@@ -1,4 +1,1 @@
-node_modules/
-DS_Store
-*.lock
-*-lock.json
+.DS_Store

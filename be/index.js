@@ -10,5 +10,5 @@ const app = express();
 loadConfig();
 
 app.listen(port, ()=>{
-    console.log(`Start server on port: ${port} 🚀🚀🚀`);
+    console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
 });

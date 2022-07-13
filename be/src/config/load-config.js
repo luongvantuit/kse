@@ -4,6 +4,7 @@ const { join } = require("path");
 function loadConfig() {
   config({
     path: join(process.cwd(), ".env"),
+ 
   });
 }
 

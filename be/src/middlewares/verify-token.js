@@ -1,5 +1,6 @@
 const { request, response } = require("express");
-const { firebaseAuth } = require("../services/firebase-auth");
+const jwt = require('jsonwebtoken');
+const { jwtSecretKey } = require("../config/server");
 
 /**
  *
@@ -17,22 +18,20 @@ function verifyIdToken(req, res, next) {
       success: false,
     });
   } else {
-    firebaseAuth
-      .verifyIdToken(token)
-      .then((decodeIdToken) => {
-        if (decodeIdToken) {
-          req.user = decodeIdToken;
-          next();
-        }
+    try {
+      /**
+      * @type {jwt.Jwt}
+      */
+      const resJwt = jwt.verify(token, jwtSecretKey)
+      req.user = resJwt.payload;
+      next()
+    } catch (e) {
+      res.status(401).send({
+        error: true,
+        msg: "Unauthorized! Token is not valid!",
+        success: false
       })
-      .catch((reason) => {
-        res.status(401).send({
-          error: true,
-          msg: "Unauthorized! Token is Not Valid!",
-          success: false,
-          ...reason,
-        });
-      });
+    }
   }
 }
 
