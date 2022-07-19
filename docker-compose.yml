@@ -3,4 +3,46 @@ services:
   be:
     build:
       context: ./be
-      dockerfile: ./be/.docker/Dockerfile
+      dockerfile: ./.docker/Dockerfile
+      args:
+        - PORT=8080
+    ports:
+      - 127.0.0.1:8080:8080
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=dev
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=123456
+    image: kse/be
+    container_name: be
+    networks:
+      - kse
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=dev
+      - PGDATA=/var/lib/postgresql/data
+    container_name: postgres
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - /usr/local/kse/postgres:/var/lib/postgresql/data
+    networks:
+      - kse
+  fe:
+    build:
+      context: ./fe
+      dockerfile: ./.docker/Dockerfile
+    ports:
+      - 127.0.0.1:3000:3000
+    image: kse/fe
+    container_name: fe
+    networks:
+      - kse
+networks:
+  kse:
+    driver: bridge
+    name: kse
