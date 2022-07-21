@@ -1,4 +1,3 @@
-const { request, response } = require("express");
 const jwt = require('jsonwebtoken');
 const { jwtSecretKey } = require("../config/server");
 
