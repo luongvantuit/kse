@@ -1,8 +1,10 @@
-import './App.css';
+import React from 'react';
+import './index.css';
+import Login from './components/Login';
 
 function App() {
   return (
-    <h1>Hello World</h1>
+     <p className="text-green-500">Hello</p>
   );
 }
 
