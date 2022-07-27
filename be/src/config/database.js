@@ -11,5 +11,5 @@ const databaseConnection = typeorm.createConnection({
 })
 
 module.exports = {
-    databaseConnection
+    databaseConnection  
 }

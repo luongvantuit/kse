@@ -1,20 +1,23 @@
-const { EntitySchema } = require('typeorm')
+const mongoose = require('mongoose');
+const timekeepingPolicy = require('./TimekeepingPolicy');
 
-const departmentEntity = new EntitySchema({
-    name: "Department",
-    tableName: "department",
-    columns: {
-        id: {
-            primary: true,
-            type: "int",
-            generated: true,
-        },
-        displayName: {
-            type: "varchar"
-        }
+const department = new mongoose.Schema({
+    admin:{
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+    },
+    numberOfEmployees: {
+        type: Number,
+        default: 0,
+    },
+    timekeepingPolicy: {
+        type: timekeepingPolicy.timekeepingPolicyShema,
     }
 })
 
-module.exports = {
-    departmentEntity
-}
+const Department = mongoose.model('Departments', department);
+
+module.exports = Department;

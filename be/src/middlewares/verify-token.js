@@ -10,7 +10,7 @@ const { jwtSecretKey } = require("../config/server");
 function verifyIdToken(req, res, next) {
   const authorization = req.headers["authorization"];
   const token = authorization.split(" ")[1];
-  if (authorization.startsWith("Bearer") && token) {
+  if (!token) {
     res.status(401).send({
       error: true,
       msg: "Unauthorized! Token Type Error or Token is Empty!",
@@ -22,7 +22,9 @@ function verifyIdToken(req, res, next) {
       * @type {jwt.Jwt}
       */
       const resJwt = jwt.verify(token, jwtSecretKey)
-      req.user = resJwt.payload;
+      // req.user = resJwt.payload;
+      req._id = resJwt._id;
+      req.token = token;
       next()
     } catch (e) {
       res.status(401).send({
