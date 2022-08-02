@@ -32,9 +32,9 @@ jobs:
         name: Build Docker actions checkout
       - run: docker version
         name: Docker version
-      - run: docker-compose up --build be
+      - run: docker-compose up --build -d be
         name: Run Docker Compose up build backend
-      - run: docker-compose up --build fe
+      - run: docker-compose up --build -d fe
         name: Run Docker Compose up build frontend
   deploy:
     needs: [build, docker]
