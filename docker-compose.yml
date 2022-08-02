@@ -39,4 +39,3 @@ services:
 networks:
   kse:
     driver: bridge
-    name: kse
