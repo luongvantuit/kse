@@ -56,7 +56,7 @@ jobs:
             echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum update -y
             echo "--- Update package done! ---"
             echo "--- Check version Docker ---"
-            if ! [ `which docker` -a $? -eq 0 ]; then
+            if [ `which docker` -a $? -eq 0 ]; then
               echo "--- Update Docker ---"
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum upgrade docker-engine -y
             else
@@ -71,9 +71,8 @@ jobs:
             docker version
             echo "--- Check docker done! ---"
             echo "--- Check Docker Compose version ---"
-            if ! [ `which docker-compose` -a $? -eq 0 ]; then
-              echo ${{secrets.SERVER_PASSWORD}} | sudo -S curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-              echo ${{secrets.SERVER_PASSWORD}} |sudo chmod +x /usr/local/bin/docker-compose
+            if ! [ `docker-compose --version` -a $? -eq 0 ]; then
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S pip install docker-compose
               if ! [ $? -eq 0 ]; then
                 exit 1
               fi
@@ -83,6 +82,7 @@ jobs:
             if ! [ `which git` -a $? -eq 0 ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
             fi
+            git --version
             echo "--- Check git done! --"
             echo "--- Update repo ---"
             ! [ -d $HOME/projects ] && mkdir $HOME/projects
