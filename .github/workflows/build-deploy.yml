@@ -71,7 +71,7 @@ jobs:
             docker version
             echo "--- Check docker done! ---"
             echo "--- Check Docker Compose version ---"
-            if [ `which docker-compose` -a $? -eq 0 ]; then
+            if [ `docker-compose --version` -a $? -eq 0 ]; then
               echo "--- Start install Docker Compose ---"
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S pip install docker-compose
               if ! [ $? -eq 0 ]; then
