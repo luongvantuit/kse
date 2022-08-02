@@ -71,14 +71,15 @@ jobs:
             docker version
             echo "--- Check docker done! ---"
             echo "--- Check Docker Compose version ---"
-            if ! [ `docker-compose --version` -a $? -eq 0 ]; then
+            docker-compose --version
+            if ! [ $? -eq 0 ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S chmod +x /usr/local/bin/docker-compose
+              docker-compose --version
               if ! [ $? -eq 0 ]; then
                 exit 1
               fi
             fi
-            docker-compose --version
             echo "--- Check Docker Compose done! ---"
             echo "--- Check git version ---"
             if ! [ `which git` -a $? -eq 0 ]; then
