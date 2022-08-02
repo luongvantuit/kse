@@ -101,6 +101,6 @@ jobs:
             echo "--- Update done! ---"
             echo "--- Deployment with Docker Compose ---"
             cd $HOME/projects/kse
-            docker-compose up --build -d be
-            docker-compose up --build -d fe
+            echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d be
+            echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d fe
             echo "--- Deployment done! ---"
