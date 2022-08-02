@@ -54,6 +54,8 @@ jobs:
           script: |
             echo "--- Update package ---"
             echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum update -y
+            echo "--- Update package done! ---"
+            echo "--- Check version Docker ---"
             if [ -x "$(command -v docker)" ]; then
               echo "--- Update Docker ---"
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum upgrade docker-engine -y
@@ -67,10 +69,13 @@ jobs:
             fi
             echo "--- Docker version ---"
             docker version
+            echo "--- Check docker done! ---"
             echo "--- Check git version ---"
-            if [ -x "$(where git)" ]; then
+            if [ -x "$(git --version)" ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
             fi
+            echo "--- Check git done! --"
+            echo "--- Update repo ---"
             if [ -d $HOME/projects/kse ]; then
               if [ -d $HOME/projects ]; then
                 mkdir $HOME/projects
@@ -80,6 +85,9 @@ jobs:
             else 
               cd $HOME/projects/kse
               git pull origin master
+            echo "--- Update done! ---"
+            echo "--- Deployment with Docker Compose ---"
             cd $HOME/projects/kse
             echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d be
             echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d fe
+            echo "--- Deployment done! ---"
