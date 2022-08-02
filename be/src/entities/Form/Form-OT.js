@@ -2,9 +2,6 @@
 
 const mongoose = require('mongoose');
 const otShema = mongoose.Schema({
-    idDepartment: { 
-        type: String,
-    },
     username: {
         type: String,
     },

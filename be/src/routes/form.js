@@ -1,7 +1,7 @@
 const express = require("express");
 const Form_CompensatingTimekeeping = require("../entities/Form/Form-CompensatingTimekeeping");
-const Form_OnLeave = require("../entities/Form/Form_OnLeave");
-const Form_OT = require("../entities/Form/Form_OT");
+const Form_OnLeave = require("../entities/Form/Form-OnLeave");
+const Form_OT = require("../entities/Form/Form-OT");
 const auth = require("../middlewares/auth");
 const PersonInformation = require("../entities/PersonalInformation");
 const Department = require("../entities/Department")
@@ -73,8 +73,8 @@ router.get('/form-OnLeave', auth, async (req, res) => {
         res.status(200).json({
             success: true,
             form_CompensatingTimekeeping: {
-                department: department.department,
                 username: user.username,
+                department: department.department,
                 approvedBy: admin.admin,
             }
         });
@@ -97,14 +97,15 @@ router.put('/form-OnLeave', async (req, res) => {
             {
                 $set:
                 {
-                    
+                    reason: req.body.reason,
+                    startTime: req.body.startTime,
+                    endTime: req.body.endTime,
                 }
             })
-        await form.save();
         res.status(200).json({ success: true });
     } catch (error) {
         res.status(500).json({
-            error: error.message,
+            error: true,
             msg: 'post form-OnLeave',
             success: false,
         });
@@ -124,8 +125,8 @@ router.get('/form-OT', auth, async (req, res) => {
         res.status(200).json({
             success: true,
             form_CompensatingTimekeeping: {
-                department: department.department,
                 username: user.username,
+                department: department.department,
                 approvedBy: admin.admin,
             }
         });
@@ -140,8 +141,16 @@ router.get('/form-OT', auth, async (req, res) => {
 
 router.put('/form-OT', async (req, res) => {
     try {
-        const form = new Form_OT(req.body);
-        await form.save();
+        await Form_OT.findOneAndUpdate(
+            { username: req.body.username },
+            {
+                $set: {
+                    reason: req.body.reason,
+                    startTime: req.body.startTime,
+                    endTime: req.body.endTime,
+                }
+            }
+        )
         res.status(200).json({ success: true });
     } catch (error) {
         res.status(500).json({

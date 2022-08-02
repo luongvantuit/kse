@@ -2,9 +2,6 @@
 
 const mongoose = require('mongoose');
 const onLeaveShema = mongoose.Schema({
-    idDepartment: { 
-        type: String,
-    },
     username: {
         type: String,
     },
