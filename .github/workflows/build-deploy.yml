@@ -15,6 +15,8 @@ jobs:
         name: Build Node.JS with version 16
         with:
           node-version: ${{matrix.node-version}}
+      - run: yarn ci
+        name: Yarn run CI
       - run: yarn install --no-lockfile --production --pure-lockfile --frozen-lockfile
         name: Yarn install package backend working directory
         working-directory: be
