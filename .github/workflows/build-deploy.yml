@@ -85,6 +85,7 @@ jobs:
             else 
               cd $HOME/projects/kse
               git pull origin master
+            fi
             echo "--- Update done! ---"
             echo "--- Deployment with Docker Compose ---"
             cd $HOME/projects/kse
