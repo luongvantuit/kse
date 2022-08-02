@@ -56,7 +56,7 @@ jobs:
             echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum update -y
             echo "--- Update package done! ---"
             echo "--- Check version Docker ---"
-            if [ -x "$(command -v docker)" ]; then
+            if [ `which docker` -a $? -eq 0 ]; then
               echo "--- Update Docker ---"
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum upgrade docker-engine -y
             else
@@ -71,7 +71,7 @@ jobs:
             docker version
             echo "--- Check docker done! ---"
             echo "--- Check git version ---"
-            if [ -x "$(git --version)" ]; then
+            if [ `which git` -a $? -eq 0 ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
             fi
             echo "--- Check git done! --"
