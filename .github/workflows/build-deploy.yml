@@ -68,7 +68,7 @@ jobs:
             echo "--- Docker version ---"
             docker version
             echo "--- Check git version ---"
-            if [ -x "$(command git)" ]; then
+            if [ -x "$(where git)" ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
             fi
             if [ -d $HOME/projects/kse ]; then
