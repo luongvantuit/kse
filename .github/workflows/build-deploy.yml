@@ -21,7 +21,7 @@ jobs:
       - run: yarn install --frozen-lockfile
         name: Yarn install package frontend working directory
         working-directory: fe
-      - run: CI=false && yarn build 
+      - run: CI=false && yarn build
         name: Yarn build project frontend
         working-directory: fe
   docker:
@@ -52,28 +52,28 @@ jobs:
           port: ${{secrets.SERVER_PORT}}
           script: |
             echo "--- Update package ---"
-            sudo apt update 
-            sudo apt upgrade -y
+            apt update 
+            apt upgrade -y
             if [ -x "$(command -v docker)" ]; then
               echo "--- Update Docker ---"
-              sudo apt-get upgrade docker-engine -y
+              apt-get upgrade docker-engine -y
             else
               echo "--- Install Docker Engine"
-              sudo apt-get update -y
-              sudo apt-get install ca-certificates curl gnupg lsb-release -y
-              sudo mkdir -p /etc/apt/keyrings
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              apt-get update -y
+              apt-get install ca-certificates curl gnupg lsb-release -y
+              mkdir -p /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
               echo \
               "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-              $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-              sudo apt-get update -y
-              sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+              $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+              apt-get update -y
+              apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
             fi
             echo "--- Docker version ---"
             docker version
             echo "--- Check git version ---"
-            if [ -x "$(which git)" ]; then
-              sudo apt install git -y
+            if [ -x "$(command git)" ]; then
+              apt install git -y
             fi
             if [ -d $HOME/projects/kse ]; then
               if [ -d $HOME/projects ]; then
@@ -85,5 +85,5 @@ jobs:
               cd $HOME/projects/kse
               git pull origin master
             cd $HOME/projects/kse
-            sudo docker-compose up --build -d be
-            sudo docker-compose up --build -d fe
+            docker-compose up --build -d be
+            docker-compose up --build -d fe
