@@ -84,8 +84,8 @@ jobs:
             fi
             echo "--- Check git done! --"
             echo "--- Update repo ---"
-            [ -d $HOME/projects ] && mkdir $HOME/projects
-            if [ -d $HOME/projects/kse ]; then
+            ! [ -d $HOME/projects ] && mkdir $HOME/projects
+            if ! [ -d $HOME/projects/kse ]; then
               echo "--- Clone code from GitHub ---"
               cd $HOME/projects
               git clone https://${{secrets.GITHUB_USERNAME}}:${{secrets.GITHUB_TOKEN}}@github.com/luongvantuit/kse.git
