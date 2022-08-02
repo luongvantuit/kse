@@ -3,10 +3,10 @@
 const mongoose = require('mongoose');
 
 const holidayShema = mongoose.Schema({
-    name: {
+    nameHoliday: {
         type: String,
     },
-    count: {
+    countHolidays: {
         type: Number,
     },
     isWage: {
@@ -17,4 +17,4 @@ const holidayShema = mongoose.Schema({
 
 const Holiday = mongoose.model('Holiday', holidayShema);
 
-module.exports = {Holiday,holidayShema} ;
+module.exports = Holiday ;

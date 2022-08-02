@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
-const timekeepingPolicy = require('./TimekeepingPolicy');
 
 const department = new mongoose.Schema({
     admin:{
         type: String,
         required: true,
     },
-    name: {
+    nameDepartment: {
         type: String,
     },
     numberOfEmployees: {
@@ -14,7 +13,7 @@ const department = new mongoose.Schema({
         default: 0,
     },
     timekeepingPolicy: {
-        type: timekeepingPolicy.timekeepingPolicyShema,
+        type: String, // timekeepingPolicyShema is used
     }
 })
 

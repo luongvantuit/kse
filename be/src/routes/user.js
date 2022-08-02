@@ -1,38 +1,66 @@
 const express = require("express");
 const User = require("../entities/User");
-// const auth = require("../middlewares/auth");
-const auth = require("../middlewares/verify-token")
+const auth = require("../middlewares/verify-token");
+const CreateUserDB = require("./create-user-db");
 const router = express.Router();
 
 router.post('/signup', async(req, res) => {
     try {
+        const username  = req.body.username;
+        const usernameDB = await User.findOne({ username: username });
+        if(usernameDB){
+            res.status(500).json({
+                error: "Username already exists",
+                success: false,
+            })
+        }
         const user = new User(req.body);
         await user.save();
-        const token = await user.generateAuthToken();
-        res.status(201).send({ user, token});
-
-    } catch (error) {
-        res.status(400).send(error);
-    }   
-})
-
-router.post('/login', async (req, res) => {
-    try {
-        const {username, password} = req.body;
-        const user = await User.findByCredentials(username, password);
-        if(!user){
-            throw new Error({error: 'Login failed!'});
-        }
-        const token = await user.generateAuthToken();
-        res.status(201).send({user, token});
+        CreateUserDB.create(username, req.body.role || 'staff');
+        res.status(201).send({ 
+            user: user,
+            msg: 'Successfully created a new user',
+            success: true,
+        });
     } catch (error) {
         res.status(400).send(error);
     }
+});
+
+router.post('/login', async (req, res) => {
+    try {
+        console.log(req.body);
+        const {username, password} = req.body;
+        const user = await User.findByCredentials(username, password);
+        if(!user){
+            res.status(400).send({
+                err: error,
+                msg: 'Not found user',
+                success: false
+            });
+        }
+        const token = await user.generateAuthToken();
+        if(!token){
+            res.status(400).json({
+                error: true,
+                msg: 'Invalid credentials',
+                sucess: false,
+            })
+        }
+        res.status(201).json({
+            error: false,    
+            token: token,
+            success: true,
+        });
+    } catch (error) {
+        res.status(400).send({
+            err: true,
+            msg: 'Login failed! Please try again later',
+            success: false
+        });
+    }
 })
 
-// router.get('/users/me', auth, async(req, res) => {
-//     res.send(req.user);
-// })
 
 router.get('/me', auth.verifyIdToken, async(req, res) => {
     try {

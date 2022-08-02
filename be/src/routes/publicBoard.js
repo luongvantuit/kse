@@ -5,11 +5,9 @@ const router  = express.Router();
 const auth = require("../middlewares/is-admin");
 
 const WorkSheet = require("../entities/WorkSheet");
-const person = require("../entities/PersonalInformation");
-const Department   = require("../entities/Department");
+const PersonInformation = require("../entities/PersonalInformation");
+const Department = require("../entities/Department");
 
-
-const PersonInformation = person.PersonInformation;
 
 router.get('/',auth,async(req,res)=>{
     try {
@@ -19,28 +17,24 @@ router.get('/',auth,async(req,res)=>{
         } else if(role.includes('staff')){
             const staff = await WorkSheet.findOne({ username: req.user.username });
             if(!staff){
-                return res.status(401).json({error: "Not found"});
+                return res.status(401).json({error: "Not found staff"});
             }
             return res.status(200).send({staff: staff});
         } else if(role.includes('manager')){
-            const deparment = await Department.findOne({ username: req.user.username });
-            console.log(deparment);
-            const peopleInManager = await PersonInformation.find({ department:deparment.name});
+            const deparment = await Department.findOne({ admin: req.user.username });
             let arr = [];
-            for(const person of peopleInManager){
-                arr.push(await WorkSheet.findOne({username: person.name}));
-            }
-            if(!arr){
-                return res.status(401).json({error: "Not Found"});
+            arr.push(await WorkSheet.find({department: deparment.nameDepartment}));
+            if(arr.length == 0){
+                return res.status(401).json({error: "Not found manager"});
             }
             return res.status(200).send({manager: arr});
         }
         // admin role
         const workSheet = await WorkSheet.find();
         if(!workSheet){
-            return res.status(404).json({error: "WorkSheet not found"});
+            return res.status(404).json({error: "Not found workSheet"});
         }
-        return res.status(200).send({workSheet: workSheet});
+        return res.status(200).send({admin: workSheet});
     } catch (error) {
         return res.status(500).send({
             error: error.message,

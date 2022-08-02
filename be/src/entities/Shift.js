@@ -3,25 +3,25 @@
 const mongoose = require('mongoose');
 
 const shiftSchema = mongoose.Schema({
-    name: {
+    nameShift: {
         type: String,
         unique: true,
     },
     startHours: {
-        type: Date,
+        type: String,  // Date
     },
     endHours: {
-        type: Date,
+        type: String,  // Date
     },
     applyForWeek: {
         type: Array,
         default: [1,2,3,4],
     },
     startShift: {
-        type: Date,
+        type: Date,  // Date
     }
 })
 
 const Shift = mongoose.model('Shift', shiftSchema)
 
-module.exports = {Shift, shiftSchema };
+module.exports = Shift;

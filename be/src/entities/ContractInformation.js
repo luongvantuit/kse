@@ -2,20 +2,28 @@
 const mongoose = require('mongoose');
 
 const contractInformationShema = mongoose.Schema({
-    name: {
+    username: {
         type: String,
+        required: true,
+    },
+    nameContract: {
+        type: String,
+        default: '',
     },
     startContract: {
-        type: Date,
+        type: String,  // Date
+        default: '',
     },
     endContract: {
-        type: Date,
+        type: String,  // Date
+        default: '',
     },
     contractTerm: {
-        type: String,
+        type: Number, // miliseconds
+        default: 0,
     }
 })
 
 const ContractInformation = mongoose.model('ContractInformation', contractInformationShema);
 
-module.exports = {ContractInformation, contractInformationShema};
+module.exports = ContractInformation;

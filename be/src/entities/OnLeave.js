@@ -3,14 +3,14 @@
 const mongoose = require('mongoose');
 
 const onLeaveShema = mongoose.Schema({
-    name: {
+    nameOnLeave: {
         type: String,
     },
     startTime: {
-        type: Date,
+        type: String,  // Date
     },
     endTime: {
-        type: Date,
+        type: String,  // Date
     },
     isWage: {
         type: Boolean,
@@ -20,4 +20,4 @@ const onLeaveShema = mongoose.Schema({
 
 const OnLeave = mongoose.model('OnLeave', onLeaveShema);
 
-module.exports = {OnLeave, onLeaveShema};
+module.exports = OnLeave;

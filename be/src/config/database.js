@@ -1,15 +1,12 @@
-var typeorm = require('typeorm')
-const { serverConfig } = require('./server')
+const mongoose = require('mongoose');
 
-const databaseConnection = typeorm.createConnection({
-    type: "postgres",
-    host: serverConfig.databaseHost,
-    port: serverConfig.databasePort,
-    database: serverConfig.databaseName,
-    username: serverConfig.databaseUsername,
-    password: serverConfig.databasePassword
-})
-
-module.exports = {
-    databaseConnection  
+async function connect(){   
+    try {
+        await mongoose.connect(process.env.MONGODB_URL ?? "mongodb://localhost:27017/demo_KSE_dev");
+        console.log('Connect DB successfully');
+    } catch (error) {
+        console.log('Connect DB failure');
+    }
 }
+
+module.exports = { connect };   

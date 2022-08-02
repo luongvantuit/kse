@@ -1,9 +1,6 @@
 // chính sách chấm công
 
 const mongoose = require('mongoose');
-const Shift = require('./Shift');
-const Holiday = require('./Holiday');
-const OnLeave = require('./OnLeave');
 
 const timekeepingPolicyShema = mongoose.Schema({
     name: {
@@ -11,17 +8,20 @@ const timekeepingPolicyShema = mongoose.Schema({
         unique: true
     },
     shift: {
-        type: Shift.shiftSchema,
+        type: String,
+        default: '',
     },
     onLeave: {
-        type: OnLeave.onLeaveShema,
+        type: String,
+        default: '',
     },
     holiday: {
-        type: Holiday.holidayShema,
+        type: String,
+        default: '',
     }
     
 })
 
 const TimekeepingPolicy = mongoose.model('TimekeepingPolicy',timekeepingPolicyShema);
 
-module.exports = {TimekeepingPolicy, timekeepingPolicyShema};
+module.exports = TimekeepingPolicy;

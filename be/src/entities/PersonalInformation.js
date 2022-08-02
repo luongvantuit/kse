@@ -3,27 +3,32 @@
 const mongoose = require('mongoose');
 
 const personInformationShema  = mongoose.Schema({
-    name: {
+    username: {
         type: String,
     },
     gender: {
         type: Boolean,
+        default: false,
     },
     birthday: {
-        type: Date,
+        type: String,
+        default: '',
     },
     CMND: {
         type: Number,
-        length: 12,
+        length: 8,
+        default: null,
     },
     department: {
-        type: Array,
+        type: String,
+        default: '',
     },
     workingMode: {
         type: String,
+        default: '',
     }
 })
 
 const PersonInformation = mongoose.model('PersonInformation', personInformationShema);
 
-module.exports = {PersonInformation, personInformationShema};
+module.exports = PersonInformation;

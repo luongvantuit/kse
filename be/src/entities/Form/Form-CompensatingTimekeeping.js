@@ -3,11 +3,11 @@
 const mongoose = require('mongoose');
 
 const compensatingTimekeepingShema = mongoose.Schema({
-    idDepartment:{
-        type: String,
-    },
     username: {
         type: String,
+    },
+    department:{
+        type: String, // 1 user - 1 department
     },
     reason: {
         type: String,
@@ -15,11 +15,14 @@ const compensatingTimekeepingShema = mongoose.Schema({
     approvedBy: {
         type: String,
     },
+    onDate: {
+        type: String, // Date
+    },
     startTime: {
-        type: Date,
+        type: String,  // Date
     },
     endTime: {
-        type: Date,
+        type: String,  // Date
     }
 })
 

@@ -15,10 +15,10 @@ const otShema = mongoose.Schema({
         type: String,
     },
     startTime: {
-        type: Date,
+        type: String,  // Date
     },
     endTime: {
-        type: Date,
+        type: String,  // Date
     }
 })
 

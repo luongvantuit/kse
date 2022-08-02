@@ -5,27 +5,35 @@ const mongoose = require('mongoose');
 const workSheetShema = mongoose.Schema({
     username: {
         type: String,
+        required: true,
     },
     department: {
         type: String,
+        default: '',
     },
     workNumber: {
         type: Number,
+        default: 0,
     },
-    holidayNumber: {
+    holidaysNumber: {
         type: Number,
+        default: 0,
     },
     nghi_phep_co_luong: {
         type: Number,
+        default: 0,
     },
     nghi_phep_ko_luong: {
         type: Number,
+        default: 0,
     },
     sumWorkNumber: {
         type: Number,
+        default: 0,
     },
     onMonth: {
         type: Number,
+        default: new Date().getMonth(),
     }
 })
 

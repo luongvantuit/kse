@@ -1,18 +1,16 @@
 const mongoose  = require("mongoose");
 const bcrypt  = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const contract = require("../entities/ContractInformation")
-const person = require("../entities/PersonalInformation");
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
         required: true,
-        minLength: 6
+        minLength: 6,
     },
     role: {
-        type: Array,
-        default: ['staff']
+        type: String,
+        default: 'staff',
     },
     password: {
         type: String,
@@ -20,19 +18,19 @@ const userSchema = new mongoose.Schema({
         minLength: 8
     },
     contractInfor: {
-        type: contract.contractInformationShema,
-        default: null,
+        type: String,
+        default: '',
     },
     personInfor: {
-        type: person.personInformationShema,
-        default: null,
+        type: String,
+        default: '',
     },
-    tokens: [{
-        token:{
-            type: String,
-            required: true
-        }
-    }]
+    // tokens: [{
+    //     token:{
+    //         type: String,
+    //         required: true
+    //     }
+    // }]
 });
 
 userSchema.pre('save',async function(next) {
@@ -41,20 +39,14 @@ userSchema.pre('save',async function(next) {
         const salt = await bcrypt.genSalt(8);
         user.password = await bcrypt.hash(user.password, salt);
     }
-    // user.contractInfor = new contract.ContractInformation({
-    //     name: 'hello', 
-    //     startContract: new Date(),
-    //     endContract: new Date(),
-    //     contractTerm: "3 year"
-    // });
     next()
 })
 
 userSchema.methods.generateAuthToken = async function() {
     const user = this;
     const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET_KEY);
-    user.tokens = user.tokens.concat({token});
-    await user.save()
+    // user.tokens = user.tokens.concat({token});
+    // await user.save()
 
     return token
 }
