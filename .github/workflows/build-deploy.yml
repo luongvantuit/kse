@@ -51,7 +51,7 @@ jobs:
           password: ${{secrets.SERVER_PASSWORD}}
           port: ${{secrets.SERVER_PORT}}
           script: |
-            SUDO_ASKPASS=${{secrets.SERVER_PASSWORD}}
+            export SUDO_ASKPASS=${{secrets.SERVER_PASSWORD}}
             echo "--- Update package ---"
             sudo -A apt update 
             sudo -A apt upgrade -y
