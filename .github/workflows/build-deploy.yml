@@ -51,29 +51,30 @@ jobs:
           password: ${{secrets.SERVER_PASSWORD}}
           port: ${{secrets.SERVER_PORT}}
           script: |
+            SUDO_ASKPASS=${{secrets.SERVER_PASSWORD}}
             echo "--- Update package ---"
-            apt update 
-            apt upgrade -y
+            sudo -A apt update 
+            sudo -A apt upgrade -y
             if [ -x "$(command -v docker)" ]; then
               echo "--- Update Docker ---"
-              apt-get upgrade docker-engine -y
+              sudo -A apt-get upgrade docker-engine -y
             else
               echo "--- Install Docker Engine"
-              apt-get update -y
-              apt-get install ca-certificates curl gnupg lsb-release -y
-              mkdir -p /etc/apt/keyrings
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              sudo -A apt-get update -y
+              sudo -A apt-get install ca-certificates curl gnupg lsb-release -y
+              sudo -A mkdir -p /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo -A gpg --dearmor -o /etc/apt/keyrings/docker.gpg
               echo \
               "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-              $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-              apt-get update -y
-              apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+              $(lsb_release -cs) stable" | sudo -A tee /etc/apt/sources.list.d/docker.list > /dev/null
+              sudo -A apt-get update -y
+              sudo -A apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
             fi
             echo "--- Docker version ---"
             docker version
             echo "--- Check git version ---"
             if [ -x "$(command git)" ]; then
-              apt install git -y
+              sudo -A apt install git -y
             fi
             if [ -d $HOME/projects/kse ]; then
               if [ -d $HOME/projects ]; then
@@ -85,5 +86,5 @@ jobs:
               cd $HOME/projects/kse
               git pull origin master
             cd $HOME/projects/kse
-            docker-compose up --build -d be
-            docker-compose up --build -d fe
+            sudo -A docker-compose up --build -d be
+            sudo -A docker-compose up --build -d fe
