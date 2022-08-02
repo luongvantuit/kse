@@ -70,6 +70,14 @@ jobs:
             echo "--- Docker version ---"
             docker version
             echo "--- Check docker done! ---"
+            echo "--- Check Docker Compose version ---"
+            if [ `which docker-compose` -a $? -eq 0 ]; then
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              if ! [ $? -eq 0 ]; then
+                exit 1
+              fi
+            fi
+            echo "--- Check Docker Compose done! ---"
             echo "--- Check git version ---"
             if [ `which git` -a $? -eq 0 ]; then
               echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
@@ -77,11 +85,15 @@ jobs:
             echo "--- Check git done! --"
             echo "--- Update repo ---"
             if [ -d $HOME/projects/kse ]; then
+              echo "--- Clone code from GitHub ---"
               if [ -d $HOME/projects ]; then
+                echo "--- Create folder project ---"
                 mkdir $HOME/projects
+                echo "--- Create folder done! ---"
               fi
               cd $HOME/projects
               git clone https://${{secrets.GITHUB_USERNAME}}:${{secrets.GITHUB_TOKEN}}@github.com/luongvantuit/kse.git
+              echo "--- Clone done! ---"
             else 
               cd $HOME/projects/kse
               git pull origin master
