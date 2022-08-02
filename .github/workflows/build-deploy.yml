@@ -21,7 +21,7 @@ jobs:
       - run: yarn install --frozen-lockfile
         name: Yarn install package frontend working directory
         working-directory: fe
-      - run: yarn build 
+      - run: CI=false && yarn build 
         name: Yarn build project frontend
         working-directory: fe
   docker:
