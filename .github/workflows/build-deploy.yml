@@ -15,17 +15,14 @@ jobs:
         name: Build Node.JS with version 16.15.1
         with:
           node-version: ${{matrix.node-version}}
-      - run: npm install
-        name: Npm install package backend working directory
+      - run: yarn install --no-lockfile --production --pure-lockfile --frozen-lockfile
+        name: Yarn install package backend working directory
         working-directory: be
-      - run: npm build
-        name: Npm build project backend
-        working-directory: be
-      - run: npm install
-        name: Npm install package frontend working directory
+      - run: yarn install --no-lockfile --production --pure-lockfile --frozen-lockfile
+        name: Yarn install package frontend working directory
         working-directory: fe
-      - run: npm build
-        name: Npm build project frontend
+      - run: yarn build 
+        name: Yarn build project frontend
         working-directory: fe
   docker:
     needs: [build]
