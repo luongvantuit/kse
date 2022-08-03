@@ -7,7 +7,7 @@ services:
       args:
         - PORT=8080
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:8080:9101
     environment:
       - MONGODB_URL="mongodb://localhost:27017/se"
     image: kse/be
@@ -31,7 +31,7 @@ services:
       context: ./fe
       dockerfile: ./.docker/Dockerfile
     ports:
-      - 127.0.0.1:3000:3000
+      - 127.0.0.1:3000:9100
     image: kse/fe
     container_name: fe
     networks:
