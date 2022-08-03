@@ -6,17 +6,25 @@ const router = express.Router();
 
 router.post('/signup', async(req, res) => {
     try {
-        const username  = req.body.username;
-        const usernameDB = await User.findOne({ username: username });
+        console.log( req.body.username);
+        const usernameDB = await User.findOne({ username: req.body.username });
         if(usernameDB){
             res.status(500).json({
                 error: "Username already exists",
                 success: false,
             })
         }
-        const user = new User(req.body);
+        console.log(req.body);
+        const user = new User({
+            username: req.body.username,
+            fullname: req.body.fullname,
+            role: req.body.role,
+            password: req.body.password,
+        });
         await user.save();
-        CreateUserDB.create(username, req.body.role || 'staff');
+        console.log(req.body.contractInfo);
+        console.log(req.body.personInfo);
+        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
         res.status(201).send({ 
             user: user,
             msg: 'Successfully created a new user',

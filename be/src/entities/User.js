@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         minLength: 6,
     },
+    fullname: {
+        type: String,
+        default: '',
+    },
     role: {
         type: String,
         default: 'staff',
@@ -16,14 +20,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 8
-    },
-    contractInfor: {
-        type: String,
-        default: '',
-    },
-    personInfor: {
-        type: String,
-        default: '',
     },
     // tokens: [{
     //     token:{
