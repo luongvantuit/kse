@@ -34,8 +34,6 @@ services:
       - 127.0.0.1:9100:3000
     image: kse/fe
     container_name: fe
-    networks:
-      - kse
 networks:
   kse:
     driver: bridge
