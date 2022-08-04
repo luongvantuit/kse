@@ -20,11 +20,15 @@ db.connect();
 
 loadConfig();
 
-app.use('/users', userRouter);
+const mainRouter = express.Router()
 
-app.use('/publicBoard', publicBoard);
+mainRouter.use('/users', userRouter);
 
-app.use('/personInfor', personInfor)
+mainRouter.use('/publicBoard', publicBoard);
+
+mainRouter.use('/personInfor', personInfor)
+
+app.use('/api', mainRouter)
 
 app.listen(port, () => {
     console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
