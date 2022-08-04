@@ -5,7 +5,7 @@ const db = require("./src/config/database");
 const userRouter = require("./src/routes/user");
 const publicBoard = require("./src/routes/publicBoard");
 const profile = require("./src/routes/person");
-// const add_data = require("./src/routes/add_data_test");
+const add_data = require("./src/routes/add_data_test");
 
 /**
  * @type {express.Application}
@@ -21,15 +21,17 @@ db.connect();
 
 loadConfig();
 
-const mainRouter = express.Router();
+const mainRouter = express.Router()
 
-app.use('/api/users', userRouter);
+mainRouter.use('/users', userRouter);
 
-app.use('/api/publicBoard', publicBoard);
+mainRouter.use('/publicBoard', publicBoard);
 
-app.use('/api/profile', profile);
+mainRouter.use('/personInfor', personInfor);
 
-app.use('/api', mainRouter);
+mainRouter.use('/profile', profile);
+
+app.use('/api', mainRouter)
 
 app.listen(port, () => {
     console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
