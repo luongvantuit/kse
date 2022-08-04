@@ -7,8 +7,10 @@ COPY . .
 RUN yarn install --frozen-lockfile
 
 ARG PORT=8080
+ARG MONGODB_URL=mongodb://mongodb:27017/kse
 
 ENV PORT=${PORT}
+ENV MONGODB_URL=${MONGODB_URL}
 
 EXPOSE ${PORT}
 
