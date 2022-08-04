@@ -4,8 +4,9 @@ const { port } = require("./src/config/server");
 const db = require("./src/config/database");
 const userRouter = require("./src/routes/user");
 const publicBoard = require("./src/routes/publicBoard");
-const personInfor = require("./src/routes/person");
-const add_data = require("./src/routes/add_data_test");
+const profile = require("./src/routes/person");
+// const add_data = require("./src/routes/add_data_test");
+
 /**
  * @type {express.Application}
  */
@@ -20,11 +21,15 @@ db.connect();
 
 loadConfig();
 
-app.use('/users', userRouter);
+const mainRouter = express.Router();
 
-app.use('/publicBoard', publicBoard);
+app.use('/api/users', userRouter);
 
-app.use('/personInfor', personInfor)
+app.use('/api/publicBoard', publicBoard);
+
+app.use('/api/profile', profile);
+
+app.use('/api', mainRouter);
 
 app.listen(port, () => {
     console.log(`Start server on port: ${port} 🚀 🚀 🚀`);

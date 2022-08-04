@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post('/signup', async(req, res) => {
     try {
-        console.log( req.body.username);
         const usernameDB = await User.findOne({ username: req.body.username });
         if(usernameDB){
             res.status(500).json({
@@ -14,7 +13,6 @@ router.post('/signup', async(req, res) => {
                 success: false,
             })
         }
-        console.log(req.body);
         const user = new User({
             username: req.body.username,
             fullname: req.body.fullname,
@@ -22,9 +20,7 @@ router.post('/signup', async(req, res) => {
             password: req.body.password,
         });
         await user.save();
-        console.log(req.body.contractInfo);
-        console.log(req.body.personInfo);
-        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
+        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff', user._id);
         res.status(201).send({ 
             user: user,
             msg: 'Successfully created a new user',
@@ -74,11 +70,12 @@ router.get('/me', auth.verifyIdToken, async(req, res) => {
     try {
         const user = await User.findOne({ _id: req._id});
         if(!user){
-            throw new Error({
+            res.status(404).json({
                 error: true,
                 msg: 'Not found user from token',
                 success: false,
-        })}
+            })
+        }
         res.status(200).send({user});
         // đổi mật khẩu khi truy cập /me
         // await User.updateOne(
@@ -95,7 +92,11 @@ router.get('/role',auth.verifyIdToken, async(req,res) => {
     try {
         const user = await User.findOne({ _id: req._id});
         if(!user){
-            throw new Error();
+            res.status(404).json({
+                error: true,
+                msg: 'Not found user from token',
+                success: false,
+            })
         }
         res.status(200).send({
             error: false,
