@@ -22,13 +22,17 @@ router.post('/signup', async (req, res) => {
         });
         await user.save();
         CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
-        return res.status(201).send({
+        return res.status(201).json({
             user: user,
             msg: 'Successfully created a new user',
             success: true,
         });
     } catch (error) {
-        return res.status(400).send(error);
+        return res.status(400).json({
+            error: true,
+            msg: 'Error creating a new user',
+            success: false,
+        });
     }
 });
 
@@ -39,24 +43,29 @@ router.post('/login', async (req, res) => {
         console.log(username, password);
         const user = await User.findOne({ username: username });
         if (!user) {
-            return res.status(400).send({
+            return res.status(400).json({
                 error: true,
                 msg: 'Username not found',
                 success: false
             });
+        } else {
+            console.log("Username is found");
+            console.log(user);
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
-            return res.status(400).send({
+            return res.status(400).json({
                 error: true,
                 msg: 'password mismatch',
                 success: false
             });
+        } else {
+            console.log("Password is match");
         }
 
         // const user = await User.findByCredentials(username, password);
         // if (!user) {
-        //     return res.status(400).send({
+        //     return res.status(400).json({
         //         error: true,
         //         msg: 'Not found user',
         //         success: false
@@ -69,6 +78,8 @@ router.post('/login', async (req, res) => {
                 msg: 'Invalid credentials',
                 sucess: false,
             })
+        } else {
+            console.log("token successfully generated");
         }
         return res.status(201).json({
             error: false,
@@ -76,7 +87,7 @@ router.post('/login', async (req, res) => {
             success: true,
         });
     } catch (error) {
-        return res.status(400).send({
+        return res.status(400).json({
             error: true,
             msg: 'Login failed! Please try again later',
             success: false
@@ -95,14 +106,14 @@ router.get('/me', auth.verifyIdToken, async (req, res) => {
                 success: false,
             })
         }
-        return res.status(200).send({ user });
+        return res.status(200).json({ user });
         // đổi mật khẩu khi truy cập /me
         // await User.updateOne(
         //     {_id: req._id},
         //     { $set: { "password" : req.body.newPassword}}
         // )
     } catch (error) {
-        return res.status(401).send(error);
+        return res.status(401).json(error);
     }
 })
 
@@ -117,13 +128,13 @@ router.get('/role', auth.verifyIdToken, async (req, res) => {
                 success: false,
             })
         }
-        return res.status(200).send({
+        return res.status(200).json({
             error: false,
             role: user.role,
             success: true
         });
     } catch (error) {
-        return res.status(401).send({
+        return res.status(401).json({
             error: true,
             msg: '',
             success: false
