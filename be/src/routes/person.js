@@ -14,19 +14,19 @@ router.get('/', auth, async (req, res) => {
         const personInfo = await PersonInformation.findOne({ username: username });
         const contract = await ContractInfo.findOne({ username: username });
         if (!user || !personInfo || !contract) {
-            res.status(404).send({
+            return res.status(404).send({
                 error: true,
                 msg: "PersonInfo not found",
                 success: false,
             })
         }
-        res.status(200).json({
+        return res.status(200).json({
             user,
             personInfo,
             contract,
         })
     } catch (error) {
-        res.status(500).send({ error: error.message });
+        return res.status(500).send({ error: error.message });
     }
 })
 
@@ -34,7 +34,7 @@ router.put('/', async (req, res) => {
     try {
         const user = req.body.user;
         if (!user) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: true,
                 msg: "User not found",
                 success: false,
@@ -78,7 +78,11 @@ router.put('/', async (req, res) => {
             }
         )
     } catch (error) {
-
+        return res.status(error.statusCode).json({
+            error: true,
+            msg: error.message,
+            success: false,
+        })
     }
 })
 
