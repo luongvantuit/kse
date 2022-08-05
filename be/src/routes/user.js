@@ -3,6 +3,7 @@ const User = require("../entities/User");
 const auth = require("../middlewares/verify-token");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const jwtSecretKey  = require("../config/server");
 const CreateUserDB = require("./create-user-db");
 const router = express.Router();
 
@@ -40,8 +41,8 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         console.log(req.body);
-        const { username, password } = req.body;
-        console.log(username, password);
+        const username = req.body.username;
+        const password = req.body.password;
         const user = await User.findOne({ username: username });
         if (!user) {
             return res.status(400).json({
@@ -50,18 +51,18 @@ router.post('/login', async (req, res) => {
                 success: false
             });
         } else {
-            console.log("Username is found");
-            console.log(user);
+            console.log("Username is found")
+            console.log(user)
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
             return res.status(400).json({
                 error: true,
-                msg: 'password mismatch',
+                msg: 'Password mismatch',
                 success: false
             });
         } else {
-            console.log("Password is match");
+            console.log("Password is match")
         }
 
         // const user = await User.findByCredentials(username, password);
@@ -72,8 +73,11 @@ router.post('/login', async (req, res) => {
         //         success: false
         //     });
         // }
-//         const token = await user.generateAuthToken();
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
+        // const token = await user.generateAuthToken();
+        console.log("_id: ", user._id);
+        console.log("JWT_SECRET_KEY: ",jwtSecretKey);
+        const token = jwt.sign({ _id: user._id }, jwtSecretKey);
+        console.log("token: ", token);
         if (!token) {
             return res.status(400).json({
                 error: true,
@@ -81,8 +85,9 @@ router.post('/login', async (req, res) => {
                 sucess: false,
             })
         } else {
-            console.log("token successfully generated");
+            console.log("token successfully generated")
         }
+        console.log("end");
         return res.status(201).json({
             error: false,
             token: token,
