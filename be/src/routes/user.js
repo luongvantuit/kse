@@ -1,13 +1,14 @@
 const express = require("express");
 const User = require("../entities/User");
 const auth = require("../middlewares/verify-token");
+const bcrypt = require("bcrypt");
 const CreateUserDB = require("./create-user-db");
 const router = express.Router();
 
-router.post('/signup', async(req, res) => {
+router.post('/signup', async (req, res) => {
     try {
         const usernameDB = await User.findOne({ username: req.body.username });
-        if(usernameDB){
+        if (usernameDB) {
             return res.status(500).json({
                 error: "Username already exists",
                 success: false,
@@ -21,7 +22,7 @@ router.post('/signup', async(req, res) => {
         });
         await user.save();
         CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
-        return res.status(201).send({ 
+        return res.status(201).send({
             user: user,
             msg: 'Successfully created a new user',
             success: true,
@@ -34,19 +35,34 @@ router.post('/signup', async(req, res) => {
 router.post('/login', async (req, res) => {
     try {
         console.log(req.body);
-        const usernameDB = await User.find();
-        console.log('username db ', usernameDB);
-        const {username, password} = req.body;
-        const user = await User.findByCredentials(username, password);
-        if(!user){
+        const { username, password } = req.body;
+        const user = await User.findOne({ username: username });
+        if (!user) {
             return res.status(400).send({
                 error: true,
-                msg: 'Not found user',
+                msg: 'Username not found',
                 success: false
             });
         }
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            return res.status(400).send({
+                error: true,
+                msg: 'password mismatch',
+                success: false
+            });
+        }
+
+        // const user = await User.findByCredentials(username, password);
+        // if (!user) {
+        //     return res.status(400).send({
+        //         error: true,
+        //         msg: 'Not found user',
+        //         success: false
+        //     });
+        // }
         const token = await user.generateAuthToken();
-        if(!token){
+        if (!token) {
             return res.status(400).json({
                 error: true,
                 msg: 'Invalid credentials',
@@ -54,7 +70,7 @@ router.post('/login', async (req, res) => {
             })
         }
         return res.status(201).json({
-            error: false,    
+            error: false,
             token: token,
             success: true,
         });
@@ -68,17 +84,17 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.get('/me', auth.verifyIdToken, async(req, res) => {
+router.get('/me', auth.verifyIdToken, async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req._id});
-        if(!user){
+        const user = await User.findOne({ _id: req._id });
+        if (!user) {
             return res.status(404).json({
                 error: true,
                 msg: 'Not found user from token',
                 success: false,
             })
         }
-        return res.status(200).send({user});
+        return res.status(200).send({ user });
         // đổi mật khẩu khi truy cập /me
         // await User.updateOne(
         //     {_id: req._id},
@@ -90,10 +106,10 @@ router.get('/me', auth.verifyIdToken, async(req, res) => {
 })
 
 
-router.get('/role',auth.verifyIdToken, async(req,res) => {
+router.get('/role', auth.verifyIdToken, async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req._id});
-        if(!user){
+        const user = await User.findOne({ _id: req._id });
+        if (!user) {
             return res.status(404).json({
                 error: true,
                 msg: 'Not found user from token',
