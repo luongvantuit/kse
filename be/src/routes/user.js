@@ -8,7 +8,7 @@ router.post('/signup', async(req, res) => {
     try {
         const usernameDB = await User.findOne({ username: req.body.username });
         if(usernameDB){
-            res.status(500).json({
+            return res.status(500).json({
                 error: "Username already exists",
                 success: false,
             })
@@ -21,13 +21,13 @@ router.post('/signup', async(req, res) => {
         });
         await user.save();
         CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff', user._id);
-        res.status(201).send({ 
+        return res.status(201).send({ 
             user: user,
             msg: 'Successfully created a new user',
             success: true,
         });
     } catch (error) {
-        res.status(400).send(error);
+        return res.status(400).send(error);
     }
 });
 

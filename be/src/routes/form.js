@@ -17,7 +17,7 @@ router.get('/form-CompensatingTimekeeping', auth, async (req, res) => {
     try {
         const department = await PersonInformation.findOne({ username: user.username });
         const admin = await Department.findOne({ username: user.username });
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             form_CompensatingTimekeeping: {
                 department: department.department,
@@ -26,7 +26,7 @@ router.get('/form-CompensatingTimekeeping', auth, async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error: error.message,
             msg: 'get form-CompensatingTimekeeping',
             success: false,
@@ -50,9 +50,9 @@ router.put('/form-CompensatingTimekeeping', async (req, res) => {
                 }
             }
         );
-        res.status(200).json({ success: true });
+        return res.status(200).json({ success: true });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error: true,
             msg: 'post form-CompensatingTimekeeping',
             success: false,
@@ -62,15 +62,16 @@ router.put('/form-CompensatingTimekeeping', async (req, res) => {
 
 router.get('/form-OnLeave', auth, async (req, res) => {
     const user = req.user;
-    if (!user) return res.status(401).json({
-        error: true,
-        msg: 'Invalid username provided in form submission',
-        success: false,
-    });
+    if (!user)
+        return res.status(401).json({
+            error: true,
+            msg: 'Invalid username provided in form submission',
+            success: false,
+        });
     try {
         const department = await PersonInformation.findOne({ username: user.username });
         const admin = await Department.findOne({ username: user.username });
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             form_CompensatingTimekeeping: {
                 username: user.username,
@@ -79,7 +80,7 @@ router.get('/form-OnLeave', auth, async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error: error.message,
             msg: 'get form-OnLeave',
             success: false,
@@ -102,9 +103,9 @@ router.put('/form-OnLeave', async (req, res) => {
                     endTime: req.body.endTime,
                 }
             })
-        res.status(200).json({ success: true });
+        return res.status(200).json({ success: true });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error: true,
             msg: 'post form-OnLeave',
             success: false,

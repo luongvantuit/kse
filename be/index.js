@@ -5,7 +5,6 @@ const db = require("./src/config/database");
 const userRouter = require("./src/routes/user");
 const publicBoard = require("./src/routes/publicBoard");
 const profile = require("./src/routes/person");
-const add_data = require("./src/routes/add_data_test");
 
 /**
  * @type {express.Application}
@@ -16,8 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 db.connect();
-// add_data.add_data();
-
 
 loadConfig();
 
@@ -26,8 +23,6 @@ const mainRouter = express.Router()
 mainRouter.use('/users', userRouter);
 
 mainRouter.use('/publicBoard', publicBoard);
-
-mainRouter.use('/personInfor', personInfor);
 
 mainRouter.use('/profile', profile);
 
