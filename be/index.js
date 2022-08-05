@@ -27,8 +27,6 @@ mainRouter.use('/users', userRouter);
 
 mainRouter.use('/publicBoard', publicBoard);
 
-mainRouter.use('/personInfor', personInfor);
-
 mainRouter.use('/profile', profile);
 
 app.use('/api', mainRouter)
