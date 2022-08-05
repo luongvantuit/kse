@@ -20,7 +20,7 @@ router.post('/signup', async(req, res) => {
             password: req.body.password,
         });
         await user.save();
-        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff', user._id);
+        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
         return res.status(201).send({ 
             user: user,
             msg: 'Successfully created a new user',
@@ -34,11 +34,13 @@ router.post('/signup', async(req, res) => {
 router.post('/login', async (req, res) => {
     try {
         console.log(req.body);
+        const usernameDB = await User.find();
+        console.log('username db ', usernameDB);
         const {username, password} = req.body;
         const user = await User.findByCredentials(username, password);
         if(!user){
             return res.status(400).send({
-                err: error,
+                error: true,
                 msg: 'Not found user',
                 success: false
             });
@@ -58,7 +60,7 @@ router.post('/login', async (req, res) => {
         });
     } catch (error) {
         return res.status(400).send({
-            err: true,
+            error: true,
             msg: 'Login failed! Please try again later',
             success: false
         });
