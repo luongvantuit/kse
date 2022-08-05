@@ -44,19 +44,22 @@ userSchema.pre('save', async function (next) {
     }
 })
 
-userSchema.methods.generateAuthToken = async function () {
+userSchema.methods.generateAuthToken = function () {
     const user = this;
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
     return token
 }
 
 userSchema.statics.findByCredentials = async (username, password) => {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: username });
     if (!user) {
+        console.log('not found username');
         throw new Error({ error: 'Invalid email and password' });
     }
+    console.log(password, user.password);
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
+        console.log('password mismatch');
         throw new Error({ error: 'Invalid email and password' });
     }
     return user
