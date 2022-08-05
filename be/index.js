@@ -15,7 +15,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-db.connect();
+db.conn;
 // add_data.add_data();
 
 
