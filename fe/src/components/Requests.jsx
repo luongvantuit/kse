@@ -1,13 +1,15 @@
 import React from 'react'
 import { TextField } from '@material-ui/core';
+import Button from '@mui/material/Button';
 import Tab from '@mui/material/Tab';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import enLocale from "date-fns/locale/en-US";
-
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import enLocale from "date-fns/locale/en-NZ";
+import { styled } from '@mui/material/styles';
 
 import './Requests.css';
 
@@ -16,8 +18,7 @@ import icon1 from '../image/icon1.png';
 import icon2 from '../image/icon2.png';
 import icon3 from '../image/icon3.png';
 import icon4 from '../image/icon4.png';
-
-
+import SendIcon from '@mui/icons-material/Send';
 
 
 export default function Compensation() {
@@ -29,19 +30,71 @@ export default function Compensation() {
     };
 
     const localeMap = {
+
         en: enLocale,
     };
+    
     const [locale] = React.useState('en');
     const [datePickerValue, setDatePickerValue] = React.useState(new Date());
+    const [timePickerValue, setTimePickerValue] = React.useState(new Date());
 
-    
+    const SentButton = styled(Button) ({
+        borderRadius: '5px',
+
+        fontFamily: 'Inter',
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '18px',
+        lineHeight: '19px',
+        alignItems: 'center',
+        textaAlign: 'center',
+
+        color: '#FFFFFF',
+
+        backGround: '#A855F7',
+        border: '0.9px solid #A855F7',
+
+    });
+
+    const ReasonTextField = styled(TextField)({
+        '& label.Mui-focused': {
+          color: 'gray',
+          fontFamily: 'Inter',
+          fontSize: '20px',
+         
+        },
+        
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: 'gray',
+            width: '480px',
+            height: '120px',
+           
+        },
+          '&.Mui-focused fieldset': {
+            borderColor: 'black',
+        },
+        },
+        '& .MuiInputBase-input': {
+          borderRadius: '5px',
+          
+          fontSize: 18,
+       
+          position: 'relative',
+      
+          fontFamily: 'Inter',
+          
+        },
+    });
+
+
     return (
         <React.Fragment>
             <div className='compensation-background'>
-                <div className='compensation-container'>
+                <header className='compensation-container'>
                     <img src={Logo} alt='logo' className='logo'/>
                     <h6 className='jss6'>HYBE Co.</h6>
-                </div>
+                </header>
 
                 <div className='menu'>
                     <button className='option1'>
@@ -70,7 +123,7 @@ export default function Compensation() {
                 <div className='sub-menu' role="tablist">
                     <div className='jss1'>
                         <TabContext value={value}>
-                            <TabList onChange={handleChange} centered={true} >
+                            <TabList onChange={handleChange} centered={true}>
 
                                 <Tab value="one" label="chấm công bù"  />
 
@@ -80,8 +133,8 @@ export default function Compensation() {
 
                                 
                             </TabList>
-
-                            <TabPanel value='one'>
+                            <div>
+                            <TabPanel className='aa' value='one'>
                                 <div className='form-comp'>
                                     <div className='jss4'>
                                         <div className='jss5'>
@@ -94,17 +147,17 @@ export default function Compensation() {
                                             <input type='text' className='jss10 rectangle1'/>
                                         </div>
 
-                                        
-                                        <TextField
+                                        <div>
+                                            <ReasonTextField
+                                            
                                             className='jss11'
                                             id="outlined-basic" 
                                             label="Lí do" 
-                                            variant="outlined"
-                                            rows={4}
-                                            multiline
-                                            
-                                            
-                                        />
+                                            variant='outlined'
+                                       
+                                            />
+                                        </div>
+                                        
 
                                         <div>
                                             <span className='jss7 jss12'>Nguời duyệt:</span>
@@ -113,40 +166,68 @@ export default function Compensation() {
 
                                         <div>
                                             <span className='jss7 jss13'>Thời gian làm thêm:</span>
-                                            <div className='calendar'>
-                                                <LocalizationProvider
-                                                
-                                                dateAdapter={AdapterDateFns}
-                                                adapterLocale={localeMap[locale]}
-                                                >
-                                                    <DatePicker
-                                                        value={datePickerValue}
-                                                        onChange={(newValue) => setDatePickerValue(newValue)}
-                                                        renderInput={(params) => <TextField {...params} />}
-                                                    />
+                                           
+                                            <LocalizationProvider
                                             
-                                                </LocalizationProvider>
-                                            </div>
+                                            dateAdapter={AdapterDateFns}
+                                            adapterLocale={localeMap[locale]}
+                                            >
+                                                <DatePicker
+                                                    
+                                                    value={datePickerValue}
+                                                    onChange={(newValue) => setDatePickerValue(newValue)}
+                                                    renderInput={(params) => <TextField className='calendar' {...params} />}
+                                                />
+                                        
+                                            </LocalizationProvider>
+                                            
                                             
                                         </div>
 
-                                     
-
-                                        <div>
+                                        <div className=''>
                                             <span className='jss7 jss14'>Từ giờ:</span>
+                                            <LocalizationProvider
+                                            
+                                            dateAdapter={AdapterDateFns}
+                                            adapterLocale={localeMap[locale]}
+                                            >
+                                                <TimePicker
+                                                    value={timePickerValue}
+                                                    onChange={(newValue) => setTimePickerValue(newValue)}
+                                                    renderInput={(params) => <TextField variant="standard" className='start-time' {...params} />}
+                                                    />
+                                        
+                                            </LocalizationProvider>
+
                                             <span className='jss7 jss15'>Đến giờ:</span>
+                                            <LocalizationProvider
+                                            
+                                            dateAdapter={AdapterDateFns}
+                                            adapterLocale={localeMap[locale]}
+                                            >
+                                                <TimePicker
+                                                    value={timePickerValue}
+                                                    onChange={(newValue) => setTimePickerValue(newValue)}
+                                                    renderInput={(params) => <TextField variant="standard" className='start-time end-time' {...params} />}
+                                                    />
+                                        
+                                            </LocalizationProvider>
+
 
                                             
                                         </div>
 
                                         <div className='jss16'>
-                                            <button className='btn-Sent'>Gửi</button>
+                                            <SentButton className='btn-Sent' variant='contained' color='secondary' endIcon={<SendIcon />}> Gửi </SentButton >
                                         </div>
 
                                         
                                     </div>
                                 </div>
                             </TabPanel>
+
+                            </div>
+
                         </TabContext>
                         
                     </div>

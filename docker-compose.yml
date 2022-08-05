@@ -6,10 +6,9 @@ services:
       dockerfile: ./.docker/Dockerfile
       args:
         - PORT=8080
+        - MONGODB_URL=mongodb://mongodb:27017/kse
     ports:
-      - 127.0.0.1:8080:8080
-    environment:
-      - MONGODB_URL="mongodb://localhost:27017/se"
+      - 127.0.0.1:9101:8080
     image: kse/be
     container_name: be
     networks:
@@ -31,11 +30,9 @@ services:
       context: ./fe
       dockerfile: ./.docker/Dockerfile
     ports:
-      - 127.0.0.1:3000:3000
+      - 127.0.0.1:9100:3000
     image: kse/fe
     container_name: fe
-    networks:
-      - kse
 networks:
   kse:
     driver: bridge
