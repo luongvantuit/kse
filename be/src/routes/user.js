@@ -3,7 +3,7 @@ const User = require("../entities/User");
 const auth = require("../middlewares/verify-token");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const jwtSecretKey  = require("../config/server");
+const { jwtSecretKey }   = require("../config/server");
 const CreateUserDB = require("./create-user-db");
 const router = express.Router();
 
@@ -74,9 +74,9 @@ router.post('/login', async (req, res) => {
         //     });
         // }
         // const token = await user.generateAuthToken();
-        console.log("_id: ", user._id);
+        console.log("username: ", user.username);
         console.log("JWT_SECRET_KEY: ",jwtSecretKey);
-        const token = jwt.sign({ _id: user._id }, jwtSecretKey);
+        const token = jwt.sign({ username: user.username }, jwtSecretKey);
         console.log("token: ", token);
         if (!token) {
             return res.status(400).json({
