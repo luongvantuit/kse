@@ -7,7 +7,7 @@ const auth = async(req, res, next) => {
         try {
             const user = await User.findOne({ _id: data._id});
             if(!user){
-                throw new Error({
+                res.status(404).json({
                     error: true,
                     msg: 'Not found user from token',
                     success: false,

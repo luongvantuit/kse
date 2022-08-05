@@ -33,11 +33,7 @@ async function create(username, contractInfo, personInfo, role) {
             await department.save();
         }
     } catch (error) {
-        throw new Error({
-            error: true,
-            msg: error.message,
-            success: false,
-        })
+        console.error(error);
     }
 }
 

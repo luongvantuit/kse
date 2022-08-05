@@ -1,5 +1,5 @@
-const mongoose  = require("mongoose");
-const bcrypt  = require("bcrypt");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userSchema = new mongoose.Schema({
     username: {
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8
+        minLength: 6
     },
     // tokens: [{
     //     token:{
@@ -27,34 +27,37 @@ const userSchema = new mongoose.Schema({
     //         required: true
     //     }
     // }]
-});
+    },
+);
 
-userSchema.pre('save',async function(next) {
-    const user = this;
-    if(user.isModified('password')){
-        const salt = await bcrypt.genSalt(8);
-        user.password = await bcrypt.hash(user.password, salt);
+userSchema.pre('save', async function (next) {
+    try {
+        const user = this;
+        if (user.isModified('password') || user.isNew) {
+            const salt = await bcrypt.genSalt(8);
+            const hashedPassword = await bcrypt.hash(user.password, salt);
+            user.password = hashedPassword;
+        }
+            next()
+    } catch (error) {
+        console.log(error);
     }
-    next()
 })
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET_KEY);
-    // user.tokens = user.tokens.concat({token});
-    // await user.save()
-
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
     return token
 }
 
-userSchema.statics.findByCredentials = async (username, password) =>{
+userSchema.statics.findByCredentials = async (username, password) => {
     const user = await User.findOne({ username });
-    if(!user){
-        throw new Error({ error: 'Invalid email and password'});
+    if (!user) {
+        throw new Error({ error: 'Invalid email and password' });
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if(!isPasswordMatch){
-        throw new Error({error: 'Invalid email and password'});
+    if (!isPasswordMatch) {
+        throw new Error({ error: 'Invalid email and password' });
     }
     return user
 }

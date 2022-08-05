@@ -4,8 +4,9 @@ const { port } = require("./src/config/server");
 const db = require("./src/config/database");
 const userRouter = require("./src/routes/user");
 const publicBoard = require("./src/routes/publicBoard");
-const personInfor = require("./src/routes/person");
+const profile = require("./src/routes/person");
 const add_data = require("./src/routes/add_data_test");
+
 /**
  * @type {express.Application}
  */
@@ -26,7 +27,7 @@ mainRouter.use('/users', userRouter);
 
 mainRouter.use('/publicBoard', publicBoard);
 
-mainRouter.use('/personInfor', personInfor)
+mainRouter.use('/profile', profile);
 
 app.use('/api', mainRouter)
 
