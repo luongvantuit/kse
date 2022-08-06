@@ -58,7 +58,6 @@ router.post('/login', async (req, res) => {
                 success: false
             });
         }
-
         const token = jwt.sign({ username: user.username }, jwtSecretKey);
         if (!token) {
             return res.status(400).json({
@@ -93,6 +92,7 @@ router.get('/me', auth.verifyIdToken, async (req, res) => {
             })
         }
         return res.status(200).json({ user });
+
     } catch (error) {
         return res.status(404).json({
             error: true,
