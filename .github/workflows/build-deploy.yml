@@ -1,0 +1,105 @@
+name: Deployment project to server
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+        name: Build actions checkout
+      - uses: actions/setup-node@v3
+        name: Build Node.JS with version 16
+        with:
+          node-version: ${{matrix.node-version}}
+      - run: yarn install --frozen-lockfile
+        name: Yarn install package backend working directory
+        working-directory: be
+      - run: yarn install --frozen-lockfile
+        name: Yarn install package frontend working directory
+        working-directory: fe
+      - run: CI=false && yarn build
+        name: Yarn build project frontend
+        working-directory: fe
+  docker:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Build Docker actions checkout
+      - run: docker version
+        name: Docker version
+      - run: docker-compose up --build -d be
+        name: Run Docker Compose up build backend
+      - run: docker-compose up --build -d fe
+        name: Run Docker Compose up build frontend
+  deploy:
+    needs: [build, docker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Deployment action checkout
+      - uses: appleboy/ssh-action@master
+        name: Run deploy with SSH
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        with:
+          host: ${{secrets.SERVER_HOST}}
+          username: ${{secrets.SERVER_USER}}
+          password: ${{secrets.SERVER_PASSWORD}}
+          port: ${{secrets.SERVER_PORT}}
+          command_timeout: 1h
+          script: |
+            echo "--- Update package ---"
+            echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum update -y
+            echo "--- Update package done! ---"
+            echo "--- Check version Docker ---"
+            if [ `which docker` -a $? -eq 0 ]; then
+              echo "--- Update Docker ---"
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum upgrade docker-engine -y
+            else
+              echo "--- Install Docker Engine"
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install -y yum-utils
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum-config-manager \
+                --add-repo \
+                https://download.docker.com/linux/centos/docker-ce.repo
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+            fi
+            echo "--- Docker version ---"
+            docker version
+            echo "--- Check docker done! ---"
+            echo "--- Check Docker Compose version ---"
+            docker-compose --version
+            if ! [ $? -eq 0 ]; then
+              echo "Install Docker Compose"
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S chmod a+rx /usr/local/bin/docker-compose
+              docker-compose --version
+            fi
+            echo "--- Check Docker Compose done! ---"
+            echo "--- Check git version ---"
+            if ! [ `which git` -a $? -eq 0 ]; then
+              echo "Install Git package"
+              echo ${{secrets.SERVER_PASSWORD}} | sudo -S yum install git -y
+            fi
+            git --version
+            echo "--- Check git done! --"
+            echo "--- Update repo ---"
+            ! [ -d $HOME/projects ] && mkdir $HOME/projects
+            if ! [ -d $HOME/projects/kse ]; then
+              echo "--- Clone code from GitHub ---"
+              cd $HOME/projects
+              git clone https://${{secrets.GITHUB_USERNAME}}:${{secrets.GITHUB_TOKEN}}@github.com/luongvantuit/kse.git
+              echo "--- Clone done! ---"
+            else 
+              cd $HOME/projects/kse
+              git pull origin master
+            fi
+            echo "--- Update done! ---"
+            echo "--- Deployment with Docker Compose ---"
+            cd $HOME/projects/kse
+            echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d be
+            echo ${{secrets.SERVER_PASSWORD}} | sudo -S docker-compose up --build -d fe
+            echo "--- Deployment done! ---"
