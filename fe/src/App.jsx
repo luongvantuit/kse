@@ -1,13 +1,22 @@
 import React from 'react';
+import { Routes, Route } from "react-router-dom";
 import './index.css';
-import Requests from './components/Requests';
+import Requests from './pages/Requests';
 
-//import Login from './components/Login';
+import Login from './pages/Login';
 
-//import Calendar from './components/Calendar';
+//import Calendar from './components/Calendar'
+
 function App() {
+  
   return (
-     <Requests />
+    <React.Fragment>
+       <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="request" element={<Requests />} /> 
+      </Routes>
+     </React.Fragment>
+    //<Requests />
   );
 }
 
