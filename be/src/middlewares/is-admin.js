@@ -12,7 +12,7 @@ const auth = async(req, res, next) => {
         }
         const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
         try {
-            const user = await User.findOne({ _id: data._id});
+            const user = await User.findOne({ username: data.username});
             if(!user){
                 res.status(403).send({
                     error: true,

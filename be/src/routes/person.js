@@ -2,19 +2,19 @@ const express = require("express");
 const PersonInformation = require("../entities/PersonalInformation");
 const ContractInfo = require("../entities/ContractInformation");
 const User = require("../entities/User");
-const auth = require("../middlewares/auth");
+const auth = require("../middlewares/verify-token");
 const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth.verifyIdToken, async (req, res) => {
     try {
-        const username = req.user.username;
+        const username = req.username;
         const user = await User.findOne({ username: username });
         const personInfo = await PersonInformation.findOne({ username: username });
         const contract = await ContractInfo.findOne({ username: username });
         if (!user || !personInfo || !contract) {
-            return res.status(404).send({
+            return res.status(404).json({
                 error: true,
                 msg: "PersonInfo not found",
                 success: false,
@@ -26,7 +26,11 @@ router.get('/', auth, async (req, res) => {
             contract,
         })
     } catch (error) {
-        return res.status(500).send({ error: error.message });
+        return res.status(404).json({
+            error: true,
+            msg: error.message,
+            success: false,
+        });
     }
 })
 

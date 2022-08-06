@@ -23,8 +23,7 @@ function verifyIdToken(req, res, next) {
       */
       const resJwt = jwt.verify(token, jwtSecretKey)
       // req.user = resJwt.payload;
-      req._id = resJwt._id;
-      req.token = token;
+      req.username = resJwt.username;
       next()
     } catch (e) {
       res.status(401).send({
