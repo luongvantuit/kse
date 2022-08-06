@@ -40,7 +40,6 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        console.log(req.body);
         const username = req.body.username;
         const password = req.body.password;
         const user = await User.findOne({ username: username });
@@ -50,9 +49,6 @@ router.post('/login', async (req, res) => {
                 msg: 'Username not found',
                 success: false
             });
-        } else {
-            console.log("Username is found")
-            console.log(user)
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
@@ -61,33 +57,15 @@ router.post('/login', async (req, res) => {
                 msg: 'Password mismatch',
                 success: false
             });
-        } else {
-            console.log("Password is match")
         }
-
-        // const user = await User.findByCredentials(username, password);
-        // if (!user) {
-        //     return res.status(400).json({
-        //         error: true,
-        //         msg: 'Not found user',
-        //         success: false
-        //     });
-        // }
-        // const token = await user.generateAuthToken();
-        console.log("username: ", user.username);
-        console.log("JWT_SECRET_KEY: ",jwtSecretKey);
         const token = jwt.sign({ username: user.username }, jwtSecretKey);
-        console.log("token: ", token);
         if (!token) {
             return res.status(400).json({
                 error: true,
                 msg: 'Invalid credentials',
                 sucess: false,
             })
-        } else {
-            console.log("token successfully generated")
         }
-        console.log("end");
         return res.status(201).json({
             error: false,
             token: token,
@@ -105,7 +83,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/me', auth.verifyIdToken, async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req._id });
+        const user = await User.findOne({ username: req.username });
         if (!user) {
             return res.status(404).json({
                 error: true,
@@ -114,20 +92,20 @@ router.get('/me', auth.verifyIdToken, async (req, res) => {
             })
         }
         return res.status(200).json({ user });
-        // đổi mật khẩu khi truy cập /me
-        // await User.updateOne(
-        //     {_id: req._id},
-        //     { $set: { "password" : req.body.newPassword}}
-        // )
+
     } catch (error) {
-        return res.status(401).json(error);
+        return res.status(404).json({
+            error: true,
+            msg: error.message,
+            success: false,
+        });
     }
 })
 
 
 router.get('/role', auth.verifyIdToken, async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req._id });
+        const user = await User.findOne({ username: req.username });
         if (!user) {
             return res.status(404).json({
                 error: true,
