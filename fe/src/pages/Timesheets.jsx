@@ -1,5 +1,7 @@
 import React from 'react';
-import './Timesheets.css';
+
+import '../components/Timesheets.css';
+
 import Logo from "../image/image_logo_bts.PNG";
 import Icon0 from "../image/ring.png";
 import Avt from "../image/avt.png";

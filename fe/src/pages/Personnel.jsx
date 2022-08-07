@@ -1,5 +1,7 @@
 import React from 'react';
-import './Homepage.css';
+
+import '..components/Personnel.css';
+
 import Logo from "../image/image_logo_bts.PNG";
 import Icon0 from "../image/ring.png";
 import Avt from "../image/avt.png";
@@ -7,15 +9,14 @@ import Icon1 from "../image/icon1.png";
 import Icon2 from "../image/icon2.png";
 import Icon3 from "../image/icon3.png";
 import Icon4 from "../image/icon4.png";
-import Icon5 from "../image/export.png";
+import Icon5 from "../image/add.png";
 import Icon6 from "../image/search.png";
 
-
-export default function Homepage() {
+export default function Personnel() {
     return (
         <React.Fragment>
-            <div className='Homepage'>
-                <div className='HomepageHeader'>
+            <div className='Personnel'>
+                <div className='PersonnelHeader'>
                     <div className='abc'>
                         <div className='def'>
                             <div className='InfoCompany'>
@@ -62,7 +63,7 @@ export default function Homepage() {
                 </div>
 
                 <div className='jss11'>
-                    <h4 class='jss13'>Danh sách chấm công</h4>
+                    <h4 class='jss13'>Danh sách nhân sự</h4>
 
                     <div className='jss9'>
                         <button class='jss26 jss27 jss28 jss29' tabIndex="0" type='button'>
@@ -89,7 +90,7 @@ export default function Homepage() {
                     
                     <button class='jss14'>
                         <img src={Icon5} alt='icon5' className='icon5'/>
-                        <span class='export'>Xuất báo cáo</span>
+                        <span class='add'>Thêm nhân sự</span>
                     </button>
                 </div>
 
@@ -97,7 +98,7 @@ export default function Homepage() {
                     <thead class='jss15'>
                         <tr class='jss16'>
                             <th class='jss17 jss18' scope='col'>
-                                <span>#</span>
+                                <span>Mã NV</span>
                             </th>
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
@@ -138,45 +139,29 @@ export default function Homepage() {
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
                                 <div class='jss19'>
-                                    <div class='jss21'>
-                                        <div class='placeholder'>Số công đi làm</div>
-                                    </div>
+                                    <form class='css-control' action='/search'>
+                                        <input type='search' placeholder='Chức vụ' autoComplete='off' class='jss10'></input>
+                                        <span class='jss23'></span>
+                                        <button class='jss24'>
+                                            <img src={Icon6} alt='icon6' className='icon6'/>
+                                        </button>
+                                    </form>
                                 </div>
                             </th>
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
                                 <div class='jss19'>
-                                    <div class='jss21'>
-                                        <div class='placeholder'>Công nghỉ lễ</div>
-                                    </div>
-                                </div>
-                            </th>
-                            <span class='jss25'></span>
-                            <th class='jss17 jss18' scope='col'>
-                                <div class='jss19'>
-                                    <div class='jss21'>
-                                        <div class='placeholder'>Nghỉ phép có lương</div>
-                                    </div>
-                                </div>
-                            </th>
-                            <span class='jss25'></span>
-                            <th class='jss17 jss18' scope='col'>
-                                <div class='jss19'>
-                                    <div class='jss21'>
-                                        <div class='placeholder'>Nghỉ phép không lương</div>
-                                    </div>
-                                </div>
-                            </th>
-                            <span class='jss25'></span>
-                            <th class='jss17 jss18' scope='col'>
-                                <div class='jss19'>
-                                    <div class='jss21'>
-                                        <div class='placeholder'>Tổng công tính lương</div>
-                                    </div>
+                                    <form class='css-control' action='/search'>
+                                        <input type='search' placeholder='Loại hợp đồng' autoComplete='off' class='jss10'></input>
+                                        <span class='jss23'></span>
+                                        <button class='jss24'>
+                                            <img src={Icon6} alt='icon6' className='icon6'/>
+                                        </button>
+                                    </form>
                                 </div>
                             </th>
                         </tr>
-                    </thead>
+                    </thead>        
                 </div>
             </div>
         </React.Fragment>
