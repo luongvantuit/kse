@@ -96,12 +96,11 @@
   vertical-align: super;
 }
 
-.Menu {
+.menu-left {
   box-sizing: content-box;
   width: 260px;
-  height: 765px;
+  height: 810px;
   padding-left: 0px;
-
   border-right: 2px solid #848484;
   background-color: #FFFFFF;
 }
@@ -122,19 +121,18 @@
   margin-right: 18px;
 }
 
-.jss7 {
+.jss9 {
   position: absolute;
-  padding-top: 10px;
   height: 40px;
   width: 100px;
-
+  top: 9px;
+  left: 50px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
   align-items: center;
-
   color: #000000;
 }
 
@@ -195,13 +193,17 @@
 
 .jss9 {
   position: absolute;
-  margin-left: 900px;
-  justify-content: center;
-  display: flex;
+  height: 40px;
+  width: 100px;
+  top: 9px;
+  left: 50px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
   align-items: center;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  
+  color: #000000;
 }
 
 .jss26 {

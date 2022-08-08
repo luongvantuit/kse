@@ -1,8 +1,10 @@
 import React from 'react'
-import { TextField } from '@material-ui/core';
+// import { TextField } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Tab from '@mui/material/Tab';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { useState } from 'react';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,7 +13,13 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import enLocale from "date-fns/locale/en-NZ";
 import { styled } from '@mui/material/styles';
 
-import './Requests.css';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+
+import '../components/Requests.css';
 
 import Logo from '../image/image_logo_bts.PNG';
 import icon1 from '../image/icon1.png';
@@ -21,9 +29,9 @@ import icon4 from '../image/icon4.png';
 import SendIcon from '@mui/icons-material/Send';
 
 
-export default function Compensation() {
+export default function Requests() {
 
-    const [value, setValue] = React.useState(null);
+    const [value, setValue] = useState('one');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -96,28 +104,34 @@ export default function Compensation() {
                     <h6 className='jss6'>HYBE Co.</h6>
                 </header>
 
-                <div className='menu'>
-                    <button className='option1'>
-                        <img src={icon1} alt='icon1' className='icon'/>
-                        <span class='jss9'>Chấm công</span>
-                    </button>
+                <div className='menu-left'>
+                    
+                    <Paper sx={{ width: 320, maxWidth: '100%'}}>
+                        <MenuList className='option'>
+                            <MenuItem className='option1'>
+                                <img src={icon1} alt='icon1' className='icon'/>
+                                <ListItemText className='jss9'>Chấm công</ListItemText>
+                            </MenuItem>
 
-                    <button className='option2'>
-                        <img src={icon2} alt='icon2' className='icon'/>
-                        <span class='jss9'>Đơn từ</span>
-                    </button>
+                            <MenuItem className='option2'>
+                                <img src={icon2} alt='icon2' className='icon'/>
+                                <ListItemText className='jss9'>Đơn từ</ListItemText>
+                            </MenuItem>
 
-                    <span className='text'> Quản lí </span>
-
-                    <button className='option3'>
-                        <img src={icon3} alt='icon3' className='icon'/>
-                        <span class='jss9'>Bảng công</span>
-                    </button>
-
-                    <button className='option4'>
-                        <img src={icon4} alt='icon4' className='icon'/>
-                        <span class='jss9'>Nhân sự</span>
-                    </button>
+                            <Divider />
+                            <span className='text'> Quản lí </span>
+                            
+                            <MenuItem className='option3'>
+                                <img src={icon3} alt='icon3' className='icon'/> 
+                                <ListItemText className='jss9'>Bảng công</ListItemText>
+                            
+                            </MenuItem>
+                            <MenuItem className='option4'>
+                                <img src={icon4} alt='icon4' className='icon'/> 
+                                <ListItemText className='jss9'>Nhân sự</ListItemText>
+                            </MenuItem>
+                        </MenuList>
+                    </Paper>
                 </div>
 
                 <div className='sub-menu' role="tablist">
@@ -139,7 +153,7 @@ export default function Compensation() {
                                     <div className='jss4'>
                                         <div className='jss5'>
                                             <span className='jss7'>Tên phòng ban:</span>
-                                            <input type='text' className='jss10 rectangle'/>
+                                            <input type='text' className='jss10 rectangle-request'/>
                                         </div>
 
                                         <div>
@@ -160,7 +174,7 @@ export default function Compensation() {
                                         
 
                                         <div>
-                                            <span className='jss7 jss12'>Nguời duyệt:</span>
+                                            <span className='jss7 jss12'>Người duyệt:</span>
                                             <input type='text' className='jss10 rectangle2'/>
                                         </div>
 
@@ -229,27 +243,9 @@ export default function Compensation() {
                             </div>
 
                         </TabContext>
-                        
-                    </div>
-                    
+                     </div>
                 </div>
-
-            
-
-                
-            </div>
-
-           
-
-                
-
-                
-
-
-
-            
-            
-            
+             </div>
         </React.Fragment>
     )
 }

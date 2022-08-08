@@ -1,5 +1,13 @@
 import React from 'react';
-import './Personnel.css';
+
+import '../components/Homepage.css';
+
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+
 import Logo from "../image/image_logo_bts.PNG";
 import Icon0 from "../image/ring.png";
 import Avt from "../image/avt.png";
@@ -7,14 +15,15 @@ import Icon1 from "../image/icon1.png";
 import Icon2 from "../image/icon2.png";
 import Icon3 from "../image/icon3.png";
 import Icon4 from "../image/icon4.png";
-import Icon5 from "../image/add.png";
+import Icon5 from "../image/export.png";
 import Icon6 from "../image/search.png";
 
-export default function Personnel() {
+
+export default function Homepage() {
     return (
         <React.Fragment>
-            <div className='Personnel'>
-                <div className='PersonnelHeader'>
+            <div className='Homepage'>
+                <div className='HomepageHeader'>
                     <div className='abc'>
                         <div className='def'>
                             <div className='InfoCompany'>
@@ -36,32 +45,38 @@ export default function Personnel() {
                     </div>
                 </div>
 
-                <div className='Menu'>
-                    <button className='option1'>
-                        <img src={Icon1} alt='icon1' className='icon'/>
-                        <span class='jss7'>Chấm công</span>
-                    </button>
+                <div className='menu-left'>
+                    
+                    <Paper sx={{ width: 320, maxWidth: '100%'}}>
+                        <MenuList className='option'>
+                            <MenuItem className='option1'>
+                                <img src={Icon1} alt='icon1' className='icon'/>
+                                <ListItemText className='jss9'>Chấm công</ListItemText>
+                            </MenuItem>
 
-                    <button className='option2'>
-                        <img src={Icon2} alt='icon2' className='icon'/>
-                        <span class='jss7'>Đơn từ</span>
-                    </button>
+                            <MenuItem className='option2'>
+                                <img src={Icon2} alt='icon2' className='icon'/>
+                                <ListItemText className='jss9'>Đơn từ</ListItemText>
+                            </MenuItem>
 
-                    <span className='text'> Quản lí </span>
-
-                    <button className='option3'>
-                        <img src={Icon3} alt='icon3' className='icon'/>
-                        <span class='jss7'>Bảng công</span>
-                    </button>
-
-                    <button className='option4'>
-                        <img src={Icon4} alt='icon4' className='icon'/>
-                        <span class='jss7'>Nhân sự</span>
-                    </button>
+                            <Divider />
+                            <span className='text'> Quản lí </span>
+                            
+                            <MenuItem className='option3'>
+                                <img src={Icon3} alt='icon3' className='icon'/> 
+                                <ListItemText className='jss9'>Bảng công</ListItemText>
+                            
+                            </MenuItem>
+                            <MenuItem className='option4'>
+                                <img src={Icon4} alt='icon4' className='icon'/> 
+                                <ListItemText className='jss9'>Nhân sự</ListItemText>
+                            </MenuItem>
+                        </MenuList>
+                    </Paper>
                 </div>
 
                 <div className='jss11'>
-                    <h4 class='jss13'>Danh sách nhân sự</h4>
+                    <h4 class='jss13'>Danh sách chấm công</h4>
 
                     <div className='jss9'>
                         <button class='jss26 jss27 jss28 jss29' tabIndex="0" type='button'>
@@ -88,7 +103,7 @@ export default function Personnel() {
                     
                     <button class='jss14'>
                         <img src={Icon5} alt='icon5' className='icon5'/>
-                        <span class='add'>Thêm nhân sự</span>
+                        <span class='export'>Xuất báo cáo</span>
                     </button>
                 </div>
 
@@ -96,7 +111,7 @@ export default function Personnel() {
                     <thead class='jss15'>
                         <tr class='jss16'>
                             <th class='jss17 jss18' scope='col'>
-                                <span>Mã NV</span>
+                                <span>#</span>
                             </th>
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
@@ -137,29 +152,45 @@ export default function Personnel() {
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
                                 <div class='jss19'>
-                                    <form class='css-control' action='/search'>
-                                        <input type='search' placeholder='Chức vụ' autoComplete='off' class='jss10'></input>
-                                        <span class='jss23'></span>
-                                        <button class='jss24'>
-                                            <img src={Icon6} alt='icon6' className='icon6'/>
-                                        </button>
-                                    </form>
+                                    <div class='jss21'>
+                                        <div class='placeholder'>Số công đi làm</div>
+                                    </div>
                                 </div>
                             </th>
                             <span class='jss25'></span>
                             <th class='jss17 jss18' scope='col'>
                                 <div class='jss19'>
-                                    <form class='css-control' action='/search'>
-                                        <input type='search' placeholder='Loại hợp đồng' autoComplete='off' class='jss10'></input>
-                                        <span class='jss23'></span>
-                                        <button class='jss24'>
-                                            <img src={Icon6} alt='icon6' className='icon6'/>
-                                        </button>
-                                    </form>
+                                    <div class='jss21'>
+                                        <div class='placeholder'>Công nghỉ lễ</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <span class='jss25'></span>
+                            <th class='jss17 jss18' scope='col'>
+                                <div class='jss19'>
+                                    <div class='jss21'>
+                                        <div class='placeholder'>Nghỉ phép có lương</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <span class='jss25'></span>
+                            <th class='jss17 jss18' scope='col'>
+                                <div class='jss19'>
+                                    <div class='jss21'>
+                                        <div class='placeholder'>Nghỉ phép không lương</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <span class='jss25'></span>
+                            <th class='jss17 jss18' scope='col'>
+                                <div class='jss19'>
+                                    <div class='jss21'>
+                                        <div class='placeholder'>Tổng công tính lương</div>
+                                    </div>
                                 </div>
                             </th>
                         </tr>
-                    </thead>        
+                    </thead>
                 </div>
             </div>
         </React.Fragment>
