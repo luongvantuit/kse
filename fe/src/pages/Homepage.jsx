@@ -30,6 +30,7 @@ export default function Homepage() {
                                 <img src={Logo} alt='logo'/>
                                 <h6 className='jss6'> TNHH </h6>
                             </div>
+                            
                             <div className='Info'>
                                 <div className='aaa'>
                                     <button className='ring'>

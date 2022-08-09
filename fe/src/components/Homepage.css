@@ -2,6 +2,8 @@
     
 }
 
+
+
 .HomepageHeader {
   position: fixed;
   z-index: 1;
@@ -40,22 +42,21 @@
 
 .jss6 {
   color: #848484;
-  margin-left: 60px;
-  margin-top: -55px;
   font-family: 'Inter';
+  font-style: normal;
   font-weight: 600;
   font-size: 32px;
   line-height: 39px;
   align-items: center;
+  margin-top: -42px;
+  margin-left: 70px;
 }
 
-.Info {
-  margin: 0;
-  flex-grow: 0;
-  max-width: 33.333333%;
-  flex-basis: 33.333333%;
-  box-sizing: border-box;
-  align-items: center;
+.logo {
+  height: 60px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 1px;
 }
 
 .aaa {

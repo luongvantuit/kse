@@ -17,39 +17,31 @@
 
 .jss6 {
   color: #848484;
-  margin-top: -50px;
-  margin-left: 60px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 32px;
   line-height: 39px;
   align-items: center;
+  margin-top: -42px;
+  margin-left: 70px;
 }
 
 .logo {
-  height: 50px;
-  margin: auto;
-  padding: 8px;
+  height: 60px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 1px;
 }
 
 .menu-left {
   box-sizing: content-box;
-  width: 260px;
-  height: 810px;
-  padding-left: 0px;
-  border-right: 2px solid #848484;
+
   background-color: #FFFFFF;
 }
 
 .option1 {
-  position: absolute;
-  width: 255px;
-  height: 50px;
-  top: 80px;
-  border: #FFFFFF;
-  background-color: #FFFFFF;
-  text-align: left;
+  top: 80px; 
 }    
 
 .icon {
@@ -62,55 +54,33 @@
   position: absolute;
   height: 40px;
   width: 100px;
-  top: 9px;
-  left: 50px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  top: 15px;
+  left: 70px;
+  
   align-items: center;
   color: #000000;
 }
 
 .option2 {
-  position: absolute;
-  width: 258px;
-  height: 50px;
-  top: 135px;
-  border: #FFFFFF;
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom: 1px solid #848484;
+  top: 100px;
 }
 
 .text {
   position: absolute;
   height: 30px;
-  top: 195px;
-  margin-left: 0px;
+  top: 220px;
+  left: 10px;
+  
   font-size: 17px;
   font-style: italic;
 }
 
 .option3 {
-  position: absolute;
-  width: 255px;
-  height: 50px;
-  top: 225px;
-  border: #FFFFFF;
-  background-color: #FFFFFF;
-  text-align: left;
+  top: 150px;
 }
 
 .option4 {
-  position: absolute;
-  width: 255px;
-  height: 50px;
-  top: 280px;
-  border: #FFFFFF;
-  background-color: #FFFFFF;
-  text-align: left;
+  top: 180px;
 }
 
 .sub-menu {
@@ -123,7 +93,6 @@
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   flex-direction: column;
   white-space: nowrap;
-
 }
 
 .jss1 {
@@ -144,7 +113,7 @@
   box-sizing: border-box;
   position: absolute;
   width: 560px;
-  height: 668px;
+  height: 656px;
   left: 160px;
   top: 90px;
   background: #FFFFFF;
@@ -188,14 +157,11 @@
   height: 30px;
   left: 30px;
   top: 54px;
+
+  padding-left: 10px;
 }
 
 .rectangle1 {
-  box-sizing: border-box;
-  position: absolute;
-  width: 497px;
-  height: 30px;
-  left: 30px;
   top: 130px;
 }
 
@@ -239,9 +205,9 @@
   margin-top: 480px;
 }
 
-.start-time {
-  width: 120px;
-  top: 440px;
+.starttime {
+  width: 138px;
+  top: 426px;
   left: 30px;
 }
 
@@ -250,8 +216,8 @@
   margin-left: 270px;
 }
 
-.end-time {
-  left: 180px;
+.endtime{
+  left: 162px;
 }
 
 .btn-Sent {
@@ -259,5 +225,85 @@
   width: 130px;
   height: 45px;
   left: 400px;
-  top: 460px;
+  top: 450px;
 }
+
+.jss17 {
+  height: 680px;
+}
+
+.datefrom {
+  top: 420px;
+
+  font-size: 14px;
+}
+
+.calendarfrom {
+  position: absolute;
+  width: 160px;
+  top: 400px;
+  left: 30px;
+}
+
+.dateto{
+  left: 300px;
+}
+
+.calendarto {
+  left: 140px;
+}
+
+.timeleavefrom {
+  top: 510px;
+}
+
+.timeleaveto {
+  left: 300px;
+}
+
+.texttime {
+  color: #9333EA;
+}
+
+.morning {
+  position: absolute;
+  width: 130px;
+  height: 45px;
+  left: 80px;
+  top: 560px;
+
+  border-radius: 5px;
+
+  font-family: 'Inter';
+  font-style: 'normal';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 19px;
+  align-items: center;
+  text-align: center;
+
+  color: '#FFFFFF';
+  border: 0.9px solid gray;
+}
+
+.morning:hover {
+  background-color: #9333EA;
+  opacity: 0.6;
+}
+
+.morning::after {
+  background-color: #9333EA;
+  opacity: 1;
+}
+
+.afternoon {
+  position: absolute;
+  left: 360px;
+}
+
+.jss16 {
+  top: 520px;
+}
+
+
+
