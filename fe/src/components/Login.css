@@ -14,21 +14,21 @@
 
 .jss6 {
     color: #848484;
-    margin-top: -50px;
-    margin-left: 60px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
     line-height: 39px;
     align-items: center;
-
-}
-
+    margin-top: -42px;
+    margin-left: 70px;
+  }
+  
 .logo {
-    height: 50px;
-    margin: auto;
-    padding: 8px;
+    height: 60px;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 1px;
 }
 
 .login-content {
