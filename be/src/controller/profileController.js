@@ -1,13 +1,9 @@
-const express = require("express");
 const PersonInformation = require("../entities/PersonalInformation");
 const ContractInfo = require("../entities/ContractInformation");
 const User = require("../entities/User");
-const auth = require("../middlewares/verify-token");
 const bcrypt = require("bcrypt");
 
-const router = express.Router();
-
-router.get('/', auth.verifyIdToken, async (req, res) => {
+async function handleGetProfile(req, res) {
     try {
         const username = req.username;
         const user = await User.findOne({ username: username });
@@ -32,9 +28,9 @@ router.get('/', auth.verifyIdToken, async (req, res) => {
             success: false,
         });
     }
-})
+}
 
-router.put('/', async (req, res) => {
+async function handlePutProfile(req, res) {
     try {
         const user = req.body.user;
         if (!user) {
@@ -44,7 +40,7 @@ router.put('/', async (req, res) => {
                 success: false,
             })
         }
-        await User.findOneAndReplace(
+        await User.findOneAndUpdate(
             {
                 username: user.username,
             },
@@ -88,6 +84,9 @@ router.put('/', async (req, res) => {
             success: false,
         })
     }
-})
+}
 
-module.exports = router
+module.exports = {
+    handleGetProfile,
+    handlePutProfile,
+}
