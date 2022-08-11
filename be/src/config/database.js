@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 
 // module.exports = { connect };   
 
-mongoose.connect(process.env.MONGODB_URL ?? 'mongodb://localhost:27017/demo_KSE_dev', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URL ?? 'mongodb://localhost:27017/demo_kse_dev', { useNewUrlParser: true });
 const conn = mongoose.connection;
 conn.on('connected', function () {
     console.log('DB is connected successfully');
