@@ -14,6 +14,7 @@ const app = express();
 
 loadConfig();
 
+
 // Add Access Control Allow Origin headers
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-db.conn;
+db.connect();
 
 const mainRouter = express.Router();
 
