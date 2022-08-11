@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import HeaderComponent from '../components/HeaderComponent';
 import MenuLeft from "../components/MenuLeft";
