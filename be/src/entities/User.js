@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+// const autoIncrement = require("mongoose-auto-increment");
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -57,6 +56,10 @@ const userSchema = new mongoose.Schema({
 //     }
 //     return user
 // }
+
+// autoIncrement.initialize(mongoose.connection);
+
+// userSchema.plugin(autoIncrement.plugin, 'User');
 
 const User = mongoose.model('User', userSchema);
 
