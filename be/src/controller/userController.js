@@ -16,7 +16,7 @@ async function hashedPassword(password) {
 
 async function handleUserSignUp(req, res) {
     try {
-        const usernameDB = await User.findOne({ username: req.body.username });
+        const usernameDB = await User.findOne({ username: req.body.username }).exec();
         console.log(req.body.username);
         if (usernameDB) {
             return res.status(500).json({
@@ -54,7 +54,7 @@ async function handleUserLogin(req, res) {
         const username = req.body.username;
         const password = req.body.password;
         console.log(req.body, username, password);
-        const user = await User.findOne({ username: username });
+        const user = await User.findOne({ username: username }).exec();
         if (!user) {
             return res.status(400).json({
                 error: true,
@@ -100,7 +100,7 @@ async function handleUserLogin(req, res) {
 
 async function handleUserInfo(req, res) {
     try {
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findOne({ username: req.username }).exec();
         if (!user) {
             return res.status(404).json({
                 error: true,
@@ -121,7 +121,7 @@ async function handleUserInfo(req, res) {
 
 async function handleUserRole(req, res) {
     try {
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findOne({ username: req.username }).exec();
         if (!user) {
             return res.status(404).json({
                 error: true,
