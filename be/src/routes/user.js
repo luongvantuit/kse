@@ -42,6 +42,7 @@ router.post('/login', async (req, res) => {
     try {
         const username = req.body.username;
         const password = req.body.password;
+        console.log(req.body, username, password);
         const user = await User.findOne({ username: username });
         if (!user) {
             return res.status(400).json({
@@ -49,6 +50,8 @@ router.post('/login', async (req, res) => {
                 msg: 'Username not found',
                 success: false
             });
+        } else {
+            console.log('Usename is found');
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
@@ -57,6 +60,8 @@ router.post('/login', async (req, res) => {
                 msg: 'Password mismatch',
                 success: false
             });
+        } else {
+            console.log('Password is match');
         }
         const token = jwt.sign({ username: user.username }, jwtSecretKey);
         if (!token) {
@@ -65,6 +70,8 @@ router.post('/login', async (req, res) => {
                 msg: 'Invalid credentials',
                 sucess: false,
             })
+        }else {
+            console.log('Token generated');
         }
         return res.status(201).json({
             error: false,
