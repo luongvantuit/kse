@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 //import Button from '@mui/material/Button';
 
-import '../components/Login.css';
+import '../public/css/login.css';
 
-import Logo from "../image/image_logo_bts.PNG";
+import Logo from "../public/image/image_logo_bts.PNG";
 import CloseIcon from '@mui/icons-material/Close';
 //import { styled } from '@mui/material/styles';
 
@@ -46,7 +46,7 @@ export default function Login() {
     return (
         <>
             {data ? (
-                <Navigate to='/' replace={true} />
+                <Navigate to='/homepage' replace={true} />
             ) : (
                 // UI Login
                 <React.Fragment>

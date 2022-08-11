@@ -1,9 +1,16 @@
 .menu-left {
-    position: relative;
+    position: fixed;
+    width: var(--menu-left-width); 
     height: 100%;
-    top: 90px;
+    top: var(--header-height);
 }
 
 .menu-name {
     margin-left: 14px;
+}
+
+.text {
+    margin: 0.8rem 0.6rem;
+    font-size: 1.2rem;
+    font-style: italic;
 }

@@ -17,17 +17,17 @@ export default function MenuLeft() {
   return (
     <div className="menu-left">
       <Paper
-        sx={{ width: 240, maxWidth: "100%"}}
+        sx={{ maxWidth: "100%", height: "100%"}}
       >
         <MenuList className="option">
           <MenuItem className="option1">
-            <AvTimer />
-            <ListItemText className="menu-name">Chấm công</ListItemText>
+            <AvTimer sx={{fontSize:'2.6rem'}}/>
+            <ListItemText className="menu-name" sx={{fontSize:'1.4rem'}}>Chấm công</ListItemText>
           </MenuItem>
 
           <MenuItem className="option2">
-            <NoteAlt />
-            <ListItemText className="menu-name">Đơn từ</ListItemText>
+            <NoteAlt sx={{fontSize:'2.6rem'}}/>
+            <ListItemText className="menu-name" sx={{fontSize:'1.4rem'}}>Đơn từ</ListItemText>
           </MenuItem>
 
           <Divider />
@@ -35,13 +35,13 @@ export default function MenuLeft() {
           <span className="text"> Quản lí </span>
 
           <MenuItem className="option3">
-            <Leaderboard />
-            <ListItemText className="menu-name">Bảng công</ListItemText>
+            <Leaderboard sx={{fontSize:'2.6rem'}}/>
+            <ListItemText className="menu-name" sx={{fontSize:'1.4rem'}}>Bảng công</ListItemText>
           </MenuItem>
 
           <MenuItem className="option4">
-            <Groups />
-            <ListItemText className="menu-name">Nhân sự</ListItemText>
+            <Groups sx={{fontSize:'2.6rem'}}/>
+            <ListItemText className="menu-name" sx={{fontSize:'1.4rem'}}>Nhân sự</ListItemText>
           </MenuItem>
         </MenuList>
       </Paper>
