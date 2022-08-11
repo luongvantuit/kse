@@ -2,14 +2,13 @@ import React from "react";
 
 import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
-import FormRequest from "../components/FormRequest";
+import AddNewPersonal from "../components/AddNewPersonal";
 
-export default function Requests() {
+export default function Addnew() {
   return (
     <React.Fragment>
       <HeaderComponent />
-
-      <FormRequest />
+      <AddNewPersonal />
       <MenuLeft />
     </React.Fragment>
   );

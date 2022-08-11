@@ -1,0 +1,185 @@
+.create-new {
+    position: absolute;
+    box-shadow: 0px 2px 2px gray;
+    left: 250px;
+    top: 80px;
+    width: 1000px;
+    height: 140px;
+    padding: 5px 20px;
+}
+
+.jss50 {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.basic-info {
+    position: absolute;
+    top: 30px;
+    left:0px;
+    width: 100%;
+    padding: 10px 30px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fullname, .username, .pass {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.jss51 {
+    background: #FFFFFF;
+    border: 0.9px solid gray;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.jss53 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 28px;
+}
+
+.jss52 {
+    position: absolute;
+    left: 400px;
+    top: 110px;
+    font-size: 15px;
+}
+
+.details {
+    position: absolute;
+    left: 250px;
+    top: 220px;
+    width: 1000px;
+    height: 440px;
+    padding: 5px 20px;
+    box-shadow: 0px 2px 2px gray;
+}
+
+.details-name {
+    position: absolute;
+    font-weight: 600;
+    left: 410px;
+    }
+
+.contract-info {
+    position: absolute;
+    top: 30px;
+    left:0px;
+    width: 100%;
+    padding: 5px 30px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+.contract-info-left {
+    padding: 10px 30px ;
+    align-items: center;
+}
+
+.selContract {
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    width: 197px;
+    height: 30px;
+    display: block;
+    outline: 0;
+}
+
+.contract-info-right {
+    padding: 10px 30px ;
+    align-items: center;
+}
+
+.jss55 {
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-weight: 400;
+    width: 197px;
+    height: 30px;
+    display: block;
+}
+
+.contract-term, .contract-expiration-date {
+    margin-top: 15px;
+}
+.details-profile {
+    position: absolute;
+    font-weight: 600;
+    top: 180px;
+    left: 410px;
+}
+
+.personal-info {
+    position: absolute;
+    top: 205px;
+    left:0px;
+    width: 100%;
+    padding: 5px 30px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personal-info-left {
+    padding: 10px 30px ;
+    align-items: center;
+}
+
+.personal-info-right {
+    padding: 10px 30px ;
+    align-items: center;
+}
+
+.department, .working-mode, .citizen-ID, .birth {
+    margin-top: 15px;
+}
+
+.endPage {
+    position: absolute;
+    top: 660px;
+    left: 250px;
+    width: 1000px;
+    height: 60px;
+    padding: 15px 30px ;
+    display: flex;
+    }
+
+.save {
+    position: absolute;
+    width: 80px;
+    height: 28px;
+    right: 40px;
+    border: 1px solid #9333EA;
+    background-color: #9333EA;
+    color: #FFFFFF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 28px;
+    right: 140px;
+    border: 1px solid #9333EA;
+    border-radius: 5px;
+    background-color: #9333EA;
+    display: flex;
+    font-family: 'Inter';
+    font-size: 18px;
+    color: #FFFFFF;
+    }
