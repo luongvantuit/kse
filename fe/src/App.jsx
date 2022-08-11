@@ -1,23 +1,19 @@
-import React from 'react';
-// import { Routes, Route } from "react-router-dom";
+import React from "react";
 
-import './index.css';
-import Requests from './pages/Requests';
-// import Login from './pages/Login';
-import Homepage from './pages/Homepage';
+import "./index.css";
 
-//import Calendar from './components/Calendar'
+//import ListCheckIn from "./components/ListCheckIn";
+import Homepage from "./pages/Homepage";
+//import Requests from "./pages/Requests";
+
 
 function App() {
-  
   return (
-    // <React.Fragment>
-    //    <Routes>
-    //     <Route path="login" element={<Login />} />
-    //     <Route path="homepage" element={<Homepage />} /> 
-    //   </Routes>
-    //  </React.Fragment>
-    <Homepage />
+    <React.Fragment>
+      <Homepage />
+      {/* <Requests /> */}
+      
+    </React.Fragment>
   );
 }
 

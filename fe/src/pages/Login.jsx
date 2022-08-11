@@ -46,7 +46,7 @@ export default function Login() {
     return (
         <>
             {data ? (
-                <Navigate to='/homepage' replace={true} />
+                <Navigate to='/' replace={true} />
             ) : (
                 // UI Login
                 <React.Fragment>

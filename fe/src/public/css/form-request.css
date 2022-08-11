@@ -1,88 +1,3 @@
-.compensation-background {
-  position: absolute;
-  height: 850px;
-  width: 600px;
-}
-
-.compensation-container {
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  height: 70px;
-  left: 0px;
-  top: 0px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 4px gray;
-}
-
-.jss6 {
-  color: #848484;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 39px;
-  align-items: center;
-  margin-top: -42px;
-  margin-left: 70px;
-}
-
-.logo {
-  height: 60px;
-  margin-left: 10px;
-  margin-top: 5px;
-  padding: 1px;
-}
-
-.menu-left {
-  box-sizing: content-box;
-
-  background-color: #FFFFFF;
-}
-
-.option1 {
-  top: 80px; 
-}    
-
-.icon {
-  width: 36px;
-  height: 34px;
-  margin-right: 18px;
-}
-
-.jss9 {
-  position: absolute;
-  height: 40px;
-  width: 100px;
-  top: 15px;
-  left: 70px;
-  
-  align-items: center;
-  color: #000000;
-}
-
-.option2 {
-  top: 100px;
-}
-
-.text {
-  position: absolute;
-  height: 30px;
-  top: 220px;
-  left: 10px;
-  
-  font-size: 17px;
-  font-style: italic;
-}
-
-.option3 {
-  top: 150px;
-}
-
-.option4 {
-  top: 180px;
-}
-
 .sub-menu {
   position: absolute;
   width: 890px;
@@ -91,11 +6,9 @@
   top: 90px;
   background: #FFFFFF;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  flex-direction: column;
-  white-space: nowrap;
 }
 
-.jss1 {
+.tab-menu {
   padding-left: 20px;
   padding-right: 100px;
   padding-top: 6px
@@ -122,8 +35,8 @@
 
 .jss7 {
   position: absolute;
-  width: 150px;
-  height: 45px;
+  width: 182px;
+  height: 46px;
   left: 30px;
   top: 10px;
   font-family: 'Inter';

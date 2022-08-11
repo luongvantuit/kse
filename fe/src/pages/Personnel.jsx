@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '..components/Personnel.css';
+import '../components/Personnel.css';
 
 import Logo from "../image/image_logo_bts.PNG";
 import Icon0 from "../image/ring.png";
