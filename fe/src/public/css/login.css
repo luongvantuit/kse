@@ -1,5 +1,22 @@
-.login-background {
+.login-container {
+    position: fixed;
+    z-index: 99;
+    /* position: relative; */
+    width: 100%;
+    height: var(--header-height);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 2px 18px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px gray;
     
+}
+
+.header-left-name {
+    font-size: 28px;
+    margin-left: 10px;
 }
 
 .login-content {
@@ -91,7 +108,7 @@
     opacity: 0.8;
     border: 0.9px solid #9333EA;
     border-radius: 8px;
-    font-family: 'Inter';
+    /* font-family: 'Inter'; */
     font-style: normal;
     font-weight: 400;
     font-size: 20px;

@@ -1,65 +1,53 @@
-.create-new {
-    position: absolute;
-    box-shadow: 0px 2px 2px gray;
-    left: 250px;
-    top: 80px;
-    width: 1000px;
-    height: 140px;
-    padding: 5px 20px;
-}
-
-.jss50 {
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.basic-info {
-    position: absolute;
-    top: 30px;
-    left:0px;
+.personal-inf {
+    /* position: relative;
     width: 100%;
-    padding: 10px 30px ;
+    height: 100%;
+    left: 18rem;
+    top: 6rem; */
+
+    position: relative;
+    width: var(--body-width);
+    top: calc(var(--header-height) + 4rem);
+    left: var(--menu-left-width);
+}
+
+.personal-inf-name{
+    margin-left: 4rem;
+    font-size: 24px;
+
+}
+.body-personal-inf-two {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    flex-direction: row;
+    margin-left: 2.8rem;
+
+    padding: 18px 10px;
 }
 
-.fullname, .username, .pass {
+.body-personal-inf-left {
+    width: 16rem;
+    height: 20rem;
     display: flex;
+    align-items: center;
     flex-direction: column;
-}
-
-
-.jss51 {
     background: #FFFFFF;
-    border: 0.9px solid gray;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #000000;
+    box-shadow: 0px 4px 4px gray;
 }
 
-.jss53 {
-    box-sizing: border-box;
-    width: 200px;
-    height: 28px;
+.body-personal-inf-username-img {
+    width: 10rem;
+    height: 10rem;
 }
 
-.jss52 {
-    position: absolute;
-    left: 400px;
-    top: 110px;
-    font-size: 15px;
+.personal-inf-left-username {
+    margin-top: 2rem;
 }
 
-.details {
-    position: absolute;
-    left: 250px;
-    top: 220px;
-    width: 1000px;
-    height: 440px;
-    padding: 5px 20px;
-    box-shadow: 0px 2px 2px gray;
+.personal-inf-left-password {
+    margin-top: 4px;
 }
+
 
 .details-name {
     position: absolute;
@@ -67,47 +55,42 @@
     left: 410px;
 }
 
-.contract-info {
-    position: absolute;
-    top: 30px;
-    left:0px;
-    width: 100%;
-    padding: 5px 30px ;
+.personal-inf-right {
+    margin-left: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px gray;
+    width: 40rem;
+    height: 20rem;
+}
+
+.body-personal-inf-right {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    }
-
-.contract-info-left {
-    padding: 10px 30px ;
-    align-items: center;
+    flex-direction: row;
 }
 
-.selContract {
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    font-weight: 400;
-    width: 197px;
-    height: 30px;
-    display: block;
-    outline: 0;
+.personal-inf-right-left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
 }
 
-.contract-info-right {
-    padding: 10px 30px ;
-    align-items: center;
+.personal-inf-right-right-id, 
+.personal-inf-right-right-MAC,
+.personal-inf-right-right-birth,
+.personal-inf-right-right-room {
+    margin-top: 0.8rem;
 }
 
-.jss55 {
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    font-weight: 400;
-    width: 197px;
-    height: 30px;
-    display: block;
+.personal-inf-right-right {
+    margin-left: 22rem;
+    margin-top: -16.7rem;
 }
+
+.personal-inf-right-right-work {
+    margin-top: 0.8rem;
+}
+
 
 .contract-term, .contract-expiration-date {
     margin-top: 25px;
@@ -118,68 +101,80 @@
     top: 190px;
     left: 410px;
 }
+.personal-inf-bottom{
+    margin-left: 20rem;
+    padding-top: 1rem;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px gray;
+    width: 40rem;
+    height: 18rem;
+}
 
-.personal-info {
-    position: absolute;
-    top: 205px;
-    left:0px;
-    width: 100%;
-    padding: 5px 30px ;
+.personal-inf-name {
+    font-size: 24px;
+    margin-left: 1.8rem;
+}
+
+.body-personal-inf-bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    flex-direction: row;
+    padding: 20px 10px;
+    margin-top: 2rem;
 }
 
-.personal-info-left {
-    padding: 10px 30px ;
-    align-items: center;
+.personal-inf-bottom-left {
+    margin-left: 2rem;
+
 }
 
-.personal-info-right {
-    padding: 10px 30px ;
-    align-items: center;
+.personal-inf-bottom-right {
+    margin-left: 4rem;
 }
 
 .department, .working-mode, .citizen-ID, .birth {
     margin-top: 25px;
+ }
+.personal-inf-right-right-contract-duration,
+.personal-inf-right-right-contract-end-date {
+    margin-top: 0.8rem;
 }
 
-.endPage {
-    position: absolute;
-    top: 660px;
-    left: 250px;
-    width: 1000px;
-    height: 60px;
-    padding: 15px 30px ;
-    display: flex;
-    }
-
-.save {
-    position: absolute;
-    width: 80px;
-    height: 28px;
-    right: 40px;
-    border: 1px solid #9333EA;
-    background-color: #9333EA;
-    color: #FFFFFF;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.personal-inf-bottom-name {
+    left: 40rem;
+    
 }
 
-.cancel {
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 28px;
-    right: 140px;
-    border: 1px solid #9333EA;
-    border-radius: 5px;
-    background-color: #9333EA;
+.btn-two {
+    margin-top: 2rem;
+    padding-left: 30rem;
+    background: #FFFFFF;
+    border-top: 0.2px solid gray;
+    width: auto;
+    height: 4rem;
     display: flex;
-    font-family: 'Inter';
-    font-size: 18px;
+    align-items: center;
+    justify-content:space-around;
+}
+
+.btn-exit,
+.btn-add {
+    width: 8rem;
+    height: 2rem;
+    left: 0px;
+    top: 0px;
+    display: block;
+    background: #9333EA;
+    opacity: 0.8;
+    border: 0.9px solid #9333EA;
+    border-radius: 8px;  
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
     color: #FFFFFF;
-    }
+}
+
+.btn-exit:hover, .btn-add:hover {
+    cursor: pointer;
+    opacity: 1;
+}

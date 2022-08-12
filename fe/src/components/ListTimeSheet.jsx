@@ -1,33 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import "../public/css/list-personal.css";
+import "../public/css/list-time-sheet.css";
 
 import TextField from "@mui/material/TextField";
-import { InputAdornment } from "@mui/material";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import SearchIcon from "@mui/icons-material/Search";
-//import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import { InputAdornment } from '@mui/material';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import SearchIcon from '@mui/icons-material/Search';
 
-export default function ListPersonal() {
+export default function ListTimeSheet() {
   return (
     <div className="body-component">
       <div className="body-header">
-        <span>Danh sách nhân sự</span>
+        <span>Danh sách chấm công</span>
         <div className="body-header-right">
-          <div>
-            <button className="btn-add-personal">
-              <Link to={"/addnew"}>
-                <PersonAddIcon />
-                <span>Thêm nhân sự</span>
-              </Link>
+          <div className="body-header-month-year">
+            <button>
+              <NavigateBeforeIcon />
+            </button>
+            <span className="time">Tháng</span>
+            <span className="time">2</span>
+            <span className="time">/</span>
+            <span className="time">2022</span>
+            <button>
+              <NavigateNextIcon />
             </button>
           </div>
+          
         </div>
       </div>
-
       <div className="thead">
         <div className="body-search">
           <span>#</span>
@@ -102,31 +103,6 @@ export default function ListPersonal() {
           <span className="thead-text-child">Nghỉ phép có lương</span>
           <span className="thead-text-child">Nghỉ phép không lương</span>
           <span className="thead-text-child">Tổng công tính lương</span>
-        </div>
-      </div>
-
-      <div className="veiw">
-        <div className="thead">
-          <div className="body-search">
-            <span>1</span>
-            <div className="search-box">
-              <span>Nguyễn Văn A"</span>
-            </div>
-            <div className="search-box">
-              <span>A@gmail.com.vn</span>
-            </div>
-
-            <div className="search-box">
-              <span>Phòng ban A</span>
-            </div>
-          </div>
-          <div className="thread-span">
-            <span className="thead-text-child-ans">1</span>
-            <span className="thead-text-child-ans">1</span>
-            <span className="thead-text-child-ans">1</span>
-            <span className="thead-text-child-ans">1</span>
-            <span className="thead-text-child-ans">1</span>
-          </div>
         </div>
       </div>
     </div>

@@ -61,6 +61,7 @@ export default function ListCheckIn() {
               }}
               variant="standard"
             />
+            
           </div>
           <div className="search-box">
             <TextField
@@ -113,6 +114,7 @@ export default function ListCheckIn() {
           <span className="thead-text-child">Tổng công tính lương</span>
         </div>
       </div>
+
     </div>
   );
 }

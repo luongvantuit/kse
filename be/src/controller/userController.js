@@ -1,4 +1,5 @@
 const User = require("../entities/User");
+const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { jwtSecretKey } = require("../config/server");
@@ -16,25 +17,30 @@ async function hashedPassword(password) {
 
 async function handleUserSignUp(req, res) {
     try {
-        const usernameDB = await User.findOne({ username: req.body.username }).exec();
-        console.log(req.body.username);
+        const username = req.body.username;
+        const password = req.body.password;
+        const fullname = req.body.fullname;
+        const role = req.body.role;
+        console.log(req.body);
+        const usernameDB = await User.findOne({ username: username }).exec();
+        console.log('username', usernameDB);
         if (usernameDB) {
             return res.status(500).json({
                 error: "Username already exists",
                 success: false,
             })
         }
-        console.log(req.body.password);
         const user = new User({
-            username: req.body.username,
-            fullname: req.body.fullname,
-            role: req.body.role,
-            password: await hashedPassword(req.body.password),
+            username: username,
+            fullname: fullname,
+            role: role,
+            password: await hashedPassword(password),
         });
         await user.save();
         console.log('User saved successfully');
         CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
-        console.log('successfully');
+        // CreateUserDB.create(user._id,req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
+        console.log('CreateUserDB successfully');
         return res.status(201).json({
             user: user,
             msg: 'Successfully created a new user',
@@ -53,8 +59,9 @@ async function handleUserLogin(req, res) {
     try {
         const username = req.body.username;
         const password = req.body.password;
-        console.log(req.body, username, password);
-        const user = await User.findOne({ username: username }).exec();
+        console.log(req.body);
+        const user = await User.findOne({ username: username });
+        console.log(user);
         if (!user) {
             return res.status(400).json({
                 error: true,
@@ -74,7 +81,7 @@ async function handleUserLogin(req, res) {
         } else {
             console.log('Password is match');
         }
-        const token = jwt.sign({ username: user.username }, jwtSecretKey);
+        const token = jwt.sign({ _id: user._id }, jwtSecretKey);
         if (!token) {
             return res.status(400).json({
                 error: true,

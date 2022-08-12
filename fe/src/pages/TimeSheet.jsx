@@ -1,23 +1,22 @@
 import React from "react";
-
 import { useEffect } from 'react';
 
 import HeaderComponent from '../components/HeaderComponent';
 import MenuLeft from "../components/MenuLeft";
-import ListCheckIn from "../components/ListCheckIn";
+import ListTimeSheet from "../components/ListTimeSheet";
 
-export default function Homepage() {
+export default function TimeSheet() {
 
     useEffect(() => {
-        document.title = 'HomePage';
+        document.title = 'TimeSheet';
       });
 
-    return (
-        
+    return(
         <React.Fragment>
             <HeaderComponent />
-            <ListCheckIn />
+            <ListTimeSheet />
             <MenuLeft />
         </React.Fragment>
+
     );
 }

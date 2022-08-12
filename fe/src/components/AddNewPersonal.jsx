@@ -1,6 +1,6 @@
 import React from "react";
 
-import '../public/css/personal-information.css';
+import '../public/css/add-new-personal.css';
 
 export default function AddNewPersonal() {
   return (
