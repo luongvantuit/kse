@@ -65,7 +65,7 @@
     position: absolute;
     font-weight: 600;
     left: 410px;
-    }
+}
 
 .contract-info {
     position: absolute;
@@ -110,12 +110,12 @@
 }
 
 .contract-term, .contract-expiration-date {
-    margin-top: 15px;
+    margin-top: 25px;
 }
 .details-profile {
     position: absolute;
     font-weight: 600;
-    top: 180px;
+    top: 190px;
     left: 410px;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .department, .working-mode, .citizen-ID, .birth {
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .endPage {
