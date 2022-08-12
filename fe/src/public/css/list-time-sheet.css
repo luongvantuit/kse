@@ -32,13 +32,6 @@
     margin: 0 2px;
 }
 
-.btn-file-export{
-    padding: 4px 6px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    background-color: aqua;
-}
-
 .thead {
     position: absolute;
     top: 4rem;
@@ -51,7 +44,7 @@
 }
 
 .body-search {
-    width: calc(0.8  * var(--body-width));
+    width: calc(0.4  * var(--body-width));
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -68,7 +61,7 @@
 }
 
 .thread-span {
-    width: calc(0.2 * var(--body-width));
+    width: calc(0.6 * var(--body-width));
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -86,11 +79,4 @@
     text-align: center;
     -webkit-box-orient: vertical;
 
-}
-
-.veiw {
-    position: absolute;
-    top: 4.8rem;
-    left: -0.4rem;
-   
 }

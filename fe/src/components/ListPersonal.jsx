@@ -3,9 +3,9 @@ import React from "react";
 import "../public/css/list-personal.css";
 
 import TextField from "@mui/material/TextField";
-import { InputAdornment } from '@mui/material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment } from "@mui/material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SearchIcon from "@mui/icons-material/Search";
 //import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -16,7 +16,6 @@ export default function ListPersonal() {
       <div className="body-header">
         <span>Danh sách chấm công</span>
         <div className="body-header-right">
-  
           <div>
             <button className="btn-add-personal">
               <PersonAddIcon />
@@ -100,6 +99,31 @@ export default function ListPersonal() {
           <span className="thead-text-child">Nghỉ phép có lương</span>
           <span className="thead-text-child">Nghỉ phép không lương</span>
           <span className="thead-text-child">Tổng công tính lương</span>
+        </div>
+      </div>
+
+      <div className="veiw">
+        <div className="thead">
+          <div className="body-search">
+            <span>1</span>
+            <div className="search-box">
+              <span>Nguyễn Văn A"</span>
+            </div>
+            <div className="search-box">
+              <span>A@gmail.com.vn</span>
+            </div>
+
+            <div className="search-box">
+              <span>Phòng ban A</span>
+            </div>
+          </div>
+          <div className="thread-span">
+            <span className="thead-text-child-ans">1</span>
+            <span className="thead-text-child-ans">1</span>
+            <span className="thead-text-child-ans">1</span>
+            <span className="thead-text-child-ans">1</span>
+            <span className="thead-text-child-ans">1</span>
+          </div>
         </div>
       </div>
     </div>

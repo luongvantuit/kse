@@ -8,6 +8,8 @@ import HomePage from "./pages/Homepage";
 import Requests from "./pages/Requests";
 import Personnel from "./pages/Personnel";
 import AddNew from "./pages/AddNew";
+import Profile from "./pages/Profile";
+import TimeSheet from "./pages/TimeSheet";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="requests" element={<Requests />} />
         <Route path="personnel" element={<Personnel />} />
         <Route path="addnew" element={<AddNew />} />
+        <Route path="profile" element={<Profile/>} />
+        <Route path="timesheet" element={<TimeSheet/>}/>
       </Routes>
     </React.Fragment>
   );
