@@ -94,3 +94,26 @@
     left: -0.4rem;
    
 }
+
+.btn-add-personal {
+    width: 10rem;
+    height: 2rem;
+    left: 0px;
+    top: 0px;
+    display: block;
+    background: #9333EA;
+    opacity: 0.8;
+    border: 0.9px solid #9333EA;
+    border-radius: 8px;
+    
+    font-size: 20px;
+   
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.btn-add-personal:hover {
+    cursor: pointer;
+    opacity: 1;
+}

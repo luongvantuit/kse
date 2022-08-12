@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "../public/css/list-personal.css";
 
@@ -14,12 +15,14 @@ export default function ListPersonal() {
   return (
     <div className="body-component">
       <div className="body-header">
-        <span>Danh sách chấm công</span>
+        <span>Danh sách nhân sự</span>
         <div className="body-header-right">
           <div>
             <button className="btn-add-personal">
-              <PersonAddIcon />
-              <span>Thêm nhân sự</span>
+              <Link to={"/addnew"}>
+                <PersonAddIcon />
+                <span>Thêm nhân sự</span>
+              </Link>
             </button>
           </div>
         </div>
