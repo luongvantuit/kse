@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
-//import Button from '@mui/material/Button';
+import { useEffect } from 'react';
 
 import "../public/css/login.css";
 
@@ -9,6 +9,11 @@ import CloseIcon from "@mui/icons-material/Close";
 //import { styled } from '@mui/material/styles';
 
 export default function Login() {
+
+  useEffect(() => {
+    document.title = 'Login';
+  });
+
   const [data, setData] = useState(false);
   const [forgot, setForgot] = useState(false);
   const elementUsername = useRef();
