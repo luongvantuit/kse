@@ -1,17 +1,14 @@
 import React from "react";
 
-import "../public/css/list-checkin.css";
+import "../public/css/list-time-sheet.css";
 
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import SearchIcon from '@mui/icons-material/Search';
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-export default function ListCheckIn() {
+export default function ListTimeSheet() {
   return (
     <div className="body-component">
       <div className="body-header">
@@ -29,12 +26,7 @@ export default function ListCheckIn() {
               <NavigateNextIcon />
             </button>
           </div>
-          <div>
-            <button className="btn-file-export">
-              <ExitToAppIcon />
-              <span>Xuất báo cáo</span>
-            </button>
-          </div>
+          
         </div>
       </div>
       <div className="thead">
@@ -61,7 +53,6 @@ export default function ListCheckIn() {
               }}
               variant="standard"
             />
-            
           </div>
           <div className="search-box">
             <TextField
@@ -114,7 +105,6 @@ export default function ListCheckIn() {
           <span className="thead-text-child">Tổng công tính lương</span>
         </div>
       </div>
-
     </div>
   );
 }
