@@ -48,9 +48,15 @@
     margin-top: 4px;
 }
 
+
+.details-name {
+    position: absolute;
+    font-weight: 600;
+    left: 410px;
+}
+
 .personal-inf-right {
     margin-left: 10px;
-
     background: #FFFFFF;
     box-shadow: 0px 4px 4px gray;
     width: 40rem;
@@ -58,7 +64,6 @@
 }
 
 .body-personal-inf-right {
-    
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -86,10 +91,19 @@
     margin-top: 0.8rem;
 }
 
+
+.contract-term, .contract-expiration-date {
+    margin-top: 25px;
+}
+.details-profile {
+    position: absolute;
+    font-weight: 600;
+    top: 190px;
+    left: 410px;
+}
 .personal-inf-bottom{
     margin-left: 20rem;
     padding-top: 1rem;
-
     background: #FFFFFF;
     box-shadow: 0px 4px 4px gray;
     width: 40rem;
@@ -118,6 +132,9 @@
     margin-left: 4rem;
 }
 
+.department, .working-mode, .citizen-ID, .birth {
+    margin-top: 25px;
+ }
 .personal-inf-right-right-contract-duration,
 .personal-inf-right-right-contract-end-date {
     margin-top: 0.8rem;
@@ -150,10 +167,8 @@
     background: #9333EA;
     opacity: 0.8;
     border: 0.9px solid #9333EA;
-    border-radius: 8px;
-    
+    border-radius: 8px;  
     font-size: 20px;
-   
     align-items: center;
     text-align: center;
     color: #FFFFFF;
