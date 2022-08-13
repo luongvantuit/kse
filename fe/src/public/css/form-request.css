@@ -39,11 +39,7 @@
   height: 46px;
   left: 30px;
   top: 10px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 18px;
-  line-height: 20px;
   display: flex;
   align-items: center;
   color: gray;
@@ -53,11 +49,7 @@
   background: #FFFFFF;
   border: 0.9px solid gray;
   border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 19px;
   display: flex;
   align-items: center;
   color: #000000;
@@ -184,17 +176,10 @@
   height: 45px;
   left: 80px;
   top: 560px;
-
   border-radius: 5px;
-
-  font-family: 'Inter';
-  font-style: 'normal';
-  font-weight: 400;
   font-size: 18px;
-  line-height: 19px;
-  align-items: center;
+ align-items: center;
   text-align: center;
-
   color: '#FFFFFF';
   border: 0.9px solid gray;
 }
