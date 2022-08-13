@@ -3,7 +3,7 @@ const PersonInformation = require("../entities/PersonalInformation");
 const WorkSheet = require("../entities/WorkSheet");
 const Department = require('../entities/Department');
 
-async function create(username, contractInfo, personInfo, role) {
+async function create( username, contractInfo, personInfo, role) {
     try {
         const contract = new ContractInformation({
             username: username,

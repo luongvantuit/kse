@@ -3,18 +3,17 @@ import { useEffect } from 'react';
 
 import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
-import ListPersonal from "../components/ListPersonal";
-
-export default function Personnel() {
+import PersonalInformation from "../components/PersonalInformation";
+export default function Profile() {
 
   useEffect(() => {
-    document.title = 'Personnel';
+    document.title = 'Profile';
   });
 
   return (
     <React.Fragment>
       <HeaderComponent />
-      <ListPersonal />
+      <PersonalInformation />
       <MenuLeft />
     </React.Fragment>
   );

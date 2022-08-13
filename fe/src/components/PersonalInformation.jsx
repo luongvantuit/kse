@@ -1,0 +1,251 @@
+import React from "react";
+
+import TextField from "@mui/material/TextField";
+import { InputAdornment } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import enLocale from "date-fns/locale/en-NZ";
+
+import Avt from "../public/image/avt.png";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+
+import "../public/css/personal-information.css";
+const localeMap = {
+  en: enLocale,
+};
+
+const genders = [
+  {
+    value: "Nam",
+    label: "Nam",
+  },
+  {
+    value: "Nữ",
+    label: "Nữ",
+  },
+  {
+    value: "Không xác định",
+    label: "Không xác định",
+  },
+];
+
+export default function PersonalInformation() {
+  const [locale] = React.useState("en");
+  const [datePickerValue, setDatePickerValue] = React.useState(new Date());
+
+  const [gender, setGender] = React.useState("Nam");
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+
+  return (
+    <div className="personal-inf">
+      <span className="personal-inf-name">Hồ sơ cá nhân</span>
+
+      <div className="body-personal-inf-two">
+        <div className="body-personal-inf-left">
+          <button className="btn-personal-avatar">
+            <img
+              src={Avt}
+              alt="avt"
+              className="body-personal-inf-username-img"
+            />
+          </button>
+
+          <div className="personal-inf-left-username">
+            <p>Tên đăng nhập</p>
+            <TextField
+              variant="standard"
+              sx={{
+                width: "14rem",
+              }}
+            />
+          </div>
+
+          <div className="personal-inf-left-password">
+            <p>Mật khẩu</p>
+            <TextField
+              variant="standard"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <ModeEditIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="personal-inf-right">
+          <span className="personal-inf-name">THÔNG TIN CÁ NHÂN</span>
+          <div className="body-personal-inf-right">
+            <div className="personal-inf-right-left">
+              <p className="personal-inf-right-right-id">Mã nhân viên</p>
+              <TextField
+                variant="standard"
+                sx={{
+                  width: "16rem",
+                  marginTop: "0.4rem",
+                }}
+              />
+
+              <p className="personal-inf-right-right-MAC">Căn cước công dân</p>
+              <TextField
+                variant="standard"
+                sx={{
+                  width: "16rem",
+                  marginTop: "0.4rem",
+                }}
+              />
+
+              <p className="personal-inf-right-right-birth">Ngày sinh</p>
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                adapterLocale={localeMap[locale]}
+              >
+                <DatePicker
+                  value={datePickerValue}
+                  onChange={(newValue) => setDatePickerValue(newValue)}
+                  renderInput={(params) => (
+                    <TextField
+                      variant="standard"
+                      sx={{
+                        width: "16rem",
+                        marginTop: "0.4rem",
+                      }}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+
+              <p className="personal-inf-right-right-room">Phòng ban</p>
+              <TextField
+                variant="standard"
+                sx={{
+                  width: "16rem",
+                  marginTop: "0.4rem",
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="personal-inf-right-right">
+            <p className="personal-inf-right-right-gender">Giới tính</p>
+            <TextField
+              select
+              value={gender}
+              onChange={handleChange}
+              variant="standard"
+              sx={{
+                width: "16rem",
+                marginTop: "0.4rem",
+              }}
+            >
+              {genders.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <p className="personal-inf-right-right-work">Chế độ làm việc</p>
+            <TextField
+              variant="standard"
+              sx={{
+                width: "16rem",
+                marginTop: "0.4rem",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="personal-inf-bottom">
+        <span className="personal-inf-name">THÔNG TIN HỢP ĐỒNG</span>
+        <div className="body-personal-inf-bottom">
+          <div className="personal-inf-bottom-left">
+            <p className="personal-inf-right-right-contract-form">
+              Loại hợp đồng
+            </p>
+            <TextField
+              variant="standard"
+              select
+              sx={{
+                width: "16rem",
+                marginTop: "0.4rem",
+              }}
+            />
+            <p className="personal-inf-right-right-contract-duration">
+              Thời hạn hợp đồng
+            </p>
+            <TextField
+              variant="standard"
+              select
+              sx={{
+                width: "16rem",
+                marginTop: "0.4rem",
+              }}
+            />
+          </div>
+
+          <div className="personal-inf-bottom-right">
+            <p className="personal-inf-right-right-contract-start-date">
+              Ngày kí hợp đồng
+            </p>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              adapterLocale={localeMap[locale]}
+            >
+              <DatePicker
+                value={datePickerValue}
+                onChange={(newValue) => setDatePickerValue(newValue)}
+                renderInput={(params) => (
+                  <TextField
+                    variant="standard"
+                    sx={{
+                      width: "16rem",
+                      marginTop: "0.4rem",
+                    }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+
+            <p className="personal-inf-right-right-contract-end-date">
+              Ngày hết hạn hợp đồng
+            </p>
+
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              adapterLocale={localeMap[locale]}
+            >
+              <DatePicker
+                value={datePickerValue}
+                onChange={(newValue) => setDatePickerValue(newValue)}
+                renderInput={(params) => (
+                  <TextField
+                    variant="standard"
+                    sx={{
+                      width: "16rem",
+                      marginTop: "0.4rem",
+                    }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+          </div>
+        </div>
+      </div>
+
+      <div className="btn-two">
+        <button className="btn-exit">HỦY BỎ</button>
+        <button className="btn-add">LƯU</button>
+      </div>
+    </div>
+    
+  );
+}
