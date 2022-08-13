@@ -30,7 +30,7 @@ services:
       context: ./fe
       dockerfile: ./.docker/Dockerfile
     ports:
-      - 127.0.0.1:9100:3000
+      - 127.0.0.1:9100:80
     image: kse/fe
     container_name: fe
 networks:
