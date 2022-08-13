@@ -10,14 +10,18 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export default function Login() {
 
-  useEffect(() => {
-    document.title = 'Login';
-  });
-
+  const token = JSON.parse(localStorage.getItem('token'));
   const [data, setData] = useState(false);
   const [forgot, setForgot] = useState(false);
   const elementUsername = useRef();
   const elementPassword = useRef();
+  
+   useEffect(() => {
+    document.title = 'Login';
+    
+    const test = token !== null ? true : false
+    setData(test);
+  }, []);
 
   const url = "http://222.252.17.200:8081/api/users/login";
 
@@ -33,18 +37,21 @@ export default function Login() {
           username: elementUsername.current.value,
           password: elementPassword.current.value,
         }),
-      });
+      })
       const jsonData = await response.json();
+      if(!token & jsonData.success){
+        localStorage.setItem('token',JSON.stringify(jsonData.token));
+      }
       setData(jsonData.success);
       setForgot(!jsonData.success);
     } catch (error) {
       console.error("Error:", error);
     }
-  };
+  }
 
   const handleSubmit = () => {
     postLogin();
-  };
+  }
 
   return (
     <>

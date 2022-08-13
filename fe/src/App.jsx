@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./index.css";
 
@@ -15,6 +15,7 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
+        <Route path="/" element={<Navigate to={"/login"} />}/>
         <Route path="login" element={<Login />} />
         <Route path="homepage" element={<HomePage />} />
         <Route path="requests" element={<Requests />} />
