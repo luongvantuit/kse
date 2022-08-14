@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const { port } = require("./server");
+// const express = require('express');
+// const mongoose = require('mongoose');
+// 
 
-const app = express();
+// const app = express();
 
-module.exports = app;
+// module.exports = app;
 
 // async function connect(){   
 //     try {
@@ -15,28 +15,28 @@ module.exports = app;
 //     }
 // }
 
-connect();
+// connect();
 
-function listen() {
-    app.listen(port, () => {
-        console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
-    });
-}
+// function listen() {
+//     app.listen(port, () => {
+//         console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
+//     });
+// }
 
-function connect() {
-    mongoose.connection
-        .on('error', console.log)
-        .on('disconnected', connect)
-        .on('connected', function () {
-            console.log('DB is connected successfully');
-        })
-        .once('open', listen);
-    return mongoose.connect(process.env.MONGODB_URL ?? "mongodb://localhost:27017/kse", {
-        keepAlive: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-}
+// function connect() {
+//     mongoose.connection
+//         .on('error', console.log)
+//         .on('disconnected', connect)
+//         .on('connected', function () {
+//             console.log('DB is connected successfully');
+//         })
+//         .once('open', listen);
+//     return mongoose.connect(process.env.MONGODB_URL ?? "mongodb://localhost:27017/kse", {
+//         keepAlive: true,
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     });
+// }
 
 
 // mongoose.connect(process.env.MONGODB_URL ?? 'mongodb://localhost:27017/demo_kse_dev',
@@ -56,3 +56,17 @@ function connect() {
 // module.exports = { conn };
 
 // module.exports = { connect };
+
+
+const mongoose = require('mongoose')
+
+const connectDB = (url) => {
+  return mongoose.connect(url, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
+}
+
+module.exports = connectDB
