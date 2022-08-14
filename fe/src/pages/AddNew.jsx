@@ -7,28 +7,22 @@ import AddNewPersonal from "../components/AddNewPersonal";
 import { Navigate } from "react-router-dom";
 
 export default function Addnew() {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [data, setData] = useState(false);
-
   useEffect(() => {
     document.title = "AddNew";
-
-    const test = token !== null ? true : false;
-    setData(test);
   }, []);
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
   return (
     <React.Fragment>
       {data ? (
         <React.Fragment>
           <HeaderComponent />
-      <AddNewPersonal />
-      <MenuLeft />
+          <AddNewPersonal />
+          <MenuLeft />
         </React.Fragment>
       ) : (
         <Navigate to="/login" replace="true" />
       )}
-      
     </React.Fragment>
   );
 }

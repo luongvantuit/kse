@@ -7,15 +7,11 @@ import ListTimeSheet from "../components/ListTimeSheet";
 import { Navigate } from "react-router-dom";
 
 export default function TimeSheet() {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [data, setData] = useState(false);
-
+ 
   useEffect(() => {
     document.title = "TimeSheet";
-
-    const test = token !== null ? true : false;
-    setData(test);
-  });
+  }, []);
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
   return (
     <React.Fragment>

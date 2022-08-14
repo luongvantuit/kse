@@ -34,12 +34,7 @@ export default function FormRequest() {
 
   const SentButton = styled(Button)({
     borderRadius: "5px",
-
-    fontFamily: "Inter",
-    fontStyle: "normal",
-    fontWeight: "400",
-    fontSize: "18px",
-    lineHeight: "19px",
+    fontSize: "1.2rem",
     alignItems: "center",
     textaAlign: "center",
 
@@ -66,8 +61,7 @@ export default function FormRequest() {
     "& .MuiInputBase-input": {
       position: "relative",
       borderRadius: "5px",
-      fontSize: 18,
-      fontFamily: "Inter",
+      fontSize: "1rem",
 
       padding: "10px",
     },
@@ -76,8 +70,7 @@ export default function FormRequest() {
   const ReasonTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "gray",
-      fontFamily: "Inter",
-      fontSize: "20px",
+      fontSize: "1rem",
     },
 
     "& .MuiOutlinedInput-root": {
@@ -93,8 +86,7 @@ export default function FormRequest() {
     "& .MuiInputBase-input": {
       position: "relative",
       borderRadius: "5px",
-      fontSize: 18,
-      fontFamily: "Inter",
+      fontSize: "1rem",
     },
   });
 

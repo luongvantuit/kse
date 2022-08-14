@@ -6,15 +6,11 @@ import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
 import PersonalInformation from "../components/PersonalInformation";
 export default function Profile() {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [data, setData] = useState(false);
-
+ 
   useEffect(() => {
     document.title = "Profile";
-
-    const test = token !== null ? true : false;
-    setData(test);
   }, []);
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
   return (
     <React.Fragment>
