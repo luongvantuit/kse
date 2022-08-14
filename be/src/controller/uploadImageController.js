@@ -12,7 +12,19 @@ async function handlePostUploadImage(req, res) {
         //     image:new Buffer(encode_img,'base64')
         // };
         const imageDB = await imageModel.findOne({ username: req.username });
-        if (imageDB) {
+        if (!imageDB) {
+            const image = new imageModel({
+                username: req.username,
+                name: req.file.filename,
+                desc: '',
+                img: {
+                    data: encode_img,
+                    contentType: req.file.mimetype || 'image/jpeg',
+                }
+            });
+            await image.save();
+        } else {
+            console.log('update');
             await imageModel.findOneAndUpdate(
                 {
                     username: req.username,
@@ -29,24 +41,15 @@ async function handlePostUploadImage(req, res) {
                 }
             )
         }
-        const image = new imageModel({
-            username: req.username,
-            name: req.file.filename,
-            desc: '',
-            img: {
-                data: encode_img,
-                contentType: req.file.mimetype || 'image/jpeg',
-            }
-        });
-        await image.save();
         console.log('successfully');
         return res.status(200).json({
-            error: false,
-            msg: 'Image saved successfully',
+            error: false.valueOf,
+            msg: "successfully",
             success: true,
         })
+
     } catch (error) {
-        response.status(500).json({
+        return res.status(500).json({
             error: true,
             msg: 'Error saving image',
             success: false,

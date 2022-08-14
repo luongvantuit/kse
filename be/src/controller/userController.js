@@ -81,7 +81,7 @@ async function handleUserLogin(req, res) {
         } else {
             console.log('Password is match');
         }
-        const token = jwt.sign({ _id: user._id }, jwtSecretKey);
+        const token = jwt.sign({ username: user.username }, jwtSecretKey);
         if (!token) {
             return res.status(400).json({
                 error: true,
