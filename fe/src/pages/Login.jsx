@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 import "../public/css/login.css";
 
@@ -10,24 +10,23 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export default function Login() {
 
-  const token = JSON.parse(localStorage.getItem('token'));
-  const [data, setData] = useState(false);
+  const elementUsername = useRef(null);
+  const elementPassword = useRef(null);
+  const [btnLogin, setBtnLogin] = useState(false);
+  const [data, setData] = useState(() => {
+    return JSON.parse(localStorage.getItem('token')) !== null;
+  });
   const [forgot, setForgot] = useState(false);
-  const elementUsername = useRef();
-  const elementPassword = useRef();
-  
-   useEffect(() => {
-    document.title = 'Login';
-    
-    const test = token !== null ? true : false
-    setData(test);
+
+
+  useEffect(() => {
+    document.title = "Login";
   }, []);
 
-  const url = "http://222.252.17.200:8081/api/users/login";
-
-  const postLogin = async () => {
-    try {
-      const response = await fetch(url, {
+  useEffect(() => {
+    if (!data) {
+      const url = "http://222.252.17.200:8081/api/users/login";
+      fetch(url, {
         method: "POST",
         headers: {
           Accept: "*/*",
@@ -38,20 +37,36 @@ export default function Login() {
           password: elementPassword.current.value,
         }),
       })
-      const jsonData = await response.json();
-      if(!token & jsonData.success){
-        localStorage.setItem('token',JSON.stringify(jsonData.token));
-      }
-      setData(jsonData.success);
-      setForgot(!jsonData.success);
-    } catch (error) {
-      console.error("Error:", error);
+        .then((response) => response.json())
+        .then((jsonData) => {
+          if (!data & jsonData.success) {
+            localStorage.setItem("token", JSON.stringify(jsonData.token));
+          }
+          setData(jsonData.success);
+        })
     }
-  }
+  }, [btnLogin]);
+
+  // const postLogin = async () => {
+  //   try {
+  //     const response = await fetch(url, {
+
+  //       }),
+  //     })
+  //     const jsonData = await response.json();
+  //     if(!token & jsonData.success){
+  //       localStorage.setItem('token',JSON.stringify(jsonData.token));
+  //     }
+  //     setData(jsonData.success);
+  //     setForgot(!jsonData.success);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }
 
   const handleSubmit = () => {
-    postLogin();
-  }
+    setBtnLogin(!btnLogin);
+  };
 
   return (
     <>

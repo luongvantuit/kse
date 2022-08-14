@@ -15,7 +15,7 @@ export default function ListCheckIn() {
   return (
     <div className="body-component">
       <div className="body-header">
-        <span>Danh sách chấm công</span>
+        <span className="body-header-name">Danh sách chấm công</span>
         <div className="body-header-right">
           <div className="body-header-month-year">
             <button>

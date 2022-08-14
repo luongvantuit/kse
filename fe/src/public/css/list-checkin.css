@@ -16,6 +16,10 @@
     padding: 0 2.4rem;
 }
 
+.body-header-name-check {
+    font-size: 1.6rem;
+}
+
 .body-header-right {
     display: flex;
     align-items: center;
