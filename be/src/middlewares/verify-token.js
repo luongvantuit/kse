@@ -9,7 +9,10 @@ const { jwtSecretKey } = require("../config/server");
  */
 function verifyIdToken(req, res, next) {
   const authorization = req.headers["authorization"];
+  console.log(authorization);
   const token = authorization.split(" ")[1];
+  console.log(token);
+
   if (!token) {
     res.status(401).send({
       error: true,
@@ -23,6 +26,7 @@ function verifyIdToken(req, res, next) {
       */
       const resJwt = jwt.verify(token, jwtSecretKey)
       // req.user = resJwt.payload;
+      console.log("username: ", resJwt.username);
       req.username = resJwt.username;
       next()
     } catch (e) {
