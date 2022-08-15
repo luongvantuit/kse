@@ -47,23 +47,6 @@ export default function Login() {
     }
   }, [btnLogin]);
 
-  // const postLogin = async () => {
-  //   try {
-  //     const response = await fetch(url, {
-
-  //       }),
-  //     })
-  //     const jsonData = await response.json();
-  //     if(!token & jsonData.success){
-  //       localStorage.setItem('token',JSON.stringify(jsonData.token));
-  //     }
-  //     setData(jsonData.success);
-  //     setForgot(!jsonData.success);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // }
-
   const handleSubmit = () => {
     setBtnLogin(!btnLogin);
   };
