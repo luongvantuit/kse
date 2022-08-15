@@ -12,7 +12,7 @@ var imageSchema = new mongoose.Schema({
     },
     img:
     {
-        data: Buffer,
+        data: [],
         contentType: String
     }
 });

@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-const uri = "mongodb+srv://admin123:admin123@kse-demo.dqhhlcr.mongodb.net/?retryWrites=true&w=majority";
+const username = encodeURIComponent("admin123");
+const password = encodeURIComponent("admin123");
+const cluster = 'kse-demo.dqhhlcr.mongodb.net';
+const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority`;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const conn = mongoose.connection;
