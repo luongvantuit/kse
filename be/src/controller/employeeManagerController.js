@@ -1,6 +1,6 @@
 const PersonalInformation = require("../entities/PersonalInformation");
 const ContractInformation = require("../entities/ContractInformation");
-
+const User = require("../entities/User");
 async function handleGetEmployeeManager(req, res){
     try {
         const listPerson = await PersonalInformation.find();
@@ -26,9 +26,11 @@ async function handleGetEmployeeManager(req, res){
         const contractInfo = [];
         for(let i = 0; i < arr.length; i++) {
             console.log('...listPerson[i]',listPerson[i]);
+            const user = await User.findOne({username: listPerson[i].username});
             let a = {
                 id: i,
-                fullname: listPerson[i].fullname,
+                fullname: user.fullname,
+                role: user.role,
                 username: listPerson[i].username,
                 department: listPerson[i].department,
                 nameContract: arr[i].nameContract,
