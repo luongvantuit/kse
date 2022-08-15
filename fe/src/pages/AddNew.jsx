@@ -4,25 +4,25 @@ import { useEffect } from "react";
 import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
 import AddNewPersonal from "../components/AddNewPersonal";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Addnew() {
+
+  let navigate = useNavigate();
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
+  if (!data) {
+    navigate("/login", { replace: true });
+  }
+
   useEffect(() => {
     document.title = "AddNew";
   }, []);
-  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
   return (
     <React.Fragment>
-      {data ? (
-        <React.Fragment>
-          <HeaderComponent />
-          <AddNewPersonal />
-          <MenuLeft />
-        </React.Fragment>
-      ) : (
-        <Navigate to="/login" replace="true" />
-      )}
+      <HeaderComponent />
+      <AddNewPersonal />
+      <MenuLeft />
     </React.Fragment>
   );
 }

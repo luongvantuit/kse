@@ -4,26 +4,24 @@ import { useEffect } from "react";
 import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
 import ListPersonal from "../components/ListPersonal";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Personnel() {
+  let navigate = useNavigate();
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
+  if (!data) {
+    navigate("/login", { replace: true });
+  }
 
   useEffect(() => {
     document.title = "Personnel";
   }, []);
-  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
   return (
     <React.Fragment>
-      {data ? (
-        <React.Fragment>
-          <HeaderComponent />
-          <ListPersonal />
-          <MenuLeft />
-        </React.Fragment>
-      ) : (
-        <Navigate to="/login" replace="true" />
-      )}
+      <HeaderComponent />
+      <ListPersonal />
+      <MenuLeft />
     </React.Fragment>
   );
 }
