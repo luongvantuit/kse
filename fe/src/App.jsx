@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./index.css";
 
@@ -12,10 +13,17 @@ import Profile from "./pages/Profile";
 import TimeSheet from "./pages/TimeSheet";
 
 function App() {
+  let navigate = useNavigate();
+  useEffect(() => {
+    if(!JSON.parse(localStorage.getItem('token'))) {
+      navigate("/login", { replace: true });
+    }
+  },[]);
   return (
+    
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Navigate to={"/login"} />}/>
+        <Route path="/" element={<Navigate to={"/homepage"} />}/>
         <Route path="login" element={<Login />} />
         <Route path="homepage" element={<HomePage />} />
         <Route path="requests" element={<Requests />} />
