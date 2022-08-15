@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import "../public/css/login.css";
 import Logo from "../public/image/image_logo_bts.PNG";
 import CloseIcon from "@mui/icons-material/Close";
