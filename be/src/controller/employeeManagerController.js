@@ -31,6 +31,7 @@ async function handleGetEmployeeManager(req, res){
                 fullname: listPerson[i].fullname,
                 username: listPerson[i].username,
                 department: listPerson[i].department,
+                role: 'staff',
                 nameContract: arr[i].nameContract,
             }
             contractInfo.push(a);

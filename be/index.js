@@ -1,12 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const { loadConfig } = require("./src/config/load-config");
 const { port } = require("./src/config/server");
+const connectDB = require("./src/config/database-atlas");
 const userRouter = require("./src/routes/user");
 const publicBoard = require("./src/routes/publicBoard");
 const profile = require("./src/routes/profile");
 const uploadImage = require("./src/routes/uploadImage");
-const connectDB = require("./src/config/database");
-const cors = require('cors')
+const employeeManager = require("./src/routes/employeeManager");
+const User = require("./src/entities/User")
 
 loadConfig();
 
@@ -16,7 +18,10 @@ loadConfig();
 
 const app = express();
 
+connectDB.conn;
+
 // Add Access Control Allow Origin headers
+
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
@@ -41,19 +46,10 @@ mainRouter.use('/profile', profile);
 
 mainRouter.use('/uploadImage', uploadImage);
 
+mainRouter.use('/employeeManager', employeeManager);
+
 app.use('/api', mainRouter);
 
-const start = async () => {
-    try {
-        await connectDB(process.env.MONGODB_URL ?? "mongodb://localhost:27017/kse");
-        app.listen(port, () =>
-            console.log(`Server is listening on port ${port}...`)
-        );
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-start();
-
-
+app.listen(port, () => {
+    console.log(`Start server on port: ${port} 🚀 🚀 🚀`);
+});

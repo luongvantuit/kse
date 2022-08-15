@@ -43,7 +43,7 @@ async function handlePostUploadImage(req, res) {
         }
         console.log('successfully');
         return res.status(200).json({
-            error: false.valueOf,
+            error: false,
             msg: "successfully",
             success: true,
         })
