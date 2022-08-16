@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import HeaderComponent from "../components/HeaderComponent";
 import MenuLeft from "../components/MenuLeft";
-import ListCheckIn from "../components/ListCheckIn";
+import CheckIn from "../components/CheckIn";
 
 export default function Homepage() {
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Homepage() {
   return (
     <React.Fragment>
       <HeaderComponent />
-      <ListCheckIn />
+      <CheckIn />
       <MenuLeft />
     </React.Fragment>
   );
