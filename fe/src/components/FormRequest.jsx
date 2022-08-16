@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import Box from "@mui/material/Box";
 import { useState } from "react";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -94,13 +95,15 @@ export default function FormRequest() {
     <div className="sub-menu" role="tablist">
       <div className="tab-menu">
         <TabContext value={value}>
-          <TabList onChange={handleChange} centered>
-            <Tab value="one" label="chấm công bù" />
+          <Box sx={{ height: "0.8rem", width:"100%"}}>
+            <TabList onChange={handleChange} centered>
+              <Tab value="one" label="chấm công bù" />
 
-            <Tab value="two" label="xin nghỉ phép" className="title1" />
+              <Tab value="two" label="xin nghỉ phép" className="title1" />
 
-            <Tab value="three" label="làm thêm giờ" className="title2" />
-          </TabList>
+              <Tab value="three" label="làm thêm giờ" className="title2" />
+            </TabList>
+          </Box>
 
           <TabPanel className="a" value="one">
             <div className="form-comp">

@@ -4,19 +4,25 @@ var imageSchema = new mongoose.Schema({
     username: {
         type: String,
     },
-    name: {
+    nameImage: {
         type: String,
+    },
+    isUpdated: {
+        type: Boolean,
+        default: false,
     },
     desc: {
         type: String,
     },
     img:
     {
-        data: Buffer,
+        data: [],
         contentType: String
     }
 });
 
 //Image is a model which has a schema imageSchema
 
-module.exports = mongoose.model('Image', imageSchema);
+const imageModel = mongoose.model('Image', imageSchema);
+
+module.exports = imageModel;

@@ -1,9 +1,9 @@
 .sub-menu {
-  position: absolute;
-  width: 890px;
-  height: 60px;
-  left: 300px;
-  top: 90px;
+  position: relative;
+  width: var(--body-width);
+  top: calc(var(--header-height) + 1rem);
+  left: var(--menu-left-width);
+
   background: #FFFFFF;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
@@ -11,7 +11,7 @@
 .tab-menu {
   padding-left: 20px;
   padding-right: 100px;
-  padding-top: 6px
+  
 }
 
 .title1 {
@@ -27,8 +27,8 @@
   position: absolute;
   width: 560px;
   height: 656px;
-  left: 160px;
-  top: 90px;
+  left: 14.8rem;
+  top: 5rem;
   background: #FFFFFF;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
