@@ -18,4 +18,13 @@
 .menu-item{
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.composition-button {
+    margin-left: 40px;
+}
+
+.jss178 {
+    margin-left: 60px;
 }
