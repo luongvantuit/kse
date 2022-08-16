@@ -1,0 +1,76 @@
+.body-component {
+    position: relative;
+    width: calc(var(--body-width) - 2rem);
+    top: calc(var(--header-height) + 1rem);
+    left: var(--menu-left-width);
+}
+
+.body-header {
+    position: absolute;
+    top: 1rem;
+    height: 2rem;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    padding: 0 2.4rem;
+}
+
+.body-header-file-card {
+    position: absolute;
+    top: 6rem;
+    left: 6.6rem;
+    height: 24rem;
+    width:50.8rem;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.file-input{
+    position: absolute;
+    width: 20rem;
+    height: 14rem;
+    top: 2rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-image {
+    width: 14rem;
+    height: 12rem;
+    border-radius: 2px;
+    border: 1px solid;
+    z-index: 1;
+} 
+
+.input {
+    position: absolute;
+    max-width: 20rem;
+    height: 12rem;
+    top: 0rem;
+    z-index: 2;
+    opacity: 0;
+} 
+
+
+.btn-input-img {
+    position: absolute;
+    width: 10rem;
+    height: 2.8rem;
+    left: 21rem;
+    top: 16.2rem;
+    background: #9333EA;
+    opacity: 0.8;
+    border: 0.9px solid #9333EA;
+    border-radius: 8px;
+}
+
+
+   
