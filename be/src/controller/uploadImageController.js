@@ -6,12 +6,12 @@ async function handlePostUploadImage(req, res) {
         console.log('post');
         const img = fs.readFileSync(req.file.path);
         const encode_img = img.toString('base64');
-        console.log('path: ', req.file.path);
-        let arr = [];
-        for(let i =0; i<encode_img.length; i+=50) {
-            arr.push(encode_img.slice(i, i + 50))
-        }
-        console.log(arr);
+        // console.log('path: ', req.file.path);
+        // let arr = [];
+        // for(let i =0; i<encode_img.length; i+=20) {
+        //     arr.push(encode_img.slice(i, i + 20))
+        // }
+        // console.log(arr);
         //decode buffer
         // var final_img = {
         //     contentType:req.file.mimetype,
@@ -26,7 +26,7 @@ async function handlePostUploadImage(req, res) {
                 name: req.file.filename,
                 desc: '',
                 img: {
-                    data: arr,
+                    data: encode_img,
                     contentType: req.file.mimetype || 'image/jpeg',
                 }
             });
@@ -39,6 +39,7 @@ async function handlePostUploadImage(req, res) {
                 },
                 {
                     $set: {
+                        isUpdated: true,
                         name: req.file.filename,
                         desc: '',
                         img: {
@@ -67,7 +68,7 @@ async function handlePostUploadImage(req, res) {
 
 async function handleGetAllImage(req, res) {
     try {
-        const images = await imageModel.find();
+        const images = await imageModel.find({ isUpdated: true});
         if (!images) {
             return res.status(404).json({
                 error: true,
