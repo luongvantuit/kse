@@ -9,7 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import enLocale from "date-fns/locale/en-NZ";
 
-import Avt from "../public/image/avt.png";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 import "../public/css/personal-information.css";
@@ -32,15 +32,66 @@ const genders = [
   },
 ];
 
+const rooms = [
+  {
+    value: "Phòng ban 1",
+    label: "Phòng ban 1",
+  },
+  {
+    value: "Phòng ban 2",
+    label: "Phòng ban 2",
+  },
+  {
+    value: "Phòng ban 3",
+    label: "Phòng ban 3",
+  },
+];
+
+const works = [
+  {
+    value: "Toàn thời gian",
+    label: "Toàn thời gian",
+  },
+  {
+    value: "Bán thời gian",
+    label: "Bán thời gian",
+  },
+];
+
+const contractDurations = [
+  {
+    value: "Sáu tháng",
+    label: "Sáu tháng",
+  },
+  {
+    value: "Một năm",
+    label: "Một năm",
+  },
+  {
+    value: "Ba năm",
+    label: "Ba năm",
+  },
+  {
+    value: "Năm năm",
+    label: "Năm năm",
+  },
+];
+
 export default function PersonalInformation() {
   const [locale] = React.useState("en");
   const [datePickerValue, setDatePickerValue] = React.useState(new Date());
 
   const [gender, setGender] = React.useState("Nam");
+  const [room, setRoom] = React.useState("Phòng ban 1");
+  const [work, setWork] = React.useState("Toàn thời gian");
+  const [contractDuration, setContractDuration] = React.useState("Sáu tháng");
   const handleChange = (event) => {
     setGender(event.target.value);
+    setRoom(event.target.value);
+    setWork(event.target.value);
+    setContractDuration(event.target.value);
   };
-
+  
   return (
     <div className="personal-inf">
       <span className="personal-inf-name">Hồ sơ cá nhân</span>
@@ -48,17 +99,14 @@ export default function PersonalInformation() {
       <div className="body-personal-inf-two">
         <div className="body-personal-inf-left">
           <button className="btn-personal-avatar">
-            <img
-              src={Avt}
-              alt="avt"
-              className="body-personal-inf-username-img"
-            />
+            <AccountCircleIcon sx={{ fontSize: "10.4rem", color: "#BBBBBB" }} />
           </button>
 
           <div className="personal-inf-left-username">
             <p>Tên đăng nhập</p>
             <TextField
               variant="standard"
+              disabled
               sx={{
                 width: "14rem",
               }}
@@ -87,6 +135,7 @@ export default function PersonalInformation() {
               <p className="personal-inf-right-right-id">Mã nhân viên</p>
               <TextField
                 variant="standard"
+                disabled
                 sx={{
                   width: "16rem",
                   marginTop: "0.4rem",
@@ -96,6 +145,7 @@ export default function PersonalInformation() {
               <p className="personal-inf-right-right-MAC">Căn cước công dân</p>
               <TextField
                 variant="standard"
+                disabled
                 sx={{
                   width: "16rem",
                   marginTop: "0.4rem",
@@ -113,6 +163,7 @@ export default function PersonalInformation() {
                   renderInput={(params) => (
                     <TextField
                       variant="standard"
+                      type="date"
                       sx={{
                         width: "16rem",
                         marginTop: "0.4rem",
@@ -124,12 +175,21 @@ export default function PersonalInformation() {
 
               <p className="personal-inf-right-right-room">Phòng ban</p>
               <TextField
+                select
+                value={room}
+                onChange={handleChange}
                 variant="standard"
                 sx={{
                   width: "16rem",
                   marginTop: "0.4rem",
                 }}
-              />
+              >
+                {rooms.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </div>
           </div>
 
@@ -154,12 +214,21 @@ export default function PersonalInformation() {
 
             <p className="personal-inf-right-right-work">Chế độ làm việc</p>
             <TextField
+              select
+              value={work}
+              onChange={handleChange}
               variant="standard"
               sx={{
                 width: "16rem",
                 marginTop: "0.4rem",
               }}
-            />
+            >
+              {works.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
         </div>
       </div>
@@ -183,13 +252,21 @@ export default function PersonalInformation() {
               Thời hạn hợp đồng
             </p>
             <TextField
-              variant="standard"
               select
+              value={contractDuration}
+              onChange={handleChange}
+              variant="standard"
               sx={{
                 width: "16rem",
                 marginTop: "0.4rem",
               }}
-            />
+            >
+              {contractDurations.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
 
           <div className="personal-inf-bottom-right">
@@ -206,6 +283,7 @@ export default function PersonalInformation() {
                 renderInput={(params) => (
                   <TextField
                     variant="standard"
+                    type="date"
                     sx={{
                       width: "16rem",
                       marginTop: "0.4rem",
@@ -229,6 +307,7 @@ export default function PersonalInformation() {
                 renderInput={(params) => (
                   <TextField
                     variant="standard"
+                    type="date"
                     sx={{
                       width: "16rem",
                       marginTop: "0.4rem",

@@ -34,6 +34,7 @@
     background: #FFFFFF;
     border: 0.9px solid gray;
     border-radius: 5px;
+    padding-left: 10px;
     font-size: 16px;
     color: #000000;
 }
@@ -69,7 +70,7 @@
 
 .contract-info {
     position: absolute;
-    top: 30px;
+    top: 25px;
     left:0px;
     width: 100%;
     padding: 5px 30px ;
@@ -85,13 +86,15 @@
 
 .selContract {
     box-sizing: border-box;
-    border: 1px solid #000000;
+    border: 0.9px solid gray;
     border-radius: 5px;
+    padding-left: 10px;
     font-weight: 400;
     width: 197px;
     height: 30px;
     display: block;
     outline: 0;
+    margin-top: 5px;
 }
 
 .contract-info-right {
@@ -101,27 +104,30 @@
 
 .jss55 {
     box-sizing: border-box;
-    border: 1px solid #000000;
+    border: 0.9px solid gray;
     border-radius: 5px;
     font-weight: 400;
     width: 197px;
     height: 30px;
     display: block;
+    margin-top: 5px;
+    padding-left: 10px;
 }
 
-.contract-term, .contract-expiration-date {
-    margin-top: 15px;
+.contract-term, .contract-expiration-date, .department, .working-mode, .citizen-ID, .birth {
+    margin-top: 10px;
 }
+
 .details-profile {
     position: absolute;
     font-weight: 600;
-    top: 180px;
+    top: 175px;
     left: 410px;
 }
 
 .personal-info {
     position: absolute;
-    top: 205px;
+    top: 195px;
     left:0px;
     width: 100%;
     padding: 5px 30px ;
@@ -138,10 +144,6 @@
 .personal-info-right {
     padding: 10px 30px ;
     align-items: center;
-}
-
-.department, .working-mode, .citizen-ID, .birth {
-    margin-top: 15px;
 }
 
 .endPage {

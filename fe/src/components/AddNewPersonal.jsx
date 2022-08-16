@@ -18,7 +18,7 @@ export default function AddNewPersonal() {
           </div>
           <div className="pass">
             <span>Password:</span>
-            <input type="text" className="jss51 jss53" />
+            <input type="password" className="jss51 jss53" />
           </div>
         </div>
 
@@ -37,7 +37,12 @@ export default function AddNewPersonal() {
 
             <div className="contract-term">
               <span>Thời hạn hợp đồng:</span>
-              <select className="selContract" />
+              <select className="selContract" >
+                <option>Sáu tháng</option>
+                <option>Một năm</option>
+                <option>Ba năm</option>
+                <option>Năm năm</option>
+              </select>
             </div>
           </div>
 
@@ -64,18 +69,29 @@ export default function AddNewPersonal() {
 
             <div className="department">
               <span>Phòng ban:</span>
-              <select className="selContract" />
+              <select className="selContract" >
+                <option>Phòng ban 1</option>
+                <option>Phòng ban 2</option>
+                <option>Phòng ban 3</option>
+              </select>
             </div>
 
             <div className="working-mode">
               <span>Chế độ làm việc:</span>
-              <select className="selContract" />
+              <select className="selContract">
+                <option>Toàn thời gian</option>
+                <option>Bán thời gian</option>
+              </select>
             </div>
           </div>
           <div className="personal-info-right">
             <div className="gender">
               <span>Giới tính:</span>
-              <select className="selContract" />
+              <select className="selContract" >
+                <option>Nam</option>
+                <option>Nữ</option>
+                <option>Không xác định</option>
+              </select>
             </div>
             <div className="citizen-ID">
               <span>Căn cước công dân:</span>

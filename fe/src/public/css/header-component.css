@@ -29,11 +29,6 @@
     align-items: center;
 }
 
-.header-right-bell {
-    width: 25px;
-    height: 23px;
-}
-
 .btn-avatar {
     display: flex;
     align-items: center;
@@ -43,8 +38,4 @@
     margin: 0 8px;
 }
 
-.header-right-username-img {
-    width: 46px;
-    height: 44px;
-}
 

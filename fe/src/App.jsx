@@ -26,9 +26,9 @@ function App() {
       </Routes>
     </React.Fragment>
 
-    // <React.Fragment>
-    //   <Personnel />
-    // </React.Fragment>
+    
+    // <Personnel />
+    
   );
 }
 
