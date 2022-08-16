@@ -6,6 +6,7 @@ async function handlePostUploadImage(req, res) {
         console.log('post');
         const img = fs.readFileSync(req.file.path);
         const encode_img = img.toString('base64');
+        console.log('path: ', req.file.path);
         let arr = [];
         for(let i =0; i<encode_img.length; i+=50) {
             arr.push(encode_img.slice(i, i + 50))
@@ -16,6 +17,8 @@ async function handlePostUploadImage(req, res) {
         //     contentType:req.file.mimetype,
         //     image:new Buffer(encode_img,'base64')
         // };
+        fs.unlinkSync(req.file.path);
+        console.log('remove image successfully')
         const imageDB = await imageModel.findOne({ username: req.username });
         if (!imageDB) {
             const image = new imageModel({
