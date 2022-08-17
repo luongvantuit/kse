@@ -7,6 +7,7 @@ async function handleGetProfile(req, res) {
     try {
         const username = req.username;
         const user = await User.findOne({ username: username });
+        console.log(user);
         const personInfo = await PersonInformation.findOne({ username: username });
         const contract = await ContractInfo.findOne({ username: username });
         if (!user || !personInfo || !contract) {
@@ -17,9 +18,12 @@ async function handleGetProfile(req, res) {
             })
         }
         return res.status(200).json({
-            user,
-            personInfo,
-            contract,
+            profile: [
+                user,
+                personInfo,
+                contract,
+            ],
+            success: true,
         })
     } catch (error) {
         return res.status(404).json({

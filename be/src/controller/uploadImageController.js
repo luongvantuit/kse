@@ -66,6 +66,29 @@ async function handlePostUploadImage(req, res) {
     }
 }
 
+async function handleGetOneImage(req, res) {
+    try {
+        const username = req.username;
+        const image = await imageModel.findOne({username: username, isUpdated: true});
+        if(!image) return res.status(404).json({
+            error: true,
+            msg: 'Image not found',
+            success: false,
+        });
+        return res.status(200).json({
+            error: false,
+            image: image,
+            success: true,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            msg: 'Error handleGetOneImage',
+            success: false,
+        });
+    }
+}
+
 async function handleGetAllImage(req, res) {
     try {
         const images = await imageModel.find({ isUpdated: true});
@@ -92,5 +115,6 @@ async function handleGetAllImage(req, res) {
 
 module.exports = {
     handlePostUploadImage,
+    handleGetOneImage,
     handleGetAllImage
 }
