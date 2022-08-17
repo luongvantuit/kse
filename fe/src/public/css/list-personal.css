@@ -16,27 +16,23 @@
     padding: 0 2.4rem;
 }
 
-.body-header-name{
-    font-size: 1.6rem;
-}
-
 .body-header-right {
     display: flex;
     align-items: center;
 }
 
-.body-header-month-year{
+.body-header-month-year {
     display: flex;
     align-items: center;
     margin-right: 2rem;
 }
 
-.time{
+.time {
     text-align: center;
     margin: 0 2px;
 }
 
-.btn-file-export{
+.btn-file-export {
     padding: 4px 6px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -54,7 +50,7 @@
     justify-content: space-between;
 }
 
-.body-search-personal {
+.body-search-personnel {
     width: var(--body-width);
     display: flex;
     justify-content: space-around;
@@ -71,13 +67,6 @@
     width: 8rem;
 }
 
-.veiw {
-    position: absolute;
-    top: 0rem;
-    left: -1rem;
-   
-}
-
 .btn-add-personal {
     width: 10rem;
     height: 2rem;
@@ -88,9 +77,9 @@
     opacity: 0.8;
     border: 0.9px solid #9333EA;
     border-radius: 8px;
-    
+
     font-size: 20px;
-   
+
     align-items: center;
     text-align: center;
     color: #FFFFFF;
@@ -99,4 +88,49 @@
 .btn-add-personal:hover {
     cursor: pointer;
     opacity: 1;
+}
+
+.view {
+    position: absolute;
+    width: inherit;
+    top: 7.6rem;
+    padding: 0 3rem;
+}
+
+.body-search-item-personnel {
+    position: relative;
+    margin: 1.8rem 0;
+    width: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.item-personnel-id {
+    position: absolute;
+    left: calc(0.01 * var(--body-width));
+}
+
+.item-personnel-fullname {
+    position: absolute;
+    left: calc(0.082 * var(--body-width));
+}
+
+.item-personnel-username {
+    position: absolute;
+    left: calc(0.262 * var(--body-width));
+}
+
+.item-personnel-department {    
+    position: absolute;
+    left: calc(0.44 * var(--body-width));
+}
+
+.item-personnel-staff {
+    position: absolute;
+    left: calc(0.62 * var(--body-width));
+}
+
+.item-personnel-contract {
+    position: absolute;
+    left: calc(0.8 * var(--body-width));
 }

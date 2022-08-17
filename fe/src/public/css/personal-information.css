@@ -35,13 +35,32 @@
     box-shadow: 0px 4px 4px gray;
 }
 
+.btn-personal-avatar {
+    display: flex;
+    flex-direction: column;
+}
+
 .body-personal-inf-username-img {
+    margin-top: 2rem;
     width: 10rem;
     height: 10rem;
+    border-radius: 100%;
+    border: 0.4px solid gray;
+}
+
+.input-avt {
+    display: none;
+}
+
+.btn-upload-avt {
+    margin-top: 1rem;
+    border: 1px solid gray;
+    background-color: aqua;
+    border-radius: 10px;
 }
 
 .personal-inf-left-username {
-    margin-top: 2rem;
+    margin-top: 3.8rem;
 }
 
 .personal-inf-left-password {

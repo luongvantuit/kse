@@ -19,8 +19,8 @@ const contractInformationShema = mongoose.Schema({
         default: '',
     },
     contractTerm: {
-        type: Number, // miliseconds
-        default: 0,
+        type: String, // miliseconds
+        default: '0',
     }
 })
 

@@ -17,10 +17,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/', auth.verifyIdToken, upload.single('myImage'), uploadImageController.handlePostUploadImage);
+router.post('/upload', auth.verifyIdToken, upload.single('myImage'), uploadImageController.handlePostUploadImage);
 
 // router.post('/', upload.single('myImage'), uploadImageController.handlePostUploadImage);
 
-router.get('/', uploadImageController.handleGetAllImage);
+router.get('/one', auth.verifyIdToken, uploadImageController.handleGetOneImage);
+
+router.get('/all', uploadImageController.handleGetAllImage);
 
 module.exports = router;

@@ -1,13 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState, memo } from 'react';
 
-import Avt from "../public/image/avt.png";
 import Logo from "../public/image/image_logo_bts.PNG";
 import Icon0 from "../public/image/ring.png";
 
 import "../public/css/header-component.css";
 
-export default function HeaderComponent() {
+function HeaderComponent() {
+  const [img, setImg] = useState("https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png");
+  const [userName, setUserName] = useState("");
+  const token = JSON.parse(localStorage.getItem("token"));
+  useEffect(() => {
+    const url = "http://localhost:8080/api/uploadImage/one";
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + token,
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setImg('data:image/jpeg;base64,' + data.image.img.data[0]);
+          setUserName(data.image.username);
+        }
+      });
+  }, []);
   return (
     <React.Fragment>
       <div className="header-component">
@@ -22,10 +41,10 @@ export default function HeaderComponent() {
             <img src={Icon0} alt="icon0" className="header-right-bell" />
           </button>
 
-          <span className="header-right-username">Xin chào</span>
+          <span className="header-right-username">{userName}</span>
           <button className="btn-avatar">
             <Link to={"/profile"}>
-              <img src={Avt} alt="avt" className="header-right-username-img" />
+              <img src={img} alt="avt" className="header-right-username-img" />
             </Link>
           </button>
         </div>
@@ -33,3 +52,5 @@ export default function HeaderComponent() {
     </React.Fragment>
   );
 }
+
+export default memo(HeaderComponent);
