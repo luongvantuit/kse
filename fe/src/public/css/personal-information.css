@@ -6,7 +6,7 @@
     top: 6rem; */
 
     position: relative;
-    width: var(--body-width);
+    width: calc(var(--body-width) - 4rem);
     top: calc(var(--header-height) + 4rem);
     left: var(--menu-left-width);
 }

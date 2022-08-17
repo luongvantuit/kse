@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState, memo } from 'react';
 
 import Logo from "../public/image/image_logo_bts.PNG";
-import Icon0 from "../public/image/ring.png";
-
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "../public/css/header-component.css";
 
 function HeaderComponent() {
@@ -38,7 +38,7 @@ function HeaderComponent() {
 
         <div className="header-right">
           <button className="btn-bell">
-            <img src={Icon0} alt="icon0" className="header-right-bell" />
+            <NotificationsNoneIcon sx={{ fontSize: "1.5rem" }}/>
           </button>
 
           <span className="header-right-username">{userName}</span>

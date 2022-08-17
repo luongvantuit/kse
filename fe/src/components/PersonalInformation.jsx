@@ -60,6 +60,7 @@ function PersonalInformation() {
       .then(data => console.log(data))
   }
 
+
   return (
     <div className="personal-inf">
       <span className="personal-inf-name">Hồ sơ cá nhân</span>
@@ -90,6 +91,7 @@ function PersonalInformation() {
               value={profile.length === 0 ? "" : profile[0].username}
               disabled
               variant="standard"
+              disabled
               sx={{
                 width: "14rem",
               }}
@@ -157,7 +159,13 @@ function PersonalInformation() {
                   width: "16rem",
                   marginTop: "0.4rem",
                 }}
-              />
+              >
+                {rooms.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </div>
           </div>
 
@@ -183,7 +191,13 @@ function PersonalInformation() {
                 width: "16rem",
                 marginTop: "0.4rem",
               }}
-            />
+            >
+              {works.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
         </div>
       </div>
@@ -215,7 +229,13 @@ function PersonalInformation() {
                 width: "16rem",
                 marginTop: "0.4rem",
               }}
-            />
+            >
+              {contractDurations.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
 
           <div className="personal-inf-bottom-right">

@@ -22,7 +22,7 @@ export default function ListPersonal() {
           <div>
             <button className="btn-add-personal">
               <Link to={"/addnew"}>
-                <PersonAddIcon />
+                <PersonAddIcon sx={{ fontSize: "1.7rem" }}/>
                 <span>Thêm nhân sự</span>
               </Link>
             </button>
