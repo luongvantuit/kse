@@ -91,7 +91,6 @@ function PersonalInformation() {
               value={profile.length === 0 ? "" : profile[0].username}
               disabled
               variant="standard"
-              disabled
               sx={{
                 width: "14rem",
               }}
@@ -160,11 +159,6 @@ function PersonalInformation() {
                   marginTop: "0.4rem",
                 }}
               >
-                {rooms.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
               </TextField>
             </div>
           </div>
@@ -192,11 +186,6 @@ function PersonalInformation() {
                 marginTop: "0.4rem",
               }}
             >
-              {works.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
             </TextField>
           </div>
         </div>
@@ -230,11 +219,6 @@ function PersonalInformation() {
                 marginTop: "0.4rem",
               }}
             >
-              {contractDurations.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
             </TextField>
           </div>
 
