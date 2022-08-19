@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import '../public/css/add-new-personal.css';
 
 export default function AddNewPersonal() {
@@ -48,7 +49,7 @@ export default function AddNewPersonal() {
       .then(response => response.json())
       .then(data => console.log(data));
   }
-
+  let navigate = useNavigate();
   const handleSubmit = () => {
     let check = userName !== '' & password !== '' & fullName !== '' & nameContract !== '' &
       contractTerm !== '' & department !== '' & workingMode !== '' & startContract !== '' &
@@ -57,6 +58,7 @@ export default function AddNewPersonal() {
       alert('Please enter a valid ...');
     } else {
       postSignUpUser();
+      navigate("/personnel", { replace: true });
     }
   }
 
