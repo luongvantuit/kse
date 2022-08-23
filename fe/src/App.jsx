@@ -11,32 +11,53 @@ import Personnel from "./pages/Personnel";
 import AddNew from "./pages/AddNew";
 import Profile from "./pages/Profile";
 import TimeSheet from "./pages/TimeSheet";
+import EditPersonal from "./pages/EditPersonal";
+import BrowseMenusPage from "./pages/BrowseMenusPage";
+import FormOnLeavePage from "./pages/FormOnLeavePage";
 
 function App() {
   let navigate = useNavigate();
   useEffect(() => {
-    if(!JSON.parse(localStorage.getItem('token'))) {
+    if (!localStorage.getItem("token")) {
       navigate("/login", { replace: true });
+    } else {
+      const token = localStorage.getItem("token") === null ? "abcd" : JSON.parse(localStorage.getItem('token'));
+      const url = 'http://localhost:8080/api/users/verify-token';
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + token,
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (!data.success) {
+            localStorage.removeItem('token');
+            navigate("/login", { replace: true });
+          }
+        });
     }
-  },[]);
+
+  }, []);
+
   return (
-    
+
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Navigate to={"/homepage"} />}/>
+        <Route path="/" element={<Navigate to={"/homepage"} />} />
         <Route path="login" element={<Login />} />
         <Route path="homepage" element={<HomePage />} />
         <Route path="requests" element={<Requests />} />
         <Route path="personnel" element={<Personnel />} />
         <Route path="addnew" element={<AddNew />} />
-        <Route path="profile" element={<Profile/>} />
-        <Route path="timesheet" element={<TimeSheet/>}/>
+        <Route path="edit-personal/:username" element={<EditPersonal />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="timesheet" element={<TimeSheet />} />
+        <Route path="browse-menus" element={<BrowseMenusPage />} />
+        <Route path="form-on-leave" element={<FormOnLeavePage />} />
       </Routes>
     </React.Fragment>
-
-    
-    // <Personnel />
-    
   );
 }
 

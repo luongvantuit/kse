@@ -1,6 +1,6 @@
 .body-component {
     position: relative;
-    width: var(--body-width);
+    width: calc(var(--body-width));
     top: calc(var(--header-height) + 1rem);
     left: var(--menu-left-width);
 }
@@ -29,7 +29,7 @@
 
 .time{
     text-align: center;
-    margin: 0 2px;
+    margin: 0 3.2px;
 }
 
 .thead {
@@ -44,7 +44,7 @@
 }
 
 .body-search {
-    width: calc(0.4  * var(--body-width));
+    width: calc(0.52  * var(--body-width));
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -61,7 +61,7 @@
 }
 
 .thread-span {
-    width: calc(0.6 * var(--body-width));
+    width: calc(0.48 * var(--body-width));
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -78,5 +78,29 @@
     display: -webkit-box;
     text-align: center;
     -webkit-box-orient: vertical;
+}
 
+.body-container {
+    position: absolute;
+    top: 8rem;
+    left: 0rem;
+    width: inherit;
+}
+
+.body-text-child {
+    width: 100%;
+    max-width: 100px;
+    overflow: hidden;
+    display: -webkit-box;
+    text-align: center;
+    -webkit-box-orient: vertical;
+}
+
+.body-item {
+    padding: 0px 0.8rem;
+    margin: 1rem 0rem;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

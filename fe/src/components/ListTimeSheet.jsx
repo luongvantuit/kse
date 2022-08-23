@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
 import "../public/css/list-time-sheet.css";
 
 import TextField from "@mui/material/TextField";
@@ -9,24 +9,96 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function ListTimeSheet() {
+  const date = new Date();
+  const [month, setMonth] = useState(date.getMonth() + 1);
+  const [year, setYear] = useState(date.getFullYear());
+  const token = JSON.parse(localStorage.getItem('token'));
+  const [publicBoard, setPublicBoard] = useState([]);
+  const [publicBoard1, setPublicBoard1] = useState([]);
+  useEffect(() => {
+    const url = "http://localhost:8080/api/publicBoard/getPublicBoard";
+    fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        month: month,
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setPublicBoard(data.publicBoard);
+        setPublicBoard1(data.publicBoard)
+      })
+  }, [month]);
+  const onClickBefore = () => {
+    setMonth(prev => {
+      if (prev < 2) {
+        setYear(year => year - 1);
+        return prev = 12;
+      } else {
+        return prev - 1;
+      }
+    });
+  }
+
+  const onClickNext = () => {
+    setMonth(prev => {
+      if (prev > 11) {
+        setYear(year => year + 1);
+        return prev = 1;
+      } else {
+        return prev + 1;
+      }
+    });
+  }
+
+  const handleChangeFullName = e => {
+    console.log(e.target.value);
+    const newData = publicBoard1.filter(person => {
+      return person.fullname.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setPublicBoard(newData);
+  }
+
+  const handleChangeEmail = e => {
+    console.log(e.target.value);
+    const newData = publicBoard1.filter(person => {
+      return person.username.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setPublicBoard(newData);
+  }
+
+  const handleChangeDepartment = e => {
+    console.log(e.target.value);
+    const newData = publicBoard1.filter(person => {
+      return person.department.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setPublicBoard(newData);
+  }
+
   return (
     <div className="body-component">
       <div className="body-header">
         <span className="body-header-name">Danh sách chấm công</span>
         <div className="body-header-right">
           <div className="body-header-month-year">
-            <button>
+            <button onClick={onClickBefore}>
               <NavigateBeforeIcon />
             </button>
             <span className="time">Tháng</span>
-            <span className="time">2</span>
+            <span className="time">{month}</span>
             <span className="time">/</span>
-            <span className="time">2022</span>
-            <button>
+            <span className="time">{year}</span>
+            <button onClick={onClickNext}>
               <NavigateNextIcon />
             </button>
           </div>
-          
+
         </div>
       </div>
       <div className="thead">
@@ -34,12 +106,12 @@ export default function ListTimeSheet() {
           <span>#</span>
           <div className="search-box">
             <TextField
+              onChange={handleChangeFullName}
               label="Họ và tên"
               id="name"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "6.4rem",
+                width: "8rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -56,12 +128,12 @@ export default function ListTimeSheet() {
           </div>
           <div className="search-box">
             <TextField
+              onChange={handleChangeEmail}
               label="Email"
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "6.4rem",
+                width: "8rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -77,12 +149,12 @@ export default function ListTimeSheet() {
           </div>
           <div className="search-box">
             <TextField
+              onChange={handleChangeDepartment}
               label="Phòng ban"
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "6.4rem",
+                width: "8rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -104,6 +176,37 @@ export default function ListTimeSheet() {
           <span className="thead-text-child">Nghỉ phép không lương</span>
           <span className="thead-text-child">Tổng công tính lương</span>
         </div>
+      </div>
+      <div className="body-container">
+        {publicBoard.map((data, index) => (
+          <div className="body-item" key={index}>
+            <div className="body-search">
+              <span>{index + 1}</span>
+              <div className="search-box">
+                <span style={{
+                  width: "8rem",
+                }}>{data.fullname}</span>
+              </div>
+              <div className="search-box">
+                <span style={{
+                  width: "8rem",
+                }}>{data.username}</span>
+              </div>
+              <div className="search-box">
+                <span style={{
+                  width: "8rem",
+                }}>{data.department}</span>
+              </div>
+            </div>
+            <div className="thread-span">
+              <span className="body-text-child">{data.workNumber}</span>
+              <span className="body-text-child">{data.holidaysNumber}</span>
+              <span className="body-text-child">{data.nghi_phep_co_luong}</span>
+              <span className="body-text-child">{data.nghi_phep_ko_luong}</span>
+              <span className="body-text-child">{data.sumWorkNumber}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

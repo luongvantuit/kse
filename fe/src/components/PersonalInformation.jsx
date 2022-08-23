@@ -29,7 +29,7 @@ function PersonalInformation() {
   }, []);
 
   useEffect(() => {
-    const url = "http://localhost:8080/api/profile"
+    const url = "http://localhost:8080/api/profile/token"
 
     fetch(url, {
       headers: {

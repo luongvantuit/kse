@@ -26,7 +26,7 @@ export default function Login() {
 
   useEffect(() => {
     if (!data) {
-      const url = "http://222.252.17.200:8081/api/users/login";
+      const url = "http://localhost:8080/api/users/login";
       fetch(url, {
         method: "POST",
         headers: {

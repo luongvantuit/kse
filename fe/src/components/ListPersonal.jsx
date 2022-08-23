@@ -1,28 +1,85 @@
 import React from "react";
-import {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../public/css/list-personal.css";
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SearchIcon from "@mui/icons-material/Search";
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function ListPersonal() {
   const [data, setData] = useState([]);
-  useEffect(() =>{
+  const [data1, setData1] = useState([]);
+  const [admin, setAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
     fetch('http://localhost:8080/api/employeeManager')
-    .then(response => response.json())
-    .then(data => {setData(data.listPerson); console.log(data.listPerson)});
+      .then(response => response.json())
+      .then(data => {
+        const result = data.listPerson.filter(function(person) {
+          return person.username !== "admin123";
+        })
+        setData(result);
+        setData1(result);
+      });
   }, []);
+
+  useEffect(() => {
+    const url = "http://localhost:8080/api/users/role";
+    const token = JSON.parse(localStorage.getItem("token"));
+    fetch(url, {
+      methods: "GET",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + token,
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.role === 'admin') {
+          setAdmin(true);
+        }
+      })
+  }, []);
+
+  const handleChangeFullName = e => {
+    console.log(e.target.value);
+    const newData = data1.filter(person => {
+      return person.fullname.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setData(newData);
+  }
+
+  const handleChangeEmail = e => {
+    console.log(e.target.value);
+    const newData = data1.filter(person => {
+      return person.username.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setData(newData);
+  }
+
+  const handleChangeDepartment = e => {
+    console.log(e.target.value);
+    const newData = data1.filter(person => {
+      return person.department.toLowerCase().search(e.target.value) !== -1;
+    })
+    console.log(newData);
+    setData(newData);
+  }
+
   return (
     <div className="body-component">
       <div className="body-header">
-        <span>Danh sách nhân sự</span>
+        <span style={{ fontWeight: 'bold', fontSize: '1.4rem' }}>Danh sách nhân sự</span>
         <div className="body-header-right">
           <div>
             <button className="btn-add-personal">
               <Link to={"/addnew"}>
-                <PersonAddIcon sx={{ fontSize: "1.7rem" }}/>
+                <PersonAddIcon sx={{ fontSize: "1.7rem" }} />
                 <span>Thêm nhân sự</span>
               </Link>
             </button>
@@ -32,15 +89,15 @@ export default function ListPersonal() {
 
       <div className="thead">
         <div className="body-search-personnel">
-          <span>Mã NV</span>
+          <span style={{ width: '1rem' }}>#</span>
           <div className="search-box">
             <TextField
+              onChange={handleChangeFullName}
               label="Họ và tên"
               id="name"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "10rem",
+                width: "10rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -58,12 +115,12 @@ export default function ListPersonal() {
 
           <div className="search-box">
             <TextField
+              onChange={handleChangeEmail}
               label="Email"
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "10rem",
+                width: "10rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -80,12 +137,12 @@ export default function ListPersonal() {
 
           <div className="search-box">
             <TextField
+              onChange={handleChangeDepartment}
               label="Phòng ban"
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "10rem",
+                width: "10rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -106,8 +163,7 @@ export default function ListPersonal() {
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "10rem",
+                width: "10rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -128,8 +184,7 @@ export default function ListPersonal() {
               variant="standard"
               autoComplete="off"
               sx={{
-                width: "auto",
-                maxWidth: "10rem",
+                width: "10rem",
                 height: "2rem",
                 marginBottom: "2rem",
                 marginLeft: "0.2rem",
@@ -143,18 +198,38 @@ export default function ListPersonal() {
               }}
             />
           </div>
+
+          <div style={{ width: '1rem' }}>
+            <span></span>
+          </div>
         </div>
       </div>
 
       <div className="view">
         {data.map(person => (
           <div className="body-search-item-personnel" key={person.id}>
-            <span className="item-personnel-id">{person.id}</span>
-            <span className="item-personnel-fullname">{person.fullname}</span>
-            <span className="item-personnel-username">{person.username}</span>
-            <span className="item-personnel-department">{person.department}</span>
-            <span className="item-personnel-staff">{person.role}</span>
-            <span className="item-personnel-contract">{person.nameContract}</span>
+            <span className="item-personnel-id">{person.id + 1}</span>
+            <span className="item-personnel">{person.fullname}</span>
+            <span className="item-personnel">{person.username}</span>
+            <span className="item-personnel">{person.department}</span>
+            <span className="item-personnel">{person.role}</span>
+            <span className="item-personnel">{person.nameContract}</span>
+            {admin && (
+              <>
+                <button onClick={() => {
+                  console.log(person);
+                  navigate(`/edit-personal/${person.username}`, {
+                    state: {
+                      person
+                    }
+                  })
+                }}>
+                  <EditIcon
+                    sx={{ marginRight: '1rem' }}
+                  />
+                </button>
+              </>
+            )}
           </div>
         ))}
       </div>

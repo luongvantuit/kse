@@ -173,7 +173,7 @@ export default function AddNewPersonal() {
                 className="selContract"
                 onChange={e => setWorkingMode(e.target.value)}
               >
-                <option value='Pass-time'>Pass-time</option>
+                <option value='Part-time'>Part-time</option>
                 <option value='Full-time'>Full-time</option>
               </select>
             </div>
