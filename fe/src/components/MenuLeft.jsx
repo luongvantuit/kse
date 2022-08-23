@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import "../public/css/menu-left.css";
 
 import Divider from "@mui/material/Divider";
@@ -15,9 +15,12 @@ import AvTimer from "@mui/icons-material/AvTimer";
 import Leaderboard from "@mui/icons-material/Leaderboard";
 import Groups from "@mui/icons-material/Groups";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArticleIcon from '@mui/icons-material/Article';
 
 export default function MenuLeft() {
   const [open, setOpen] = React.useState(false);
+  const [openBrowse, setOpenBrowse] = React.useState(false);
+  const [admin, setAdmin] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
@@ -31,6 +34,24 @@ export default function MenuLeft() {
 
     setOpen(false);
   };
+
+  useEffect(() => {
+    const url = "http://localhost:8080/api/users/role";
+    const token = JSON.parse(localStorage.getItem("token"));
+    fetch(url, {
+      methods: "GET",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + token,
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.role === 'admin') {
+          setAdmin(true);
+        }
+      })
+  }, []);
 
   return (
     <div className="menu-left">
@@ -64,6 +85,40 @@ export default function MenuLeft() {
 
           <span className="text"> Quản lí </span>
 
+          {admin && (
+            <MenuItem className="option3" onClick={() => setOpenBrowse(!openBrowse)}>
+              <div className="menu-item">
+                <ArticleIcon sx={{ fontSize: "2.6rem" }} />
+                <ListItemText className="menu-name" sx={{ fontSize: "1.4rem" }}>
+                  Phê duyệt
+                </ListItemText>
+              </div>
+            </MenuItem>
+          )}
+          {openBrowse && (
+            <div style={{ paddingLeft: '2rem' }}>
+              <MenuItem className="option3" style={{ height: '2.6rem' }}>
+                <Link to={"/browse-menus"}>
+                  <div className="menu-item">
+                    <ListItemText className="menu-name" sx={{ fontSize: "1.4rem" }}>
+                      Chấm công bù
+                    </ListItemText>
+                  </div>
+                </Link>
+              </MenuItem>
+
+              <MenuItem className="option3" style={{ height: '2.6rem' }}>
+                <Link to={"/form-on-leave"}>
+                  <div className="menu-item">
+                    <ListItemText className="menu-name" sx={{ fontSize: "1.4rem" }}>
+                      Xin nghỉ phép
+                    </ListItemText>
+                  </div>
+                </Link>
+              </MenuItem>
+            </div>
+          )}
+
           <MenuItem className="option3">
             <Link to={"/timesheet"}>
               <div className="menu-item">
@@ -90,9 +145,9 @@ export default function MenuLeft() {
                   aria-expanded={open ? 'true' : undefined}
                   aria-haspopup="true"
                   onClick={handleToggle}
-                  sx={{marginLeft: "14px" }}
+                  sx={{ marginLeft: "14px" }}
                 >
-                  <ExpandMoreIcon className="jss178"/>
+                  <ExpandMoreIcon className="jss178" />
                 </ListItemText>
                 <Menu
                   open={open}

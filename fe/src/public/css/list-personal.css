@@ -64,6 +64,7 @@
 .search-box {
     display: flex;
     align-items: baseline;
+    width: 10rem;
 }
 
 
@@ -95,9 +96,9 @@
 
 .view {
     position: absolute;
-    width: inherit;
+    width: var(--body-width);
     top: 7.6rem;
-    padding: 0 3rem;
+    padding: 0 0.8rem;
 }
 
 .body-search-item-personnel {
@@ -106,34 +107,13 @@
     width: inherit;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 .item-personnel-id {
-    position: absolute;
-    left: calc(0.01 * var(--body-width));
+    width: 1rem;
 }
 
-.item-personnel-fullname {
-    position: absolute;
-    left: calc(0.082 * var(--body-width));
-}
-
-.item-personnel-username {
-    position: absolute;
-    left: calc(0.262 * var(--body-width));
-}
-
-.item-personnel-department {    
-    position: absolute;
-    left: calc(0.44 * var(--body-width));
-}
-
-.item-personnel-staff {
-    position: absolute;
-    left: calc(0.62 * var(--body-width));
-}
-
-.item-personnel-contract {
-    position: absolute;
-    left: calc(0.8 * var(--body-width));
+.item-personnel{
+    width: 10rem;
 }

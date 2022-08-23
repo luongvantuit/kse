@@ -1,207 +1,111 @@
 .sub-menu {
   position: relative;
-  width: var(--body-width);
-  top: calc(var(--header-height) + 1rem);
-  left: var(--menu-left-width);
-
+  width: 62vw;
+  height: 60px;
+  left: 30vw;
+  top: 9rem;
+  padding: 0 2rem;
   background: #FFFFFF;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.tab-menu {
-  padding-left: 20px;
-  padding-right: 100px;
-  
-}
-
-.title1 {
-  left: 40px;
-}
-
-.title2 {
-  left: 80px;
-}
-
-.jss4 {
-  box-sizing: border-box;
+.form-1 {
   position: absolute;
-  width: 560px;
-  height: 656px;
-  left: 14.8rem;
-  top: 5rem;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-}
-
-.jss7 {
-  position: absolute;
-  width: 192px;
-  height: 46px;
-  left: 30px;
-  top: 10px;
+  top: 7rem;
+  left: 10vw;
+  width: 42vw;
+  height: 40rem;
+  padding: 0rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 1rem;
-  display: flex;
-  align-items: center;
-  color: gray;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
 
-.jss10 {
-  background: #FFFFFF;
-  border: 0.9px solid gray;
-  border-radius: 5px;
-  font-size: 16px;
+.form-2 {
+  position: absolute;
+  top: 7rem;
+  left: 10vw;
+  width: 42vw;
+  height: 42rem;
+  padding: 0rem 1.4rem;
   display: flex;
-  align-items: center;
-  color: #000000;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1rem;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+}
+
+.form-3 {
+  position: absolute;
+  top: 7rem;
+  left: 10vw;
+  width: 42vw;
+  height: 40rem;
+  padding: 0rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1rem;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+}
+
+.property {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.property-name {
+  max-width: 18rem;
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+.property-text {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.8rem;
 }
 
 .rectangle-request {
   box-sizing: border-box;
-  position: absolute;
-  width: 497px;
-  height: 30px;
-  left: 30px;
-  top: 54px;
-
-  padding-left: 10px;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  height: 2rem;
 }
 
-.rectangle1 {
-  top: 130px;
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.jss8 {
-  margin-top: 80px;
+.time-property {
+  display: flex;
+  flex-direction: column;
 }
 
-.jss11 {
-  box-sizing: border-box;
-  position: absolute;
-  width: 497px;
-  left: 30px;
-  top: 190px;
+.btn-send {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.jss12 {
-  margin-top: 300px;
+.shiftToleave {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1.6rem;
 }
 
-.rectangle2 {
-  box-sizing: border-box;
-  position: absolute;
-  width: 497px;
-  height: 30px;
-  left: 30px;
-  top: 350px;  
+.btn-morning {
+  border: 1px solid gray;
+  padding: 0rem;  
+  border-radius: 0.5rem;
 }
-
-.jss13 {
-  margin-top: 380px;
-}
-
-.calendar {
-  position: absolute;
-  width: 497px;
-  top: 370px;
-  left: 30px;
-}
-
-.jss14 {
-  margin-top: 480px;
-}
-
-.starttime {
-  width: 138px;
-  top: 426px;
-  left: 30px;
-}
-
-.jss15 {
-  margin-top: 480px;
-  margin-left: 270px;
-}
-
-.endtime{
-  left: 162px;
-}
-
-.btn-Sent {
-  position: absolute;
-  width: 130px;
-  height: 45px;
-  left: 400px;
-  top: 450px;
-}
-
-.jss17 {
-  height: 680px;
-}
-
-.datefrom {
-  top: 420px;
-
-  font-size: 14px;
-}
-
-.calendarfrom {
-  position: absolute;
-  width: 160px;
-  top: 400px;
-  left: 30px;
-}
-
-.dateto{
-  left: 300px;
-}
-
-.calendarto {
-  left: 140px;
-}
-
-.timeleavefrom {
-  top: 510px;
-}
-
-.timeleaveto {
-  left: 300px;
-}
-
-.texttime {
-  color: #9333EA;
-}
-
-.morning {
-  position: absolute;
-  width: 130px;
-  height: 45px;
-  left: 80px;
-  top: 560px;
-  border-radius: 5px;
-  font-size: 18px;
- align-items: center;
-  text-align: center;
-  color: '#FFFFFF';
-  border: 0.9px solid gray;
-}
-
-.morning:hover {
-  background-color: #9333EA;
-  opacity: 0.6;
-}
-
-.morning::after {
-  background-color: #9333EA;
-  opacity: 1;
-}
-
-.afternoon {
-  position: absolute;
-  left: 360px;
-}
-
-.jss16 {
-  top: 520px;
-}
-
-
-
