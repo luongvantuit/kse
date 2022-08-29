@@ -36,8 +36,12 @@ function HeaderComponent() {
   const anchorRef = React.useRef(null);
   const navigate = useNavigate();
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+  const handleClick = (event) => {
+    setOpen(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setOpen(null);
   };
 
   const handleCloseProfile = (event) => {
@@ -84,7 +88,7 @@ function HeaderComponent() {
                 aria-controls={open ? "composition-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
                 aria-haspopup="true"
-                onClick={handleToggle}
+                onClick={handleClick}
                 sx={{ marginLeft: "14px" }}
               >
                 <img
@@ -95,6 +99,7 @@ function HeaderComponent() {
               </ListItemText>
               <Menu
                 open={open}
+                onClose={handleClose}
                 anchorEl={anchorRef.current}
                 role={undefined}
                 transition="true"

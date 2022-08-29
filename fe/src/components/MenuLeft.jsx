@@ -96,7 +96,7 @@ export default function MenuLeft() {
             </MenuItem>
           )}
           {openBrowse && (
-            <div style={{ paddingLeft: '2rem' }}>
+            <div style={{ paddingLeft: '2.5rem' }}>
               <MenuItem className="option3" style={{ height: '2.6rem' }}>
                 <Link to={"/browse-menus"}>
                   <div className="menu-item">
@@ -138,32 +138,6 @@ export default function MenuLeft() {
                   {" "}
                   Nhân sự
                 </ListItemText>
-                <ListItemText
-                  ref={anchorRef}
-                  id="menu-name"
-                  aria-controls={open ? 'composition-menu' : undefined}
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-haspopup="true"
-                  onClick={handleToggle}
-                  sx={{ marginLeft: "14px" }}
-                >
-                  <ExpandMoreIcon className="jss178" />
-                </ListItemText>
-                <Menu
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                >
-                  <MenuItem onClick={handleClose}>Phòng ban 1</MenuItem>
-                  <MenuItem onClick={handleClose}>Phòng ban 2</MenuItem>
-                  <MenuItem onClick={handleClose}>Phòng ban 3</MenuItem>
-                </Menu>
               </div>
             </Link>
           </MenuItem>
