@@ -9,8 +9,8 @@ export default function Login() {
   let navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem('token')) !== null;
 
-  const elementUsername = useRef(null);
-  const elementPassword = useRef(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [btnLogin, setBtnLogin] = useState(false);
 
   const [forgot, setForgot] = useState(false);
@@ -25,7 +25,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    if (!data) {
+    if (!data && !(username === "") && !(password === "")){
       const url = "http://localhost:8080/api/users/login";
       fetch(url, {
         method: "POST",
@@ -34,8 +34,8 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: elementUsername.current.value,
-          password: elementPassword.current.value,
+          username: username,
+          password: password,
         }),
       })
         .then((response) => response.json())
@@ -46,6 +46,7 @@ export default function Login() {
           if (jsonData.success) {
             navigate("/homepage", { replace: true });
           }
+          setForgot(!jsonData.success);
         })
     }
   }, [btnLogin]);
@@ -71,7 +72,7 @@ export default function Login() {
               <input
                 type="text"
                 className="rectangle res-user"
-                ref={elementUsername}
+                onChange={e => setUsername(e.target.value)}
               />
             </div>
 
@@ -80,7 +81,7 @@ export default function Login() {
               <input
                 type="password"
                 className="rectangle res-pass"
-                ref={elementPassword}
+                onChange={e => setPassword(e.target.value)}
               />
 
               <div className="text-forgot">
