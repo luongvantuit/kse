@@ -44,8 +44,6 @@ function FormRequest() {
 
   const [datePickerValueFromTwo, setDatePickerValueFromTwo] = React.useState(new Date());
   const [datePickerValueToTwo, setDatePickerValueToTwo] = React.useState(new Date());
-  const [datePickerValue, setDatePickerValue] = React.useState(new Date());
-  const [timePickerValue, setTimePickerValue] = React.useState(new Date());
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -171,7 +169,7 @@ function FormRequest() {
         <Tab
           value="one" label="chấm công bù"
           sx={{
-            fontSize: '1rem',
+            fontSize: '1rem',  marginLeft: '3.5rem',
             '& .MuiTabPanel-root': {
               padding: '0px',
             },
@@ -179,16 +177,7 @@ function FormRequest() {
         />
         <Tab value="two" label="xin nghỉ phép" className="title1"
           sx={{
-            marginLeft: '5rem', marginRight: '5rem', fontSize: '1rem',
-            '& .MuiTabPanel-root': {
-              padding: '0px'
-            }
-          }}
-        />
-        <Tab
-          value="three" label="làm thêm giờ" className="title2"
-          sx={{
-            fontSize: '1rem',
+            marginLeft: '5rem', fontSize: '1rem',
             '& .MuiTabPanel-root': {
               padding: '0px'
             }
@@ -440,116 +429,8 @@ function FormRequest() {
           </div>
         </div>
       </TabPanel>
-
-      <TabPanel className="c" value="three"
-        sx={{
-          '& .MuiTabPanel-root': {
-            padding: '0px',
-          },
-        }}
-      >
-        <div className="form-3">
-          <div className="property department">
-            <span className="property-name department-name">Tên phòng ban:</span>
-            <input type="text" className="property-text rectangle-request" />
-          </div>
-
-          <div className="property">
-            <span className="property-name">Họ và tên:</span>
-            <input
-              type="text"
-              className="property-text rectangle-request"
-            />
-          </div>
-
-          <div className="property">
-            <TextField
-              id="outlined-basic"
-              label="Lí do"
-              variant="outlined"
-              multiline
-              rows={3}
-            />
-          </div>
-
-          <div className="property">
-            <span className="property-name">Người duyệt:</span>
-            <input
-              type="text"
-              className="property-text rectangle-request"
-            />
-          </div>
-
-          <div className="property">
-            <span className="property-name">Thời gian chấm công bù:</span>
-            <LocalizationProvider
-              style={{ marginTop: '0.4rem' }}
-              dateAdapter={AdapterDateFns}
-              adapterLocale={localeMap[locale]}
-            >
-              <DatePicker
-                value={datePickerValue}
-                onChange={(newValue) => setDatePickerValue(newValue)}
-                renderInput={(params) => (
-                  <DateTimeTextField {...params} />
-                )}
-              />
-            </LocalizationProvider>
-          </div>
-
-          <div className="time">
-            <div className="time-property">
-              <span className="property-name">Từ giờ:</span>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={localeMap[locale]}
-              >
-                <TimePicker
-                  value={timePickerValue}
-                  onChange={(newValue) => setTimePickerValue(newValue)}
-                  renderInput={(params) => (
-                    <DateTimeTextField {...params}
-                      sx={{ width: '12rem', minWidth: '0.1rem', maxWidth: '16rem' }}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
-            </div>
-            <div className="time-property">
-              <span className="property-name">Đến giờ:</span>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={localeMap[locale]}
-              >
-                <TimePicker
-                  value={timePickerValue}
-                  onChange={(newValue) => setTimePickerValue(newValue)}
-                  renderInput={(params) => (
-                    <DateTimeTextField
-                      sx={{ width: '12em', minWidth: '0.1rem', maxWidth: '16rem' }}
-                      {...params}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
-            </div>
-          </div>
-
-          <div className="btn-send">
-            <SentButton
-              className="btn-Sent"
-              variant="contained"
-              color="secondary"
-              endIcon={<SendIcon />}
-            >
-              {" "}
-              Gửi{" "}
-            </SentButton>
-          </div>
-        </div>
-      </TabPanel>
     </TabContext>
-    </div >
+    </div>
   );
 
 }
