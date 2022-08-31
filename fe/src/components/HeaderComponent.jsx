@@ -30,7 +30,7 @@ function HeaderComponent() {
           setUserName(data.image.username);
         }
       });
-  }, []);
+  }, [token]);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -109,7 +109,7 @@ function HeaderComponent() {
                 }}
               >
                 <MenuItem onClick={handleCloseProfile}>
-                  <Link to={"/profile"}>Hồ sơ cá nhân</Link>
+                  <Link to={"/app/profile"}>Hồ sơ cá nhân</Link>
                   </MenuItem>
                 <MenuItem onClick={handleCloseLogout}>Đăng xuất</MenuItem>
                 
