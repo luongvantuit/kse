@@ -6,6 +6,8 @@ const publicBoardController = require("../controller/publicBoardController");
 
 const router = express.Router();
 
-router.get('/', auth.verifyIdToken, publicBoardController.handleGetPublicBoard)
+router.get('/getPublicBoard', auth.verifyIdToken, publicBoardController.handleGetPublicBoard);
+
+router.put('/updateTimekeeping', auth.verifyIdToken, publicBoardController.handleUpdateBoard);
 
 module.exports = router;

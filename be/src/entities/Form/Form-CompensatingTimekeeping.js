@@ -6,23 +6,24 @@ const compensatingTimekeepingShema = mongoose.Schema({
     username: {
         type: String,
     },
+    fullName: {
+        type: String,
+    },
+    approvedBy: {
+        type: String,
+    },
     department:{
         type: String, // 1 user - 1 department
     },
     reason: {
         type: String,
     },
-    approvedBy: {
-        type: String,
-    },
     onDate: {
         type: String, // Date
     },
-    startTime: {
-        type: String,  // Date
-    },
-    endTime: {
-        type: String,  // Date
+    isChecked: {
+        type: Boolean,
+        default: false,
     }
 })
 

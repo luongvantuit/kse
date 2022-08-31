@@ -3,21 +3,25 @@ const Form_OnLeave = require("../entities/Form/Form-OnLeave");
 const Form_OT = require("../entities/Form/Form-OT");
 const PersonInformation = require("../entities/PersonalInformation");
 const Department = require("../entities/Department");
+const User = require("../entities/User");
+const WorkSheet = require("../entities/WorkSheet");
 
 async function handleGetFormCompensatingTimekeeping(req, res) {
     const username = req.username;
-    if (!username) return res.status(401).json({
+    if (!username) return res.status(404).json({
         error: true,
         msg: 'Invalid username provided in form submission',
         success: false,
     });
     try {
-        const department = await PersonInformation.findOne({ username: username });
-        const admin = await Department.findOne({ username: username });
+        const user = await User.findOne({ username: username });
+        const personInfo = await PersonInformation.findOne({ username: username });
+        const admin = await Department.findOne({ nameDepartment: personInfo.department });
         return res.status(200).json({
             success: true,
-            form_CompensatingTimekeeping: {
-                department: department.department,
+            form_data: {
+                fullname: user.fullname,
+                department: personInfo.department,
                 username: username,
                 approvedBy: admin.admin,
             }
@@ -31,27 +35,140 @@ async function handleGetFormCompensatingTimekeeping(req, res) {
     }
 }
 
-async function handlePutFormCompensatingTimekeeping(req, res){
+async function handlePostFormCompensatingTimekeeping(req, res) {
     try {
-        await Form_CompensatingTimekeeping.findOneAndUpdate(
-            {
-                username: req.body.username,
-            },
-            {
-                $set: {
-                    department: req.body.department,
-                    reason: req.body.reason,
-                    onDate: req.body.onDate,
-                    startTime: req.body.startTime,
-                    endTime: req.body.endTime,
-                }
-            }
-        );
+        console.log(req.body);
+        const form = new Form_CompensatingTimekeeping({
+            username: req.username,
+            fullName: req.body.fullName,
+            approvedBy: req.body.approvedBy,
+            department: req.body.department,
+            reason: req.body.reason,
+            onDate: req.body.onDate,
+        })
+        await form.save();
         return res.status(200).json({ success: true });
     } catch (error) {
         return res.status(404).json({
             error: true,
             msg: 'post form-CompensatingTimekeeping',
+            success: false,
+        });
+    }
+}
+
+async function handleGetAllUnCheckedFormCompensatingTimekeeping(req, res) {
+    try {
+        const form_checked = await Form_CompensatingTimekeeping.find({ isChecked: false });
+        if (!form_checked) {
+            return res.status(404).json({
+                error: true,
+                msg: 'Not found',
+                success: false,
+            })
+        }
+        return res.status(200).json({
+            error: false,
+            form: form_checked,
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
+            success: false,
+        })
+    }
+}
+
+async function handleGetAllCheckedFormCompensatingTimekeeping(req, res) {
+    try {
+        const form_checked = await Form_CompensatingTimekeeping.find({ isChecked: true });
+        if (!form_checked) {
+            return res.status(404).json({
+                error: true,
+                msg: 'Not found',
+                success: false,
+            })
+        }
+        return res.status(200).json({
+            error: false,
+            form: form_checked,
+            msg: 'OK',
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
+            msg: 'Error: ' + error.message,
+            success: false,
+        })
+    }
+}
+
+async function handlePutFormCompensatingTimekeeping(req, res) {
+    try {
+        console.log(req.body);
+        const username = req.body.username;
+        if (!username) {
+            return res.status(401).json({
+                error: true,
+                msg: 'Invalid username provided',
+                success: false,
+            });
+        }
+        await Form_CompensatingTimekeeping.findOneAndUpdate(
+            {
+                username: username,
+                reason: req.body.onDate,
+            },
+            {
+                $set: {
+                    isChecked: req.body.isChecked,
+                }
+            }
+        );
+        const form = await Form_CompensatingTimekeeping.findOne({
+            username: username,
+            reason: req.body.onDate,
+        })
+        if (!form) {
+            return res.status(404).json({
+                error: true,
+                msg: 'form not found',
+                success: false,
+            })
+        }
+        const month = new Date(form.onDate).getMonth() + 1;
+        const workSheet = await WorkSheet.findOne({
+            username: username,
+            onMonth: month,
+        });
+        if (!workSheet) {
+            return res.status(404).json({
+                error: true,
+                msg: 'workSheet not found',
+                success: false,
+            })
+        }
+        await WorkSheet.findOneAndUpdate(
+            {
+                username: username,
+                onMonth: month,
+            },
+            {
+                $set:
+                {
+                    workNumber: (workSheet.workNumber + 1 ),
+                    sumWorkNumber: (workSheet.sumWorkNumber + 1),
+                }
+            }
+        )
+        return res.status(200).json({
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
             success: false,
         });
     }
@@ -84,20 +201,21 @@ async function handleGetFormOnLeave(req, res) {
     }
 }
 
-async function handlePutFormOnLeave(req, res) {
+async function handlePostFormOnLeave(req, res) {
     try {
-        await Form_OnLeave.findOneAndUpdate(
-            {
-                username: req.body.username,
-            },
-            {
-                $set:
-                {
-                    reason: req.body.reason,
-                    startTime: req.body.startTime,
-                    endTime: req.body.endTime,
-                }
-            })
+        console.log('red.body: ', req.body);
+        const form = new Form_OnLeave({
+            username: req.username,
+            fullName: req.body.fullName,
+            approvedBy: req.body.approvedBy,
+            department: req.body.department,
+            reason: req.body.reason,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            morning: req.body.morning,
+            afternoon: req.body.afternoon,
+        })
+        await form.save();
         return res.status(200).json({ success: true });
     } catch (error) {
         return res.status(404).json({
@@ -108,9 +226,130 @@ async function handlePutFormOnLeave(req, res) {
     }
 }
 
+async function handleGetAllUnCheckedFormOnLeave(req, res) {
+    try {
+        const form_checked = await Form_OnLeave.find({ isChecked: false });
+        if (!form_checked) {
+            return res.status(404).json({
+                error: true,
+                msg: 'Not found',
+                success: false,
+            })
+        }
+        return res.status(200).json({
+            error: false,
+            form: form_checked,
+            msg: 'OK',
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
+            msg: 'Error: ' + error.message,
+            success: false,
+        })
+    }
+}
+
+async function handleGetAllCheckedFormOnLeave(req, res) {
+    try {
+        const form_checked = await Form_OnLeave.find({ isChecked: true });
+        if (!form_checked) {
+            return res.status(404).json({
+                error: true,
+                msg: 'Not found',
+                success: false,
+            })
+        }
+        return res.status(200).json({
+            error: false,
+            form: form_checked,
+            msg: 'OK',
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
+            msg: 'Error: ' + error.message,
+            success: false,
+        })
+    }
+}
+
+async function handlePutFormOnLeave(req, res) {
+    try {
+        const username = req.body.username;
+        if (!username) {
+            return res.status(401).json({
+                error: true,
+                msg: 'Invalid username provided',
+                success: false,
+            });
+        }
+        await Form_OnLeave.findOneAndUpdate(
+            {
+                username: username,
+                reason: req.body.reason,
+            },
+            {
+                $set: {
+                    date: req.body.date,
+                    countDate: Number(req.body.countDate),
+                    isChecked: req.body.isChecked,
+                }
+            }
+        )
+        const form = await Form_OnLeave.findOne({
+            username: username,
+            reason: req.body.reason,
+        })
+        if (!form) {
+            return res.status(404).json({
+                error: true,
+                msg: 'server error',
+                success: false,
+            })
+        }
+        const month = new Date(form.startTime).getMonth();
+        let co_luong = 0;
+        let ko_luong = 0;
+        if (form.isCheckedSalary) {
+            co_luong = Number(form.countDate);
+        } else {
+            ko_luong = Number(form.countDate);
+        }
+        const workSheet = await WorkSheet.findOne({
+            username: username,
+            onMonth: month,
+        });
+        await WorkSheet.findOneAndUpdate(
+            {
+                username: username,
+                onMonth: month,
+            },
+            {
+                $set: {
+                    nghi_phep_co_luong: workSheet.nghi_phep_co_luong + co_luong,
+                    nghi_phep_ko_luong: workSheet.nghi_phep_ko_luong + ko_luong,
+                    sumWorkNumber: workSheet.sumWorkNumber + co_luong - ko_luong,
+                }
+            }
+        )
+
+        return res.status(200).json({
+            success: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message,
+            success: false,
+        });
+    }
+}
+
 async function handleGetFormOT(req, res) {
-    const username  = req.username;
-    if (!user) return res.status(401).json({
+    const username = req.username;
+    if (!username) return res.status(401).json({
         error: true,
         msg: 'Invalid username provided in form submission',
         success: false,
@@ -159,9 +398,17 @@ async function handlePutFormOT(req, res) {
 
 module.exports = {
     handleGetFormCompensatingTimekeeping,
+    handlePostFormCompensatingTimekeeping,
+    handleGetAllUnCheckedFormCompensatingTimekeeping,
+    handleGetAllCheckedFormCompensatingTimekeeping,
     handlePutFormCompensatingTimekeeping,
+
     handleGetFormOnLeave,
+    handlePostFormOnLeave,
+    handleGetAllUnCheckedFormOnLeave,
+    handleGetAllCheckedFormOnLeave,
     handlePutFormOnLeave,
+
     handleGetFormOT,
     handlePutFormOT,
 }
