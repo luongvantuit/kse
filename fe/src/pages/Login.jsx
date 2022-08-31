@@ -84,9 +84,6 @@ export default function Login() {
                 onChange={e => setPassword(e.target.value)}
               />
 
-              <div className="text-forgot">
-                <span className="forgot-pd">Quên mật khẩu?</span>
-              </div>
             </div>
 
             <div className="btn-rectangle">

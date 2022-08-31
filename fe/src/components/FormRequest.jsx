@@ -251,44 +251,6 @@ function FormRequest() {
             </LocalizationProvider>
           </div>
 
-          <div className="time">
-            <div className="time-property">
-              <span className="property-name">Từ giờ:</span>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={localeMap[locale]}
-              >
-                <TimePicker
-                  value={timePickerValueFromOne}
-                  onChange={(newValue) => setTimePickerValueFromOne(newValue)}
-                  renderInput={(params) => (
-                    <DateTimeTextField {...params}
-                      sx={{ width: '12rem', minWidth: '0.1rem', maxWidth: '16rem' }}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
-            </div>
-            <div className="time-property">
-              <span className="property-name">Đến giờ:</span>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={localeMap[locale]}
-              >
-                <TimePicker
-                  value={timePickerValueToOne}
-                  onChange={(newValue) => setTimePickerValueToOne(newValue)}
-                  renderInput={(params) => (
-                    <DateTimeTextField
-                      sx={{ width: '12em', minWidth: '0.1rem', maxWidth: '16rem' }}
-                      {...params}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
-            </div>
-          </div>
-
           <div className="btn-send">
             <SentButton
               className="btn-Sent"
@@ -393,7 +355,7 @@ function FormRequest() {
                 style={bgBtnMorning}
                 onClick={() => {
                   setBgBtnColorMorning(!bgBtnColorMorning);
-                  bgBtnColorMorning ? setBgBtnMorning({ backgroundColor: 'aqua' }) : setBgBtnMorning({ backgroundColor: 'transparent' });
+                  bgBtnColorMorning ? setBgBtnMorning({ backgroundColor: 'lightblue' }) : setBgBtnMorning({ backgroundColor: 'transparent' });
                 }}
               >
                 <span className="property-name">Ca sáng:</span>
@@ -406,7 +368,7 @@ function FormRequest() {
                 style={bgBtnAfternoon}
                 onClick={() => {
                   setBgBtnColorAfternoon(!bgBtnColorAfternoon);
-                  bgBtnColorAfternoon ? setBgBtnAfternoon({ backgroundColor: 'aqua' }) : setBgBtnAfternoon({ backgroundColor: 'transparent' });
+                  bgBtnColorAfternoon ? setBgBtnAfternoon({ backgroundColor: 'lightblue' }) : setBgBtnAfternoon({ backgroundColor: 'transparent' });
                 }}
               >
                 <span className="property-name">Ca chiều:</span>
