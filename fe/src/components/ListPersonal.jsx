@@ -78,7 +78,7 @@ export default function ListPersonal() {
         <div className="body-header-right">
           <div>
             <button className="btn-add-personal">
-              <Link to={"/addnew"}>
+              <Link to={"/app/addnew"}>
                 <PersonAddIcon sx={{ fontSize: "1.7rem" }} />
                 <span>Thêm nhân sự</span>
               </Link>
