@@ -83,9 +83,6 @@ export default function Login() {
                 ref={elementPassword}
               />
 
-              <div className="text-forgot">
-                <span className="forgot-pd">Quên mật khẩu?</span>
-              </div>
             </div>
 
             <div className="btn-rectangle">
