@@ -5,6 +5,22 @@ const jwt = require("jsonwebtoken");
 const { jwtSecretKey } = require("../config/server");
 const CreateUserDB = require("../controller/create-user-db");
 
+function verify(req, res) {
+    const username = req.username;
+    if(!username) {
+        return res.status(401).json({
+            error: true,
+            msg: 'Invalid username provided in token',
+            success: false,
+        })
+    }
+    return res.status(200).json({
+        error: false,
+        msg: 'Token is valid',
+        success: true,
+    })
+}
+
 async function hashedPassword(password) {
     try {
         const salt = await bcrypt.genSalt(8);
@@ -59,9 +75,7 @@ async function handleUserLogin(req, res) {
     try {
         const username = req.body.username;
         const password = req.body.password;
-        console.log(req.body);
         const user = await User.findOne({ username: username });
-        console.log(user);
         if (!user) {
             return res.status(400).json({
                 error: true,
@@ -69,7 +83,7 @@ async function handleUserLogin(req, res) {
                 success: false
             });
         } else {
-            console.log('Usename is found');
+            console.log('Username is found');
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
@@ -151,6 +165,7 @@ async function handleUserRole(req, res) {
 }
 
 module.exports = {
+    verify,
     handleUserSignUp,
     handleUserLogin,
     handleUserInfo,
