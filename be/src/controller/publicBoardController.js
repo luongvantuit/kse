@@ -33,7 +33,7 @@ async function handleGetPublicBoard(req, res) {
             return res.status(200).json({ publicBoard: arr });
         }
         // admin role
-        const workSheet = await WorkSheet.find({ onMonth: month});
+        const workSheet = await WorkSheet.find({ onMonth: month });
         if (!workSheet) {
             return res.status(404).json({ error: "Not found workSheet" });
         }
@@ -50,19 +50,33 @@ async function handleGetPublicBoard(req, res) {
 async function handleUpdateBoard(req, res) {
     try {
         const username = req.username;
-        const month = req.body.month;
+        const month = req.body.onMonth;
         const workSheetUser = await WorkSheet.findOne({
             username: username,
             onMonth: month,
         });
         if (!workSheetUser) {
-            return res.status(404).json({
-                error: true,
-                msg: 'Not Found',
-                success: false,
-            })
+            const workSheet = await WorkSheet.findOne(
+                {
+                    username: username,
+                }
+            )
+            const newWorkSheet = await WorkSheet(
+                {
+                    fullname: workSheet.fullname,
+                    username: workSheet.username,
+                    department: workSheet.department,
+                    onMonth: month,
+                }
+            )
+            await newWorkSheet.save();
+            // return res.status(404).json({
+            //     error: true,
+            //     msg: 'Not Found workSheetUser',
+            //     success: false,
+            // })
         }
-        const update = await WorkSheet.findOneAndUpdate(
+        await WorkSheet.findOneAndUpdate(
             {
                 username: username,
                 onMonth: month,
@@ -70,18 +84,20 @@ async function handleUpdateBoard(req, res) {
             {
                 $set: {
                     workNumber: workSheetUser.workNumber + 1,
-                    sumWorkNumber: workSheetUser.sumWorkNumber + 1,
+                    sumWorkNumber: workSheetUser.workNumber + 1 +
+                        workSheetUser.holidaysNumber +
+                        workSheetUser.nghi_phep_co_luong -
+                        workSheetUser.nghi_phep_ko_luong,
                 }
             }
         )
-        return res.status(200).json( {
+        return res.status(200).json({
             error: false,
-            update: update,
             msg: 'Successfully',
             success: true,
         })
     } catch (error) {
-        return res.status(500).json( {
+        return res.status(500).json({
             error: true,
             msg: 'Error processing',
             success: false,

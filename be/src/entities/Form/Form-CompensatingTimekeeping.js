@@ -21,6 +21,10 @@ const compensatingTimekeepingShema = mongoose.Schema({
     onDate: {
         type: String, // Date
     },
+    countDate: {
+        type: Number,
+        default: 1,
+    },
     isChecked: {
         type: Boolean,
         default: false,
