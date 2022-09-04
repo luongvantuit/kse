@@ -90,53 +90,51 @@ export default function EditPersonal() {
     let navigate = useNavigate();
     const handleSubmit = () => {
         postPutUser();
-        navigate("/personnel", { replace: true });
+        navigate("/app/personnel", { replace: true });
+    }
+    const handleCancel = () => { 
+        navigate("/app/personnel", { replace: true });
     }
 
     return (
-        <div className="add-new-personal">
-            <div className="create-new">
-                <span className="jss50">Thay đổi tài khoản nhân sự</span>
-                <div className="basic-info">
-                    <div className="fullname">
-                        <span>Họ và tên:</span>
-                        <input
-                            defaultValue={fullName}
-                            onChange={e => setFullName(e.target.value)}
-                            type="text"
-                            className="jss51 jss53"
-                        />
-                    </div>
-                    <div className="username">
-                        <span>User name:</span>
-                        <input
-                            disabled
-                            defaultValue={userName}
-                            onChange={e => setUserName(e.target.value)}
-                            type="text"
-                            className="jss51 jss53"
-                        />
-                    </div>
-                    <div className="pass">
-                        <span>Password:</span>
-                        <input
-                            onChange={e => setPassword(e.target.value)}
-                            type="text"
-                            className="jss51 jss53"
-                        />
-                    </div>
+        <div className="edit-personal">
+            <span className="edit-personal-title">Thay đổi tài khoản nhân sự</span>
+            <div className="basic-info">
+                <div className="fullname">
+                    <span className="text-field">Họ và tên:</span>
+                    <input
+                        defaultValue={fullName}
+                        onChange={e => setFullName(e.target.value)}
+                        type="text"
+                        className="jss51 jss53"
+                    />
                 </div>
-
-                <span className="jss52">Hiển thị thêm thông tin</span>
+                <div className="username">
+                    <span className="text-field">User name:</span>
+                    <input
+                        disabled
+                        defaultValue={userName}
+                        onChange={e => setUserName(e.target.value)}
+                        type="text"
+                        className="jss51 jss53"
+                    />
+                </div>
+                <div className="pass">
+                    <span className="text-field">Password:</span>
+                    <input
+                        onChange={e => setPassword(e.target.value)}
+                        type="text"
+                        className="jss51 jss53"
+                    />
+                </div>
             </div>
 
-            <div className="details">
-                <span className="details-name">Thông tin hợp đồng</span>
-
-                <div className="contract-info">
+            <div className="contract-info">
+                <span className="contract-info-title">Thông tin hợp đồng</span>
+                <div className="contract-info-child">
                     <div className="contract-info-left">
                         <div className="type-of-contract">
-                            <span>Loại hợp đồng:</span>
+                            <span className="text-field">Loại hợp đồng:</span>
                             <select
                                 value={nameContract}
                                 onChange={e => setNameContract((e.target.value).trim())}
@@ -148,7 +146,7 @@ export default function EditPersonal() {
                         </div>
 
                         <div className="contract-term">
-                            <span>Thời hạn hợp đồng:</span>
+                            <span className="text-field">Thời hạn hợp đồng:</span>
                             <select
                                 value={contractTerm}
                                 onChange={e => setContractTerm((e.target.value))}
@@ -165,7 +163,7 @@ export default function EditPersonal() {
 
                     <div className="contract-info-right">
                         <div className="contract-signing-date">
-                            <span>Ngày ký hợp đồng:</span>
+                            <span className="text-field">Ngày ký hợp đồng:</span>
                             <input
                                 defaultValue={startContract}
                                 onChange={e => setStartContract(e.target.value)}
@@ -175,7 +173,7 @@ export default function EditPersonal() {
                         </div>
 
                         <div className="contract-expiration-date">
-                            <span>Ngày hết hạn hợp đồng:</span>
+                            <span className="text-field">Ngày hết hạn hợp đồng:</span>
                             <input
                                 defaultValue={endContract}
                                 onChange={e => setEndContract(e.target.value)}
@@ -185,9 +183,11 @@ export default function EditPersonal() {
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <span className="details-profile">Thông tin cá nhân</span>
-                <div className="personal-info">
+            <div className="personal-info">
+                <span className="personal-info-title">Thông tin cá nhân</span>
+                <div className="personal-info-child">
                     <div className="personal-info-left">
                         <div className="personal-code">
                             <span>Mã số cá nhân:</span>
@@ -226,7 +226,7 @@ export default function EditPersonal() {
                         <div className="gender">
                             <span>Giới tính:</span>
                             <select
-                                value={gender ? 'male': 'female'}
+                                value={gender ? 'male' : 'female'}
                                 onChange={e => setGender(e.target.value)}
                                 className="selContract"
                             >
@@ -256,7 +256,7 @@ export default function EditPersonal() {
                 </div>
             </div>
             <div className="endPage">
-                <button className="cancel">HỦY BỎ</button>
+                <button onClick={handleCancel} className="cancel">HỦY BỎ</button>
                 <button onClick={handleSubmit} className="save">LƯU</button>
             </div>
         </div>

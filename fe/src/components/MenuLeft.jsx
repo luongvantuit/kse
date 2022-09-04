@@ -23,6 +23,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 export default function MenuLeft() {
   const [openBrowse, setOpenBrowse] = React.useState(false);
   const [admin, setAdmin] = React.useState(false);
+  const [openDepartment, setOpenDepartment] = React.useState(false);
   useEffect(() => {
     const url = "http://localhost:8080/api/users/role";
     const token = JSON.parse(localStorage.getItem("token"));
@@ -78,7 +79,7 @@ export default function MenuLeft() {
                 <ListItemText className="menu-name" sx={{ fontSize: "1.4rem" }}>
                   Phê duyệt
                 </ListItemText>
-                <div style={{ marginLeft: "5rem" }}>
+                <div style={{ marginLeft: "6vw" }}>
                   {openBrowse ? <ExpandLess /> : <ExpandMore />}
                 </div>
               </div>
@@ -110,7 +111,7 @@ export default function MenuLeft() {
             </Link>
           </MenuItem>
 
-          <MenuItem className="option4">
+          <MenuItem className="option4" onClick={() => setOpenDepartment(!openDepartment)}>
             <Link to={"/app/personnel"}>
               <div className="menu-item">
                 <Groups sx={{ fontSize: "2.6rem" }} />
@@ -118,9 +119,30 @@ export default function MenuLeft() {
                   {" "}
                   Nhân sự
                 </ListItemText>
+                {admin && (
+                  <div style={{ marginLeft: "6vw" }}>
+                    {openDepartment ? <ExpandLess /> : <ExpandMore />}
+                  </div>
+                )}
               </div>
             </Link>
           </MenuItem>
+          {admin && (
+            <Collapse in={openDepartment} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link to="/app/browse-menus">
+                  <ListItemButton sx={{ pl: 7 }}>
+                    <ListItemText primary="Phòng ban 1" />
+                  </ListItemButton>
+                </Link>
+                <Link to="/app/form-on-leave">
+                  <ListItemButton sx={{ pl: 7 }}>
+                    <ListItemText primary="Phòng ban 2" />
+                  </ListItemButton>
+                </Link>
+              </List>
+            </Collapse>
+          )}
         </MenuList>
       </Paper>
     </div>

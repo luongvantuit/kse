@@ -1,34 +1,41 @@
-.create-new {
-    position: absolute;
-    box-shadow: 0px 2px 2px gray;
-    left: 250px;
-    top: 80px;
-    width: 1000px;
-    height: 140px;
-    padding: 5px 20px;
+.edit-personal {
+    position: relative;
+    width: var(--body-width);
+    height: 100%;
+    top: calc(var(--header-height) + 1rem);
+    left: var(--menu-left-width);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.jss50 {
+.edit-personal-title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.6rem;
 }
 
 .basic-info {
     position: absolute;
     top: 30px;
-    left:0px;
+    left: 0px;
     width: 100%;
-    padding: 10px 30px ;
+    padding: 0px 4rem;
+    margin-top: 3.4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.fullname, .username, .pass {
+.fullname,
+.username,
+.pass {
     display: flex;
     flex-direction: column;
 }
 
+.text-field {
+    margin-bottom: 0.4rem;
+}
 
 .jss51 {
     background: #FFFFFF;
@@ -45,43 +52,55 @@
     height: 28px;
 }
 
-.jss52 {
-    position: absolute;
-    left: 400px;
-    top: 110px;
-    font-size: 15px;
-}
-
-.details {
-    position: absolute;
-    left: 250px;
-    top: 220px;
-    width: 1000px;
-    height: 440px;
-    padding: 5px 20px;
-    box-shadow: 0px 2px 2px gray;
-}
-
-.details-name {
-    position: absolute;
-    font-weight: 600;
-    left: 410px;
-    }
-
 .contract-info {
     position: absolute;
-    top: 25px;
-    left:0px;
+    top: 9rem;
+    left: 0px;
     width: 100%;
-    padding: 5px 30px ;
+    padding: 0px 4rem;
+    margin-top: 3.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contract-info-title {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contract-info-child {
+    width: inherit;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    }
+}
 
-.contract-info-left {
-    padding: 10px 30px ;
-    align-items: center;
+.contract-info-left,
+.contract-info-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.type-of-contract {
+    display: flex;
+    flex-direction: column;
+}
+
+.contract-term {
+    display: flex;
+    flex-direction: column;
+}
+
+.contract-signing-date {
+    display: flex;
+    flex-direction: column;
+}
+
+.contract-expiration-date {
+    display: flex;
+    flex-direction: column;
 }
 
 .selContract {
@@ -97,11 +116,6 @@
     margin-top: 5px;
 }
 
-.contract-info-right {
-    padding: 10px 30px ;
-    align-items: center;
-}
-
 .jss55 {
     box-sizing: border-box;
     border: 0.9px solid gray;
@@ -114,74 +128,62 @@
     padding-left: 10px;
 }
 
-.contract-term, .contract-expiration-date, .department, .working-mode, .citizen-ID, .birth {
-    margin-top: 10px;
-}
-
-.details-profile {
-    position: absolute;
-    font-weight: 600;
-    top: 175px;
-    left: 410px;
-}
-
 .personal-info {
     position: absolute;
-    top: 195px;
-    left:0px;
+    top: 24rem;
+    left: 0px;
     width: 100%;
-    padding: 5px 30px ;
+    padding: 0px 4rem;
+    margin-top: 3.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personal-info-title {
+    display: block;
+    width: inherit;
+    text-align: center;
+}
+
+.personal-info-child {
+    width: inherit;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-
-.personal-info-left {
-    padding: 10px 30px ;
-    align-items: center;
-}
-
-.personal-info-right {
-    padding: 10px 30px ;
-    align-items: center;
 }
 
 .endPage {
     position: absolute;
-    top: 660px;
-    left: 250px;
-    width: 1000px;
-    height: 60px;
-    padding: 15px 30px ;
+    width: inherit;
+    height: 4rem;
+    top: 44rem;
+    left: 0px;
+    padding: 0px 4rem;
     display: flex;
-    }
+    align-items: center;
+    justify-content: flex-end;
+}
 
 .save {
-    position: absolute;
-    width: 80px;
-    height: 28px;
-    right: 40px;
+    width: 5rem;
+    height: 2rem;
+    margin-left: 1rem;
     border: 1px solid #9333EA;
     background-color: #9333EA;
     color: #FFFFFF;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .cancel {
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 28px;
-    right: 140px;
+    width: 5rem;
+    height: 2rem;
     border: 1px solid #9333EA;
-    border-radius: 5px;
     background-color: #9333EA;
-    display: flex;
-    font-family: 'Inter';
-    font-size: 18px;
+    border-radius: 5px;
     color: #FFFFFF;
-    }
+}
+
+.save:hover,
+.cancel:hover {
+    opacity: 0.88;
+}

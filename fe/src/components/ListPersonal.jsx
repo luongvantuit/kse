@@ -15,7 +15,15 @@ export default function ListPersonal() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/employeeManager')
+    const token = JSON.parse(localStorage.getItem('token'));
+    fetch('http://localhost:8080/api/employeeManager/getEmployee', {
+      method: 'GET',
+      headers:{
+        "accept": "application/json",
+        "content-type": "application/json; charset=utf-8",
+        Authorization: 'Bearer ' + token,
+      }
+    })
       .then(response => response.json())
       .then(data => {
         const result = data.listPerson.filter(function(person) {
@@ -38,7 +46,7 @@ export default function ListPersonal() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.role === 'admin') {
+        if (data.role === 'admin' || data.role ==="manager") {
           setAdmin(true);
         }
       })
@@ -208,7 +216,7 @@ export default function ListPersonal() {
       <div className="view">
         {data.map(person => (
           <div className="body-search-item-personnel" key={person.id}>
-            <span className="item-personnel-id">{person.id + 1}</span>
+            <span className="item-personnel-id">{person.id}</span>
             <span className="item-personnel">{person.fullname}</span>
             <span className="item-personnel">{person.username}</span>
             <span className="item-personnel">{person.department}</span>
@@ -218,7 +226,7 @@ export default function ListPersonal() {
               <>
                 <button onClick={() => {
                   console.log(person);
-                  navigate(`/edit-personal/${person.username}`, {
+                  navigate(`/app/edit-personal/${person.username}`, {
                     state: {
                       person
                     }
