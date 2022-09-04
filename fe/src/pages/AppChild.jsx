@@ -16,7 +16,7 @@ export default function AppChild() {
         <React.Fragment>
             <HeaderComponent/>
             <Routes>
-                <Route path="/" element={<Navigate to={"homepage"} />} />
+                <Route path="/" element={<Navigate to="homepage" />} />
                 <Route path="homepage" element={<CheckIn />} />
                 <Route path="requests" element={<FormRequest />} /> 
                 <Route path="personnel" element={<ListPersonal />} />

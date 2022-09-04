@@ -7,26 +7,7 @@ import '../public/css/form-on-leave.css';
 
 export default function FormOnLeave() {
 
-   const [arrFrom, setArrFrom] = useState([
-      {
-         fullName: 'Ahihi1',
-         date: '14/7 - 16/7',
-         reason: 'Bận ẻ',
-         department: 'Phòng ban 1',
-         countDate: '2',
-         isCheckedSalary: true,
-         isChecked: false,
-      },
-      {
-         fullName: 'Ahihi2',
-         date: '14/7 - 16/7',
-         reason: 'Bận ẻ',
-         department: 'Phòng ban 1',
-         countDate: '2',
-         isCheckedSalary: true,
-         isChecked: false,
-      }
-   ])
+   const [arrFrom, setArrFrom] = useState([]);
    const [arrTo, setArrTo] = useState([]);
    const [checked, setChecked] = useState(false);
 
@@ -35,24 +16,7 @@ export default function FormOnLeave() {
       fetch(url)
          .then(res => res.json())
          .then(data => {
-            const form = data.form;
-            const newForm = form.map(function (child) {
-               let a = ((new Date(child.endTime)).getTime() - (new Date(child.startTime)).getTime()) / 86400000;
-               if (!child.morning && !child.afternoon) {
-                  a = 0;
-               }
-               if (!child.morning || !child.afternoon) {
-                  a = a / 2;
-               }
-               return {
-                  ...child,
-                  date: `${(new Date(child.startTime)).getDate()}/${(new Date(child.startTime)).getMonth()} - ${(new Date(child.endTime)).getDate()}/${(new Date(child.endTime)).getMonth()}`,
-                  countDate: a,
-               }
-            }
-            )
-            console.log('newFormUnChecked: ', newForm);
-            setArrFrom(newForm)
+            setArrFrom(data.form)
          })
    }, [checked]);
 
@@ -61,24 +25,7 @@ export default function FormOnLeave() {
       fetch(url)
          .then(res => res.json())
          .then(data => {
-            const form = data.form;
-            const newForm = form.map(function (child) {
-               let a = ((new Date(child.endTime)).getTime() - (new Date(child.startTime)).getTime()) / 86400000;
-               if (!child.morning && !child.afternoon) {
-                  a = 0;
-               }
-               if (!child.morning || !child.afternoon) {
-                  a = a / 2;
-               }
-               return {
-                  ...child,
-                  date: `${(new Date(child.startTime)).getDate()}/${(new Date(child.startTime)).getMonth()} - ${(new Date(child.endTime)).getDate()}/${(new Date(child.endTime)).getMonth()}`,
-                  countDate: a,
-               }
-            }
-            )
-            // console.log('newFormChecked: ', newForm);
-            setArrTo(newForm)
+            setArrTo(data.form)
          })
    }, [checked]);
 
@@ -89,16 +36,14 @@ export default function FormOnLeave() {
          a[0].isChecked = true;
          // a[0].isCheckedSalary = document.getElementsByName(`checked-${index}`)[0].checked ? false : true;
          const vak = document.getElementsByName(`checked-${index}`)[0].checked;
-         console.log(vak ? false: true);
+         console.log('có lương hay ko?: ',vak ? false: true);
          console.log('a: ', a);
          const url = "http://localhost:8080/api/form/form-OnLeave";
          fetch(url, {
             method: "PUT",
             body: JSON.stringify({
                username: a[0].username,
-               reason: a[0].reason,
-               date: a[0].date,
-               countDate: a[0].countDate,
+               startDate: a[0].startDate,
                isChecked: a[0].isChecked,
                isCheckedSalary: vak ? false : true,
             }),
@@ -176,7 +121,7 @@ export default function FormOnLeave() {
                      {arrFrom.map((data, index) => (
                         <div className="unprocessed-form-leave-body-item" id={`test-${index}`} key={index}>
                            <span className="unprocessed-form-leave-body-item-fullName">{data.fullName}</span>
-                           <span className="unprocessed-form-leave-body-item-time">{data.date}</span>
+                           <span className="unprocessed-form-leave-body-item-time">{`${data.endDate} - ${data.startDate} `}</span>
                            <span className="unprocessed-form-leave-body-item-reason">{data.reason}</span>
                            <span className="unprocessed-form-leave-body-item-department">{data.department}</span>
                            <span className="unprocessed-form-leave-body-item-checked">
@@ -220,7 +165,7 @@ export default function FormOnLeave() {
             >
                <div className="processed-form-leave">
                   <div>
-                     <span style={{ fontWeight: '500', fontSize: '1.2rem', marginLeft: '1rem' }}>Chấm công bù</span>
+                     <span style={{ fontWeight: '500', fontSize: '1.2rem', marginLeft: '1rem' }}>Xin nghỉ phép</span>
                   </div>
                   <div className="processed-form-leave-header">
                      <span className="processed-form-leave-header-item-fullName">Nhân sự</span>
@@ -235,7 +180,7 @@ export default function FormOnLeave() {
                      {arrTo.map((data, index) => (
                         <div className="processed-form-leave-body-item" key={index}>
                            <span className="processed-form-leave-body-item-fullName">{data.fullName}</span>
-                           <span className="processed-form-leave-body-item-time">{data.date}</span>
+                           <span className="processed-form-leave-body-item-time">{`${data.endDate} - ${data.startDate}`}</span>
                            <span className="processed-form-leave-body-item-reason">{data.reason}</span>
                            <span className="processed-form-leave-body-item-department">{data.department}</span>
                            <span className="processed-form-leave-body-item-checked">{data.isCheckedSalary ? "Có lương" : "Không lương"}</span>

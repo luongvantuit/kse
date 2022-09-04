@@ -7,7 +7,6 @@ import { useState } from "react";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import enLocale from "date-fns/locale/en-NZ";
 import { styled } from "@mui/material/styles";
@@ -15,7 +14,6 @@ import { styled } from "@mui/material/styles";
 import SendIcon from "@mui/icons-material/Send";
 
 import "../public/css/form-request.css";
-// import { style } from "@mui/system";
 
 function FormRequest() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -39,8 +37,6 @@ function FormRequest() {
   const [locale] = React.useState("en");
 
   const [datePickerValueOne, setDatePickerValueOne] = React.useState(new Date());
-  const [timePickerValueFromOne, setTimePickerValueFromOne] = React.useState(new Date());
-  const [timePickerValueToOne, setTimePickerValueToOne] = React.useState(new Date());
 
   const [datePickerValueFromTwo, setDatePickerValueFromTwo] = React.useState(new Date());
   const [datePickerValueToTwo, setDatePickerValueToTwo] = React.useState(new Date());
@@ -64,14 +60,15 @@ function FormRequest() {
         approvedBy: personInfo.approvedBy,
         reason: reasonOne,
         onDate: datePickerValueOne.toString(),
-        startTime: timePickerValueFromOne.toString(),
-        endTime: timePickerValueToOne.toString(),
       })
     })
       .then(response => response.json())
       .then(data => {
         console.log(data);
       })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   const handleSubmitTwo = () => {
@@ -89,8 +86,8 @@ function FormRequest() {
         department: personInfo.department,
         approvedBy: personInfo.approvedBy,
         reason: reasonTwo,
-        startTime: datePickerValueFromTwo.toString(),
-        endTime: datePickerValueToTwo.toString(),
+        startDate: datePickerValueFromTwo.toString(),
+        endDate: datePickerValueToTwo.toString(),
         morning: !bgBtnColorMorning,
         afternoon: !bgBtnColorAfternoon,
       })
@@ -122,7 +119,7 @@ function FormRequest() {
         })
       }
       )
-  }, [])
+  }, [token])
 
   const SentButton = styled(Button)({
     borderRadius: "5px",
@@ -196,7 +193,7 @@ function FormRequest() {
           <div className="property department">
             <span className="property-name department-name">Tên phòng ban:</span>
             <input
-              value={personInfo.department}
+              defaultValue={personInfo.department}
               disabled
               type="text"
               className="property-text rectangle-request" />
@@ -205,7 +202,7 @@ function FormRequest() {
           <div className="property">
             <span className="property-name">Họ và tên:</span>
             <input
-              value={personInfo.fullName}
+              defaultValue={personInfo.fullName}
               disabled
               type="text"
               className="property-text rectangle-request"
@@ -227,7 +224,7 @@ function FormRequest() {
           <div className="property">
             <span className="property-name">Người duyệt:</span>
             <input
-              value={personInfo.approvedBy}
+              defaultValue={personInfo.approvedBy}
               disabled
               type="text"
               className="property-text rectangle-request"
@@ -277,7 +274,7 @@ function FormRequest() {
           <div className="property department">
             <span className="property-name department-name">Tên phòng ban:</span>
             <input
-              value={personInfo.department}
+              defaultValue={personInfo.department}
               disabled
               type="text"
               className="property-text rectangle-request" />
@@ -286,7 +283,7 @@ function FormRequest() {
           <div className="property">
             <span className="property-name">Họ và tên:</span>
             <input
-              value={personInfo.fullName}
+              defaultValue={personInfo.fullName}
               disabled
               type="text"
               className="property-text rectangle-request"
@@ -295,7 +292,7 @@ function FormRequest() {
 
           <div className="property">
             <TextField
-              value={reasonTwo}
+              defaultValue={reasonTwo}
               id="outlined-basic"
               label="Lí do"
               variant="outlined"
@@ -308,7 +305,7 @@ function FormRequest() {
           <div className="property">
             <span className="property-name">Người duyệt:</span>
             <input
-              value={personInfo.approvedBy}
+              defaultValue={personInfo.approvedBy}
               disabled
               type="text"
               className="property-text rectangle-request"
@@ -355,7 +352,7 @@ function FormRequest() {
                 style={bgBtnMorning}
                 onClick={() => {
                   setBgBtnColorMorning(!bgBtnColorMorning);
-                  bgBtnColorMorning ? setBgBtnMorning({ backgroundColor: 'lightblue' }) : setBgBtnMorning({ backgroundColor: 'transparent' });
+                  bgBtnColorMorning ? setBgBtnMorning({ backgroundColor: '#60a5fa' }) : setBgBtnMorning({ backgroundColor: 'transparent' });
                 }}
               >
                 <span className="property-name">Ca sáng:</span>
@@ -368,7 +365,7 @@ function FormRequest() {
                 style={bgBtnAfternoon}
                 onClick={() => {
                   setBgBtnColorAfternoon(!bgBtnColorAfternoon);
-                  bgBtnColorAfternoon ? setBgBtnAfternoon({ backgroundColor: 'lightblue' }) : setBgBtnAfternoon({ backgroundColor: 'transparent' });
+                  bgBtnColorAfternoon ? setBgBtnAfternoon({ backgroundColor: '#60a5fa' }) : setBgBtnAfternoon({ backgroundColor: 'transparent' });
                 }}
               >
                 <span className="property-name">Ca chiều:</span>

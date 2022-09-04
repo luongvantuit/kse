@@ -1,10 +1,6 @@
 import React from "react";
 import { useState, useEffect, memo } from "react";
 import TextField from "@mui/material/TextField";
-// import { InputAdornment } from "@mui/material";
-// import Avt from "../public/image/avt.png";
-// import ModeEditIcon from "@mui/icons-material/ModeEdit";
-// import { useFileUpload } from "use-file-upload";
 
 import "../public/css/personal-information.css";
 
@@ -20,13 +16,13 @@ function PersonalInformation() {
         "Authorization": "Bearer " + token,
       }
     })
-    .then(response => response.json())
-    .then(data =>{
-      if(data.success){
-        setImg('data:image/jpeg;base64,' + data.image.img.data[0]);
-      }
-    });
-  }, []);
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setImg('data:image/jpeg;base64,' + data.image.img.data[0]);
+        }
+      });
+  }, [token]);
 
   useEffect(() => {
     const url = "http://localhost:8080/api/profile/token"
@@ -37,9 +33,12 @@ function PersonalInformation() {
       }
     })
       .then(response => response.json())
-      .then(data => setProfile(data.profile))
+      .then(data => {
+        console.log(data.profile);
+        setProfile(data.profile);
+      })
 
-  }, []);
+  }, [token]);
   const handleInput = () => {
     const myFile = document.querySelector("input[type=file]").files[0];
     const urlImage = URL.createObjectURL(myFile)
@@ -57,13 +56,24 @@ function PersonalInformation() {
       }
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        fetch("http://127.0.0.1:5000/trainModel", {
+          method: "GET",
+          headers: {
+            "Accept": "*/*",
+          },
+        })
+          .then((response) => response.json())
+          .then((jsonData) => {
+            alert("Cập nhật ảnh đại diện thành công!")
+          })
+      })
   }
-
 
   return (
     <div className="personal-inf">
-      <span className="personal-inf-name">Hồ sơ cá nhân</span>
+      <span className="personal-inf-title">Hồ sơ cá nhân</span>
       <div className="body-personal-inf-two">
         <div className="body-personal-inf-left">
           <div className="btn-personal-avatar">
@@ -251,11 +261,6 @@ function PersonalInformation() {
             />
           </div>
         </div>
-      </div>
-
-      <div className="btn-two">
-        <button className="btn-exit">HỦY BỎ</button>
-        <button className="btn-add">LƯU</button>
       </div>
     </div>
 

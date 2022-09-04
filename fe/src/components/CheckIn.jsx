@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,7 +25,10 @@ const departments = [
 
 export default function CheckIn() {
 
+  const token = JSON.parse(localStorage.getItem("token"));
   const [img, setImg] = useState(IconCheckIn);
+  const [userName, setUserName] = useState("");
+  const [recognitionStatus, setRecognitionStatus] = useState("Chấm công");
   const handleInput = () => {
     const myFile = document.querySelector("input[type=file]").files[0];
     const urlImage = URL.createObjectURL(myFile);
@@ -35,25 +38,63 @@ export default function CheckIn() {
     var rawLog = "";
     reader.onload = function (e) {
       rawLog = reader.result;
-      console.log(rawLog.split(",")[1]);
-    
-    };
+      // console.log(rawLog.split(",")[1]);
 
-    // console.log(reader);
-    // const token = JSON.parse(localStorage.getItem("token"));
-    // const data = new FormData();
-    // data.append("myImage", myFile);
-    // fetch("http://localhost:8080/api/uploadImage", {
-    //     method: "POST",
-    //     body: data,
-    //     headers: {
-    //         "accept": "/",
-    //         "Authorization": "Bearer " + token,
-    //     }
-    // })
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
+      var b64Img = rawLog.split(',')[1]
+
+      fetch("http://127.0.0.1:5000/verifyFace", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({ face: b64Img }),
+      })
+        .then((response) => response.json())
+        .then((jsonData) => {
+          var statusTag = document.getElementsByClassName('btn-input-img')[0];
+          if (jsonData.label === userName) {
+            statusTag.style.background = "#86da00";
+            setRecognitionStatus("Đã điểm danh!");
+            alert("Điểm danh thành công");
+            console.log('month', (new Date().getMonth()) + 1);
+            fetch("http://localhost:8080/api/publicBoard/updateTimekeeping", {
+              method: "PUT",
+              headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token,
+              },
+              body: JSON.stringify({
+                onMonth: (new Date().getMonth()) + 1,
+              })
+            })
+              .then((response) => response.json())
+              .then(data => {
+                console.log(data);
+              })
+          }
+          else
+            alert("Khuôn mặt không chính xác!");
+        })
+
+    };
   };
+
+  useEffect(() => {
+    const url = "http://localhost:8080/api/uploadImage/one";
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + token,
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setUserName(data.image.username);
+        }
+      });
+  }, [token]);
 
   const [department, setDepartment] = React.useState("FE");
   const handleChange = (event) => {
@@ -88,20 +129,18 @@ export default function CheckIn() {
         <div className="body-header-file-card">
           <div className="file-input">
             {img && <img src={img} alt="gai xinh" className="input-image" />}
-          
+
             <input
               type="file"
               name="myImage"
               className="input"
               accept="image/*"
               onChange={handleInput}
-              
+
             />
           </div>
 
-          
-
-            <button className="btn-input-img">Chấm công</button>
+          <button className="btn-input-img">{recognitionStatus}</button>
         </div>
       </div>
     </React.Fragment>

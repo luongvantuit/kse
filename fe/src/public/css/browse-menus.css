@@ -34,8 +34,8 @@
     text-align: center;
 }
 
-.unprocessed-form-browse-header-item-time,
-.unprocessed-form-browse-body-item-time {
+.unprocessed-form-browse-header-item-approvedBy,
+.unprocessed-form-browse-body-item-approvedBy {
     width: 8rem;
     text-align: center;
 }
@@ -60,7 +60,7 @@
 
 .unprocessed-form-browse-header-item-countTime,
 .unprocessed-form-browse-body-item-countTime {
-    width: 3rem;
+    width: 4rem;
     text-align: center;
 }
 
@@ -119,8 +119,8 @@
     text-align: center;
 }
 
-.processed-form-browse-header-item-time,
-.processed-form-browse-body-item-time {
+.processed-form-browse-header-item-approvedBy,
+.processed-form-browse-body-item-approvedBy {
     width: 8rem;
     text-align: center;
 }

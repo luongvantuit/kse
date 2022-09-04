@@ -41,7 +41,7 @@ function HeaderComponent() {
   };
 
   const handleClose = () => {
-    setOpen(null);
+    setOpen(Boolean(null));
   };
 
   const handleCloseProfile = (event) => {
@@ -77,10 +77,6 @@ function HeaderComponent() {
           <span className="header-right-username">{userName}</span>
           <button className="btn-avatar">
             <div className="menu-item">
-              
-              <ListItemText className="menu-name" sx={{ fontSize: "1.4rem" }}>
-            
-              </ListItemText>
               <ListItemText
                 ref={anchorRef}
                 id="menu-name"
@@ -97,7 +93,7 @@ function HeaderComponent() {
                 />
               </ListItemText>
               <Menu
-                open={open}
+                open={Boolean(open)}
                 onClose={handleClose}
                 anchorEl={anchorRef.current}
                 role={undefined}
@@ -110,9 +106,9 @@ function HeaderComponent() {
               >
                 <MenuItem onClick={handleCloseProfile}>
                   <Link to={"/app/profile"}>Hồ sơ cá nhân</Link>
-                  </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={handleCloseLogout}>Đăng xuất</MenuItem>
-                
+
               </Menu>
             </div>
           </button>

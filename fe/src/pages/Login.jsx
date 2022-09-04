@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "../public/css/login.css";
@@ -6,7 +6,7 @@ import Logo from "../public/image/image_logo_bts.PNG";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function Login() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem('token')) !== null;
 
   const [username, setUsername] = useState('');
@@ -16,7 +16,7 @@ export default function Login() {
   const [forgot, setForgot] = useState(false);
   useEffect(() => {
     if (data) {
-      navigate("/homepage", { replace: true });
+      navigate("/app/homepage", { replace: true });
     }
   }, []);
 
@@ -44,7 +44,7 @@ export default function Login() {
             localStorage.setItem("token", JSON.stringify(jsonData.token));
           }
           if (jsonData.success) {
-            navigate("/homepage", { replace: true });
+            navigate("/app/homepage", { replace: true });
           }
           setForgot(!jsonData.success);
         })

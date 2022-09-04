@@ -11,7 +11,7 @@ export default function AddNewPersonal() {
   const [nameContract, setNameContract] = useState('Dài hạn');
   const [contractTerm, setContractTerm] = useState('6 tháng');
   const [department, setDepartment] = useState('Phòng ban 1');
-  const [workingMode, setWorkingMode] = useState('Pass-time');
+  const [workingMode, setWorkingMode] = useState('Part-time');
   const [startContract, setStartContract] = useState('');
   const [endContract, setEndContract] = useState('');
   const [gender, setGender] = useState('Nam');
@@ -58,54 +58,57 @@ export default function AddNewPersonal() {
       alert('Please enter a valid ...');
     } else {
       postSignUpUser();
-      navigate("/personnel", { replace: true });
+      navigate("/app/personnel", { replace: true });
+    }
+  }
+  const handleCancel = () => {
+    const notify = window.confirm('Ahihi');
+    if (notify) {
+      navigate("/app/personnel", { replace: true });
     }
   }
 
   return (
     <div className="add-new-personal">
-      <div className="create-new">
-        <span className="jss50">Tạo tài khoản nhân sự mới</span>
-        <div className="basic-info">
-          <div className="fullname">
-            <span>Họ và tên:</span>
-            <input
-              type="text"
-              className="jss51 jss53"
-              onChange={e => setFullName(e.target.value)}
-            />
-          </div>
-          <div className="username">
-            <span>User name:</span>
-            <input
-              type="text"
-              className="jss51 jss53"
-              onChange={e => setUserName(e.target.value)}
-            />
-          </div>
-          <div className="pass">
-            <span>Password:</span>
-            <input
-              type="text"
-              className="jss51 jss53"
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
+      <span className="add-new-personal-title">Tạo tài khoản nhân sự mới</span>
+      <div className="basic-info">
+        <div className="fullname">
+          <span className="text-field">Họ và tên:</span>
+          <input
+            defaultValue={fullName}
+            onChange={e => setFullName(e.target.value)}
+            type="text"
+            className="jss51 jss53"
+          />
         </div>
-
-        <span className="jss52">Hiển thị thêm thông tin</span>
+        <div className="username">
+          <span className="text-field">User name:</span>
+          <input
+            defaultValue={userName}
+            onChange={e => setUserName(e.target.value)}
+            type="text"
+            className="jss51 jss53"
+          />
+        </div>
+        <div className="pass">
+          <span className="text-field">Password:</span>
+          <input
+            onChange={e => setPassword(e.target.value)}
+            type="text"
+            className="jss51 jss53"
+          />
+        </div>
       </div>
 
-      <div className="details">
-        <span className="details-name">Thông tin hợp đồng</span>
-
-        <div className="contract-info">
+      <div className="contract-info">
+        <span className="contract-info-title">Thông tin hợp đồng</span>
+        <div className="contract-info-child">
           <div className="contract-info-left">
             <div className="type-of-contract">
-              <span>Loại hợp đồng:</span>
+              <span className="text-field">Loại hợp đồng:</span>
               <select
-                className="selContract"
                 onChange={e => setNameContract((e.target.value).trim())}
+                className="selContract"
               >
                 <option value='Dài hạn' >Dài hạn</option>
                 <option value='Ngắn hạn'>Ngắn hạn</option>
@@ -113,10 +116,10 @@ export default function AddNewPersonal() {
             </div>
 
             <div className="contract-term">
-              <span>Thời hạn hợp đồng:</span>
+              <span className="text-field">Thời hạn hợp đồng:</span>
               <select
+                onChange={e => setContractTerm((e.target.value))}
                 className="selContract"
-                onChange={e => setContractTerm((e.target.value).trim())}
               >
                 <option value='6 tháng'>6 tháng</option>
                 <option value='1 năm'>1 năm</option>
@@ -129,38 +132,43 @@ export default function AddNewPersonal() {
 
           <div className="contract-info-right">
             <div className="contract-signing-date">
-              <span>Ngày ký hợp đồng:</span>
+              <span className="text-field">Ngày ký hợp đồng:</span>
               <input
+                onChange={e => setStartContract(e.target.value)}
                 type="date"
                 className="jss55"
-                onChange={e => setStartContract(e.target.value)}
               />
             </div>
 
             <div className="contract-expiration-date">
-              <span>Ngày hết hạn hợp đồng:</span>
+              <span className="text-field">Ngày hết hạn hợp đồng:</span>
               <input
+                onChange={e => setEndContract(e.target.value)}
                 type="date"
                 className="jss55"
-                onChange={e => setEndContract(e.target.value)}
               />
             </div>
           </div>
         </div>
+      </div>
 
-        <span className="details-profile">Thông tin cá nhân</span>
-        <div className="personal-info">
+      <div className="personal-info">
+        <span className="personal-info-title">Thông tin cá nhân</span>
+        <div className="personal-info-child">
           <div className="personal-info-left">
             <div className="personal-code">
               <span>Mã số cá nhân:</span>
-              <input type="text" className="jss55" />
+              <input
+                type="text"
+                className="jss55"
+              />
             </div>
 
             <div className="department">
               <span>Phòng ban:</span>
               <select
-                className="selContract"
                 onChange={e => setDepartment(e.target.value)}
+                className="selContract"
               >
                 <option value='Phòng ban 1'>Phòng ban 1</option>
                 <option value='Phòng ban 2'>Phòng ban 2</option>
@@ -170,8 +178,8 @@ export default function AddNewPersonal() {
             <div className="working-mode">
               <span>Chế độ làm việc:</span>
               <select
-                className="selContract"
                 onChange={e => setWorkingMode(e.target.value)}
+                className="selContract"
               >
                 <option value='Part-time'>Part-time</option>
                 <option value='Full-time'>Full-time</option>
@@ -182,34 +190,34 @@ export default function AddNewPersonal() {
             <div className="gender">
               <span>Giới tính:</span>
               <select
-                className="selContract"
                 onChange={e => setGender(e.target.value)}
+                className="selContract"
               >
-                <option value='Nam'>Nam</option>
-                <option value='Nữ'>Nữ</option>
+                <option value='female'>Nữ</option>
+                <option value='male'>Nam</option>
               </select>
             </div>
             <div className="citizen-ID">
               <span>Căn cước công dân:</span>
               <input
+                onChange={e => setCMND(e.target.value)}
                 type="text"
                 className="jss55"
-                onChange={e => setCMND(e.target.value)}
               />
             </div>
             <div className="birth">
               <span>Ngày sinh:</span>
               <input
+                onChange={e => setBirthday(e.target.value)}
                 type="date"
                 className="jss55"
-                onChange={e => setBirthday(e.target.value)}
               />
             </div>
           </div>
         </div>
       </div>
       <div className="endPage">
-        <button className="cancel">HỦY BỎ</button>
+        <button onClick={handleCancel} className="cancel">HỦY BỎ</button>
         <button onClick={handleSubmit} className="save">LƯU</button>
       </div>
     </div>

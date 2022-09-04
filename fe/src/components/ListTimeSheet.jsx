@@ -27,7 +27,8 @@ export default function ListTimeSheet() {
       }
     })
       .then(response => response.json())
-      .then(data => {
+      .then(data => { 
+        console.log(data.publicBoard);
         setPublicBoard(data.publicBoard);
         setPublicBoard1(data.publicBoard)
       })

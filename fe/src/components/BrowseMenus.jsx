@@ -17,18 +17,8 @@ export default function BrowseMenus() {
       fetch(url)
          .then(res => res.json())
          .then(data => {
-            const form = data.form;
-            const newForm = form.map(function (child) {
-               return {
-                  ...child,
-                  date: `${new Date(child.onDate).getDate()}-${(new Date(child.onDate).getMonth() + 1)}`,
-                  time: `${(new Date(child.startTime)).getHours()}h${(new Date(child.startTime)).getMinutes()}p - ${(new Date(child.endTime)).getHours()}h${(new Date(child.endTime)).getMinutes()}p`,
-                  countTime: new Date((new Date(child.endTime)).getTime() - (new Date(child.startTime)).getTime()).toISOString().slice(11, 19),
-               }
-            }
-            )
-            // console.log('newFormUnChecked: ', newForm);
-            setArrFrom(newForm)
+            console.log(data.form);
+            setArrFrom(data.form);
          })
    }, [checked]);
 
@@ -37,23 +27,14 @@ export default function BrowseMenus() {
       fetch(url)
          .then(res => res.json())
          .then(data => {
-            const form = data.form;
-            const newForm = form.map(function (child) {
-               return {
-                  ...child,
-                  date: `${new Date(child.onDate).getDate()}-${new Date(child.onDate).getMonth()}`,
-                  time: `${(new Date(child.startTime)).getHours()}h${(new Date(child.startTime)).getMinutes()}p - ${(new Date(child.endTime)).getHours()}h${(new Date(child.endTime)).getMinutes()}p`,
-                  countTime: new Date((new Date(child.endTime)).getTime() - (new Date(child.startTime)).getTime()).toISOString().slice(11, 19),
-               }
-            }
-            )
-            // console.log('newFormChecked: ', newForm);
-            setArrTo(newForm)
+            console.log('newFormChecked: ', data.form);
+            setArrTo(data.form)
          })
    }, [checked]);
 
    const handleCheck = index => {
       document.getElementById(`test-${index}`).style.display = "none";
+      setChecked(!checked);
       if (index > -1) {
          const a = arrFrom.splice(index, 1);
          a[0].isChecked = true;
@@ -63,10 +44,7 @@ export default function BrowseMenus() {
             method: "PUT",
             body: JSON.stringify({
                username: a[0].username,
-               reason: a[0].reason,
-               date: a[0].date,
-               time: a[0].time,
-               countTime: a[0].countTime,
+               onDate: a[0].onDate,
                isChecked: a[0].isChecked,
             }),
             headers: {
@@ -75,7 +53,6 @@ export default function BrowseMenus() {
          })
             .then(response => response.json())
             .then(data => console.log(data.success))
-         setChecked(!checked);
          // setArrTo(prev => prev.concat(a));
          // setArrFrom(arrFrom);
       }
@@ -132,10 +109,10 @@ export default function BrowseMenus() {
                   <div className="unprocessed-form-browse-header">
                      <span className="unprocessed-form-browse-header-item-fullName">Nhân sự</span>
                      <span className="unprocessed-form-browse-header-item-date">Ngày</span>
-                     <span className="unprocessed-form-browse-header-item-time">Thời gian</span>
+                     <span className="unprocessed-form-browse-header-item-approvedBy">Trưởng phòng</span>
                      <span className="unprocessed-form-browse-header-item-reason">Lí do</span>
                      <span className="unprocessed-form-browse-header-item-department">Phòng ban</span>
-                     <span className="unprocessed-form-browse-header-item-countTime">Số giờ chấm bù</span>
+                     <span className="unprocessed-form-browse-header-item-countTime">Số ngày chấm bù</span>
                      <span className="unprocessed-form-browse-header-item-icon">Phê duyệt</span>
                   </div>
                   <hr />
@@ -144,11 +121,11 @@ export default function BrowseMenus() {
                      {arrFrom.map((data, index) => (
                         <div className="unprocessed-form-browse-body-item" id={`test-${index}`} key={index}>
                            <span className="unprocessed-form-browse-body-item-fullName">{data.fullName}</span>
-                           <span className="unprocessed-form-browse-body-item-date">{data.date}</span>
-                           <span className="unprocessed-form-browse-body-item-time">{data.time}</span>
+                           <span className="unprocessed-form-browse-body-item-date">{data.onDate}</span>
+                           <span className="unprocessed-form-browse-body-item-approvedBy">{data.approvedBy}</span>
                            <span className="unprocessed-form-browse-body-item-reason">{data.reason}</span>
                            <span className="unprocessed-form-browse-body-item-department">{data.department}</span>
-                           <span className="unprocessed-form-browse-body-item-countTime">{data.countTime}</span>
+                           <span className="unprocessed-form-browse-body-item-countTime">{data.countDate}</span>
                            <span className="unprocessed-form-browse-body-item-icon">
                               <CheckCircleOutlineIcon
                                  onClick={() => handleCheck(index)}
@@ -179,21 +156,21 @@ export default function BrowseMenus() {
                   <div className="processed-form-browse-header">
                      <span className="processed-form-browse-header-item-fullName">Nhân sự</span>
                      <span className="processed-form-browse-header-item-date">Ngày</span>
-                     <span className="processed-form-browse-header-item-time">Thời gian</span>
+                     <span className="processed-form-browse-header-item-approvedBy">Trưởng phòng</span>
                      <span className="processed-form-browse-header-item-reason">Lí do</span>
                      <span className="processed-form-browse-header-item-department">Phòng ban</span>
-                     <span className="processed-form-browse-header-item-countTime">Số giờ chấm bù</span>
+                     <span className="processed-form-browse-header-item-countTime">Số ngày chấm bù</span>
                   </div>
                   <hr />
                   <div className="processed-form-browse-body">
                      {arrTo.map((data, index) => (
                         <div className="processed-form-browse-body-item" key={index}>
                            <span className="processed-form-browse-body-item-fullName">{data.fullName}</span>
-                           <span className="processed-form-browse-body-item-date">{data.date}</span>
-                           <span className="processed-form-browse-body-item-time">{data.time}</span>
+                           <span className="processed-form-browse-body-item-date">{data.onDate}</span>
+                           <span className="processed-form-browse-body-item-approvedBy">{data.approvedBy}</span>
                            <span className="processed-form-browse-body-item-reason">{data.reason}</span>
                            <span className="processed-form-browse-body-item-department">{data.department}</span>
-                           <span className="processed-form-browse-body-item-countTime">{data.countTime}</span>
+                           <span className="processed-form-browse-body-item-countTime">{data.countDate}</span>
                         </div>
                      ))}
                   </div>
