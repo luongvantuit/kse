@@ -17,15 +17,29 @@ async function handleGetPublicBoard(req, res) {
         if (!role) {
             return res.status(401).json({ error: "Invalid Role" });
         } else if (role.includes('staff')) {
-            const staff = await WorkSheet.findOne({ username: user.username });
+            const staff = await WorkSheet.findOne(
+                {
+                    username: user.username,
+                    onMonth: month,
+                }
+            );
             console.log([staff]);
             if (!staff) {
-                return res.status(401).json({ error: "Not found staff" });
+                return res.status(401).json(
+                    {
+                        error: "Not found staff",
+                    }
+                );
             }
             return res.status(200).json({ publicBoard: [staff] });
         } else if (role.includes('manager')) {
             const deparment = await Department.findOne({ admin: user.username });
-            const arr = await WorkSheet.find({ department: deparment.nameDepartment });
+            const arr = await WorkSheet.find(
+                {
+                    department: deparment.nameDepartment,
+                    onMonth: month,
+                }
+            );
             if (arr.length == 0) {
                 return res.status(401).json({ error: "Not found manager" });
             }
