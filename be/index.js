@@ -8,6 +8,7 @@ const publicBoard = require("./src/routes/publicBoard");
 const profile = require("./src/routes/profile");
 const uploadImage = require("./src/routes/uploadImage");
 const employeeManager = require("./src/routes/employeeManager");
+const form = require("./src/routes/form");
 
 loadConfig();
 
@@ -46,6 +47,8 @@ mainRouter.use('/profile', profile);
 mainRouter.use('/uploadImage', uploadImage);
 
 mainRouter.use('/employeeManager', employeeManager);
+
+mainRouter.use('/form', form);
 
 app.use('/api', mainRouter);
 

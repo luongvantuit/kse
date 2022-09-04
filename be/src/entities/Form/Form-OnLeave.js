@@ -18,12 +18,6 @@ const onLeaveShema = mongoose.Schema({
         type: String,
         default: '',
     },
-    startTime: {
-        type: String,  // Date
-    },
-    endTime: {
-        type: String,  // Date
-    },
     morning: {
         type: Boolean,
         default: false,
@@ -32,7 +26,11 @@ const onLeaveShema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    date: {
+    startDate: {
+        type: String,
+        default: ''
+    },
+    endDate: {
         type: String,
         default: ''
     },

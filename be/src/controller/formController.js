@@ -44,9 +44,26 @@ async function handlePostFormCompensatingTimekeeping(req, res) {
             approvedBy: req.body.approvedBy,
             department: req.body.department,
             reason: req.body.reason,
-            onDate: req.body.onDate,
+            onDate: new Date(req.body.onDate).toLocaleDateString().toString(),
         })
         await form.save();
+        const isWorkSheet = await WorkSheet.findOne(
+            {
+                username: req.username,
+                onMonth: new Date(req.body.onDate).getMonth() + 1,
+            }
+        );
+        if (!isWorkSheet) {
+            const newWorkSheet = await WorkSheet(
+                {
+                    username: req.username,
+                    fullname: req.body.fullName,
+                    department: req.body.department,
+                    onMonth: new Date(req.body.onDate).getMonth() + 1,
+                }
+            );
+            await newWorkSheet.save();
+        }
         return res.status(200).json({ success: true });
     } catch (error) {
         return res.status(404).json({
@@ -119,7 +136,7 @@ async function handlePutFormCompensatingTimekeeping(req, res) {
         await Form_CompensatingTimekeeping.findOneAndUpdate(
             {
                 username: username,
-                reason: req.body.onDate,
+                onDate: req.body.onDate,
             },
             {
                 $set: {
@@ -129,7 +146,7 @@ async function handlePutFormCompensatingTimekeeping(req, res) {
         );
         const form = await Form_CompensatingTimekeeping.findOne({
             username: username,
-            reason: req.body.onDate,
+            onDate: req.body.onDate,
         })
         if (!form) {
             return res.status(404).json({
@@ -158,8 +175,11 @@ async function handlePutFormCompensatingTimekeeping(req, res) {
             {
                 $set:
                 {
-                    workNumber: (workSheet.workNumber + 1 ),
-                    sumWorkNumber: (workSheet.sumWorkNumber + 1),
+                    workNumber: workSheet.workNumber + 1,
+                    sumWorkNumber: workSheet.workNumber + 1 +
+                        workSheet.holidaysNumber +
+                        workSheet.nghi_phep_co_luong -
+                        workSheet.nghi_phep_ko_luong,
                 }
             }
         )
@@ -204,18 +224,45 @@ async function handleGetFormOnLeave(req, res) {
 async function handlePostFormOnLeave(req, res) {
     try {
         console.log('red.body: ', req.body);
+        let a = ((new Date(req.body.endDate)).getTime() - (new Date(req.body.startDate)).getTime()) / 86400000;
+        if (!req.body.morning && !req.body.afternoon) {
+            a = 0;
+        }
+        if (!req.body.morning || !req.body.afternoon) {
+            a = a / 2;
+        }
         const form = new Form_OnLeave({
             username: req.username,
             fullName: req.body.fullName,
             approvedBy: req.body.approvedBy,
             department: req.body.department,
             reason: req.body.reason,
-            startTime: req.body.startTime,
-            endTime: req.body.endTime,
+            startDate: new Date(req.body.startDate).toLocaleDateString(),
+            endDate: new Date(req.body.endDate).toLocaleDateString(),
+            countDate: a,
             morning: req.body.morning,
             afternoon: req.body.afternoon,
         })
         await form.save();
+
+        const isWorkSheet = await WorkSheet.findOne(
+            {
+                username: req.username,
+                onMonth: new Date(req.body.startDate).getMonth() + 1,
+            }
+        );
+        if (!isWorkSheet) {
+            const newWorkSheet = await WorkSheet(
+                {
+                    username: req.username,
+                    fullname: req.body.fullname,
+                    department: req.body.department,
+                    onMonth: new Date(req.body.startDate).getMonth() + 1,
+                }
+            );
+            await newWorkSheet.save();
+        }
+
         return res.status(200).json({ success: true });
     } catch (error) {
         return res.status(404).json({
@@ -278,6 +325,7 @@ async function handleGetAllCheckedFormOnLeave(req, res) {
 
 async function handlePutFormOnLeave(req, res) {
     try {
+        console.log(req.body);
         const username = req.body.username;
         if (!username) {
             return res.status(401).json({
@@ -289,19 +337,18 @@ async function handlePutFormOnLeave(req, res) {
         await Form_OnLeave.findOneAndUpdate(
             {
                 username: username,
-                reason: req.body.reason,
+                startDate: req.body.startDate,
             },
             {
                 $set: {
-                    date: req.body.date,
-                    countDate: Number(req.body.countDate),
                     isChecked: req.body.isChecked,
+                    isCheckedSalary: req.body.isCheckedSalary,
                 }
             }
         )
         const form = await Form_OnLeave.findOne({
             username: username,
-            reason: req.body.reason,
+            startDate: req.body.startDate,
         })
         if (!form) {
             return res.status(404).json({
@@ -310,7 +357,7 @@ async function handlePutFormOnLeave(req, res) {
                 success: false,
             })
         }
-        const month = new Date(form.startTime).getMonth();
+        const month = new Date(form.startDate).getMonth() + 1;
         let co_luong = 0;
         let ko_luong = 0;
         if (form.isCheckedSalary) {

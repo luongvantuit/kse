@@ -4,7 +4,7 @@ const WorkSheet = require("../entities/WorkSheet");
 const Department = require('../entities/Department');
 const ImageModel = require('../entities/ImageModel');
 
-async function create( username, contractInfo, personInfo, role) {
+async function create( username, fullname, contractInfo, personInfo, role) {
     try {
         const contract = new ContractInformation({
             username: username,
@@ -24,7 +24,9 @@ async function create( username, contractInfo, personInfo, role) {
         })
         await person.save();
         const workSheet = new WorkSheet({
+            fullname: fullname,
             username: username,
+            department: personInfo.department,
         })
         await workSheet.save();
         const image = new ImageModel({
@@ -34,6 +36,7 @@ async function create( username, contractInfo, personInfo, role) {
         if(role == 'manager'){
             const department = new Department({
                 admin: username,
+                nameDepartment: personInfo.department,
             });
             await department.save();
         }

@@ -54,7 +54,7 @@ async function handleUserSignUp(req, res) {
         });
         await user.save();
         console.log('User saved successfully');
-        CreateUserDB.create(req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
+        CreateUserDB.create(req.body.username, req.body.fullname, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
         // CreateUserDB.create(user._id,req.body.username, req.body.contractInfo || {}, req.body.personInfo || {}, req.body.role || 'staff');
         console.log('CreateUserDB successfully');
         return res.status(201).json({

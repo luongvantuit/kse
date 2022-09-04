@@ -3,6 +3,10 @@
 const mongoose = require('mongoose');
 
 const workSheetShema = mongoose.Schema({
+    fullname: {
+        type: String,
+        default: '',
+    },
     username: {
         type: String,
         required: true,
@@ -33,7 +37,7 @@ const workSheetShema = mongoose.Schema({
     },
     onMonth: {
         type: Number,
-        default: new Date().getMonth(),
+        default: new Date().getMonth() + 1,
     }
 })
 
