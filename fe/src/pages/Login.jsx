@@ -4,13 +4,15 @@ import { useEffect } from "react";
 import "../public/css/login.css";
 import Logo from "../public/image/image_logo_bts.PNG";
 import CloseIcon from "@mui/icons-material/Close";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
   const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem('token')) !== null;
+  const data = JSON.parse(localStorage.getItem("token")) !== null;
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [btnLogin, setBtnLogin] = useState(false);
 
   const [forgot, setForgot] = useState(false);
@@ -20,12 +22,17 @@ export default function Login() {
     }
   }, []);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleBtn = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   useEffect(() => {
     document.title = "Login";
   }, []);
 
   useEffect(() => {
-    if (!data && !(username === "") && !(password === "")){
+    if (!data && !(username === "") && !(password === "")) {
       const url = "http://localhost:8080/api/users/login";
       fetch(url, {
         method: "POST",
@@ -47,7 +54,7 @@ export default function Login() {
             navigate("/app/homepage", { replace: true });
           }
           setForgot(!jsonData.success);
-        })
+        });
     }
   }, [btnLogin]);
 
@@ -56,7 +63,7 @@ export default function Login() {
   };
 
   return (
-    (!data && (
+    !data && (
       <React.Fragment>
         <div className="login-background">
           <div className="login-container">
@@ -72,18 +79,22 @@ export default function Login() {
               <input
                 type="text"
                 className="rectangle res-user"
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
             <div className="text-password">
               <p>Mật khẩu</p>
-              <input
-                type="password"
-                className="rectangle res-pass"
-                onChange={e => setPassword(e.target.value)}
-              />
-
+              <div className="custom-input-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="rectangle res-pass"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button className="icon-eye" onClick={toggleBtn}>
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </button>
+              </div>
             </div>
 
             <div className="btn-rectangle">
@@ -107,6 +118,6 @@ export default function Login() {
           </div>
         </div>
       </React.Fragment>
-    ))
+    )
   );
 }
