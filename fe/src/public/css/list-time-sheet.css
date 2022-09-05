@@ -1,11 +1,11 @@
-.body-component {
+.list-timesheet-body-component {
     position: relative;
     width: calc(var(--body-width));
     top: calc(var(--header-height) + 1rem);
     left: var(--menu-left-width);
 }
 
-.body-header {
+.list-timesheet-body-header {
     position: absolute;
     top: 1rem;
     height: 2rem;
@@ -16,12 +16,17 @@
     padding: 0 2.4rem;
 }
 
-.body-header-right {
+.list-timesheet-body-header-name {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.list-timesheet-body-header-right {
     display: flex;
     align-items: center;
 }
 
-.body-header-month-year{
+.list-timesheet-body-header-month-year{
     display: flex;
     align-items: center;
     margin-right: 2rem;
@@ -43,7 +48,7 @@
     justify-content: space-between;
 }
 
-.body-search {
+.list-timesheet-body-search {
     width: calc(0.52  * var(--body-width));
     display: flex;
     justify-content: space-around;
@@ -80,14 +85,14 @@
     -webkit-box-orient: vertical;
 }
 
-.body-container {
+.list-timesheet-body-container {
     position: absolute;
     top: 8rem;
     left: 0rem;
     width: inherit;
 }
 
-.body-text-child {
+.list-timesheet-body-text-child {
     width: 100%;
     max-width: 100px;
     overflow: hidden;
@@ -96,7 +101,7 @@
     -webkit-box-orient: vertical;
 }
 
-.body-item {
+.list-timesheet-body-item {
     padding: 0px 0.8rem;
     margin: 1rem 0rem;
     width: inherit;

@@ -1,6 +1,6 @@
 .add-new-personal {
     position: relative;
-    width: var(--body-width);
+    width: calc(var(--body-width) - 2vw);
     height: 100%;
     top: calc(var(--header-height) + 1rem);
     left: var(--menu-left-width);
@@ -17,13 +17,15 @@
 .basic-info {
     position: absolute;
     top: 30px;
-    left: 0px;
-    width: 100%;
-    padding: 0px 4rem;
+    left: 1.8rem;
+    width: calc(var(--body-width) - 4rem);
+    padding: 1rem 4rem 1rem;
     margin-top: 3.4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
 
 .fullname,
@@ -55,13 +57,15 @@
 .contract-info {
     position: absolute;
     top: 9rem;
-    left: 0px;
-    width: 100%;
-    padding: 0px 4rem;
-    margin-top: 3.4rem;
+    left: 1.8rem;
+    width: calc(var(--body-width) - 4rem);
+    padding: 1rem 4rem;
+    margin-top: 3.4rem ;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
 
 .contract-info-title {
@@ -71,7 +75,6 @@
 }
 
 .contract-info-child {
-    width: inherit;
     display: flex;
     justify-content: space-between;
 }
@@ -130,35 +133,36 @@
 
 .personal-info {
     position: absolute;
-    top: 24rem;
-    left: 0px;
-    width: 100%;
-    padding: 0px 4rem;
+    top: 25rem;
+    left: 1.8rem;
+    width: calc(var(--body-width) - 4rem);
+    padding: 1rem 4rem;
     margin-top: 3.4rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 }
 
 .personal-info-title {
     display: block;
-    width: inherit;
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .personal-info-child {
-    width: inherit;
     display: flex;
     justify-content: space-between;
 }
 
 .endPage {
     position: absolute;
-    width: inherit;
+    width: calc(var(--body-width) - 4rem);
     height: 4rem;
-    top: 44rem;
-    left: 0px;
-    padding: 0px 4rem;
+    top: 47.4rem;
+    left: 1.8rem;
+    padding: 1rem 4rem 2rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;

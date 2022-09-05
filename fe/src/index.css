@@ -11,7 +11,7 @@ html {
 :root {
     --menu-left-width: 20vw;
     --header-height: 70px;
-    --body-margin-top: calc(100% - var(--header-height));
+    --body-margin-top: calc(100vw - var(--header-height));
     --body-width: calc(100vw - var(--menu-left-width));
 }
 
