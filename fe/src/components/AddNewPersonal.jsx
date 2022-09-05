@@ -79,6 +79,7 @@ export default function AddNewPersonal() {
             onChange={e => setFullName(e.target.value)}
             type="text"
             className="jss51 jss53"
+            autoFocus
           />
         </div>
         <div className="username">

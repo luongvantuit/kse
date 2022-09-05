@@ -8,11 +8,12 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import SearchIcon from '@mui/icons-material/Search';
 
+const token = JSON.parse(localStorage.getItem('token'));
+
 export default function ListTimeSheet() {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth() + 1);
   const [year, setYear] = useState(date.getFullYear());
-  const token = JSON.parse(localStorage.getItem('token'));
   const [publicBoard, setPublicBoard] = useState([]);
   const [publicBoard1, setPublicBoard1] = useState([]);
   useEffect(() => {
@@ -83,11 +84,11 @@ export default function ListTimeSheet() {
   }
 
   return (
-    <div className="body-component">
-      <div className="body-header">
-        <span className="body-header-name">Danh sách chấm công</span>
-        <div className="body-header-right">
-          <div className="body-header-month-year">
+    <div className="list-timesheet-body-component">
+      <div className="list-timesheet-body-header">
+        <span className="list-timesheet-body-header-name">Danh sách chấm công</span>
+        <div className="list-timesheet-body-header-right">
+          <div className="list-timesheet-body-header-month-year">
             <button onClick={onClickBefore}>
               <NavigateBeforeIcon />
             </button>
@@ -103,7 +104,7 @@ export default function ListTimeSheet() {
         </div>
       </div>
       <div className="thead">
-        <div className="body-search">
+        <div className="list-timesheet-body-search">
           <span>#</span>
           <div className="search-box">
             <TextField
@@ -178,10 +179,10 @@ export default function ListTimeSheet() {
           <span className="thead-text-child">Tổng công tính lương</span>
         </div>
       </div>
-      <div className="body-container">
+      <div className="list-timesheet-body-container">
         {publicBoard.map((data, index) => (
-          <div className="body-item" key={index}>
-            <div className="body-search">
+          <div className="list-timesheet-body-item" key={index}>
+            <div className="list-timesheet-body-search">
               <span>{index + 1}</span>
               <div className="search-box">
                 <span style={{
@@ -200,11 +201,11 @@ export default function ListTimeSheet() {
               </div>
             </div>
             <div className="thread-span">
-              <span className="body-text-child">{data.workNumber}</span>
-              <span className="body-text-child">{data.holidaysNumber}</span>
-              <span className="body-text-child">{data.nghi_phep_co_luong}</span>
-              <span className="body-text-child">{data.nghi_phep_ko_luong}</span>
-              <span className="body-text-child">{data.sumWorkNumber}</span>
+              <span className="list-timesheet-body-text-child">{data.workNumber}</span>
+              <span className="list-timesheet-body-text-child">{data.holidaysNumber}</span>
+              <span className="list-timesheet-body-text-child">{data.nghi_phep_co_luong}</span>
+              <span className="list-timesheet-body-text-child">{data.nghi_phep_ko_luong}</span>
+              <span className="list-timesheet-body-text-child">{data.sumWorkNumber}</span>
             </div>
           </div>
         ))}

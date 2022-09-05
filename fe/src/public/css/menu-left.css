@@ -3,6 +3,7 @@
     width: var(--menu-left-width); 
     height: 100%;
     top: var(--header-height);
+    left: 0px;
 }
 
 .menu-name {

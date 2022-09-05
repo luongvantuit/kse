@@ -80,10 +80,10 @@ export default function ListPersonal() {
   }
 
   return (
-    <div className="body-component">
-      <div className="body-header">
+    <div className="list-personal-body-component">
+      <div className="list-personal-body-header">
         <span style={{ fontWeight: 'bold', fontSize: '1.4rem' }}>Danh sách nhân sự</span>
-        <div className="body-header-right">
+        <div className="list-personal-body-header-right">
           <div>
             <button className="btn-add-personal">
               <Link to={"/app/addnew"}>
@@ -96,7 +96,7 @@ export default function ListPersonal() {
       </div>
 
       <div className="thead">
-        <div className="body-search-personnel">
+        <div className="list-personal-body-search-personnel">
           <span style={{ width: '1rem' }}>#</span>
           <div className="search-box">
             <TextField
@@ -213,9 +213,9 @@ export default function ListPersonal() {
         </div>
       </div>
 
-      <div className="view">
+      <div className="list-personal-view">
         {data.map(person => (
-          <div className="body-search-item-personnel" key={person.id}>
+          <div className="list-personal-body-search-item-personnel" key={person.id}>
             <span className="item-personnel-id">{person.id}</span>
             <span className="item-personnel">{person.fullname}</span>
             <span className="item-personnel">{person.username}</span>
