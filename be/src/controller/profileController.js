@@ -89,17 +89,31 @@ async function handlePutProfile(req, res) {
                 success: false,
             })
         }
-        await User.findOneAndUpdate(
-            {
-                username: user.username,
-            },
-            {
-                $set: {
-                    password: await bcrypt.hash(user.password, await bcrypt.genSalt(8)),
-                    fullname: user.fullname,
+        if (user.password === '') {
+            await User.findOneAndUpdate(
+                {
+                    username: user.username,
+                },
+                {
+                    $set: {
+                        fullname: user.fullname,
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            await User.findOneAndUpdate(
+                {
+                    username: user.username,
+                },
+                {
+                    $set: {
+                        password: await bcrypt.hash(user.password, await bcrypt.genSalt(8)),
+                        fullname: user.fullname,
+                    }
+                }
+            )
+        }
+
         const contractInfo = req.body.contractInfo;
         await ContractInfo.findOneAndUpdate(
             {

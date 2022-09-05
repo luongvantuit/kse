@@ -8,6 +8,6 @@ router.get('/token',auth.verifyIdToken, profileController.handleGetProfileByToke
 
 router.get('/header', profileController.handleGetProfile);
 
-router.put('/', profileController.handlePutProfile);
+router.put('/put', profileController.handlePutProfile);
 
 module.exports = router
