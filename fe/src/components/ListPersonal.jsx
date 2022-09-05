@@ -18,7 +18,7 @@ export default function ListPersonal() {
     const token = JSON.parse(localStorage.getItem('token'));
     fetch('http://localhost:8080/api/employeeManager/getEmployee', {
       method: 'GET',
-      headers:{
+      headers: {
         "accept": "application/json",
         "content-type": "application/json; charset=utf-8",
         Authorization: 'Bearer ' + token,
@@ -26,7 +26,7 @@ export default function ListPersonal() {
     })
       .then(response => response.json())
       .then(data => {
-        const result = data.listPerson.filter(function(person) {
+        const result = data.listPerson.filter(function (person) {
           return person.username !== "admin123";
         })
         setData(result);
@@ -46,7 +46,7 @@ export default function ListPersonal() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.role === 'admin' || data.role ==="manager") {
+        if (data.role === 'admin' || data.role === "manager") {
           setAdmin(true);
         }
       })
@@ -83,16 +83,18 @@ export default function ListPersonal() {
     <div className="list-personal-body-component">
       <div className="list-personal-body-header">
         <span style={{ fontWeight: 'bold', fontSize: '1.4rem' }}>Danh sách nhân sự</span>
-        <div className="list-personal-body-header-right">
-          <div>
-            <button className="btn-add-personal">
-              <Link to={"/app/addnew"}>
-                <PersonAddIcon sx={{ fontSize: "1.7rem" }} />
-                <span>Thêm nhân sự</span>
-              </Link>
-            </button>
+        {admin && (
+          <div className="list-personal-body-header-right">
+            <div>
+              <button className="btn-add-personal">
+                <Link to={"/app/addnew"}>
+                  <PersonAddIcon sx={{ fontSize: "1.7rem" }} />
+                  <span>Thêm nhân sự</span>
+                </Link>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="thead">
