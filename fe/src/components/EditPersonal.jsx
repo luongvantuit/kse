@@ -56,7 +56,7 @@ export default function EditPersonal() {
     }, []);
 
     const postPutUser = () => {
-        const url = 'http://localhost:8080/api/profile';
+        const url = 'http://localhost:8080/api/profile/put';
         fetch(url, {
             method: 'PUT',
             body: JSON.stringify({
