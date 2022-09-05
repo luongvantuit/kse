@@ -12,6 +12,7 @@ export default function ListPersonal() {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [admin, setAdmin] = useState(false);
+  const [adminOrManager, setAdminOrManager] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +48,9 @@ export default function ListPersonal() {
       .then(response => response.json())
       .then(data => {
         if (data.role === 'admin' || data.role === "manager") {
+          setAdminOrManager(true);
+        }
+        if(data.role === 'admin') {
           setAdmin(true);
         }
       })
@@ -224,7 +228,7 @@ export default function ListPersonal() {
             <span className="item-personnel">{person.department}</span>
             <span className="item-personnel">{person.role}</span>
             <span className="item-personnel">{person.nameContract}</span>
-            {admin && (
+            {adminOrManager && (
               <>
                 <button onClick={() => {
                   console.log(person);
